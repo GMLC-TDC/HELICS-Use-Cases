@@ -36,12 +36,12 @@ int main (int argc, char *argv[])
         return 0;
     }
 
-	std::string targetfederate = "fed";
+	std::string targetfederate = "ns3";
 	if (vm.count("target") > 0)
 	{
 		targetfederate = vm["target"].as<std::string>();
 	}
-    std::string targetEndpoint = "endpoint";
+    std::string targetEndpoint = "endpoint1";
     if (vm.count("endpoint") > 0) {
         targetEndpoint = vm["endpoint"].as<std::string>();
     }
@@ -51,10 +51,15 @@ int main (int argc, char *argv[])
     {
         myname = vm["name"].as<std::string>();
     }
-    std::string myendpoint = "endpoint";
+    std::string mysource = "endpoint1";
     if (vm.count("source") > 0)
     {
-        myendpoint = vm["source"].as<std::string>();
+        mysource = vm["source"].as<std::string>();
+    }
+    std::string mydestination = "endpoint2";
+    if (vm.count("destination") > 0)
+    {
+        mydestination = vm["destination"].as<std::string>();
     }
     helics::FederateInfo fi(myname);
     fi.loadInfoFromArgs(argc, argv);
@@ -67,8 +72,10 @@ int main (int argc, char *argv[])
 	
     auto mFed = std::make_unique<helics::MessageFederate> (fi);
     auto name = mFed->getName();
-	std::cout << " registering endpoint '" << myendpoint << "' for " << name<<'\n';
-    auto id = mFed->registerEndpoint(myendpoint, "");
+	std::cout << " registering endpoint '" << mysource << "' for " << name<<'\n';
+    auto idsource = mFed->registerEndpoint(mysource, "");
+	std::cout << " registering endpoint '" << mydestination << "' for " << name<<'\n';
+    auto iddestination = mFed->registerEndpoint(mydestination, "");
 
     std::cout << "entering init State\n";
     mFed->enterInitializationState ();
@@ -76,14 +83,14 @@ int main (int argc, char *argv[])
     mFed->enterExecutionState ();
     std::cout << "entered exec State\n";
     for (int i=1; i<10; ++i) {
-		std::string message = "message sent from "+name+" to "+target+" at time " + std::to_string(i);
-		mFed->sendMessage(id, target, message.data(), message.size());
+		std::string message = "message sent from "+name+"/"+mysource+" to "+target+" at time " + std::to_string(i);
+		mFed->sendMessage(idsource, target, message.data(), message.size());
         std::cout << message << std::endl;
         auto newTime = mFed->requestTime (i);
 		std::cout << "processed time " << static_cast<double> (newTime) << "\n";
-		while (mFed->hasMessage(id))
+		while (mFed->hasMessage())
 		{
-			auto nmessage = mFed->getMessage(id);
+			auto nmessage = mFed->getMessage();
 			std::cout << "received message from " << nmessage->source << " at " << static_cast<double>(nmessage->time) << " ::" << nmessage->data.to_string() << '\n';
 		}
         
@@ -113,6 +120,7 @@ bool argumentParser (int argc, const char * const *argv, po::variables_map &vm_m
         ("endpoint,e", po::value<std::string>(), "name of the target endpoint")
         ("name,n", po::value<std::string>(), "name of this federate")
         ("source,s", po::value<std::string>(), "name of the source endpoint");
+        ("destination,d", po::value<std::string>(), "name of the destination endpoint");
 
     // clang-format on
 
