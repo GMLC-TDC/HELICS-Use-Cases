@@ -1,11 +1,11 @@
 /*
 
-Copyright (C) 2017-2018, Battelle Memorial Institute
-All rights reserved.
+   Copyright (C) 2017-2018, Battelle Memorial Institute
+   All rights reserved.
 
-This software was co-developed by Pacific Northwest National Laboratory, operated by the Battelle Memorial
-Institute; the National Renewable Energy Laboratory, operated by the Alliance for Sustainable Energy, LLC; and the
-Lawrence Livermore National Laboratory, operated by Lawrence Livermore National Security, LLC.
+   This software was co-developed by Pacific Northwest National Laboratory, operated by the Battelle Memorial
+   Institute; the National Renewable Energy Laboratory, operated by the Alliance for Sustainable Energy, LLC; and the
+   Lawrence Livermore National Laboratory, operated by Lawrence Livermore National Security, LLC.
 
 */
 #include "helics/application_api/MessageFederate.hpp"
@@ -36,11 +36,11 @@ int main (int argc, char *argv[])
         return 0;
     }
 
-	std::string targetfederate = "ns3";
-	if (vm.count("target") > 0)
-	{
-		targetfederate = vm["target"].as<std::string>();
-	}
+    std::string targetfederate = "ns3";
+    if (vm.count("target") > 0)
+    {
+        targetfederate = vm["target"].as<std::string>();
+    }
     std::string targetEndpoint = "endpoint1";
     if (vm.count("endpoint") > 0) {
         targetEndpoint = vm["endpoint"].as<std::string>();
@@ -69,13 +69,15 @@ int main (int argc, char *argv[])
     {
         brk = helics::BrokerFactory::create(fi.coreType, vm["startbroker"].as<std::string>());
     }
-	
+
     auto mFed = std::make_unique<helics::MessageFederate> (fi);
     auto name = mFed->getName();
-	std::cout << " registering endpoint '" << mysource << "' for " << name<<'\n';
+    std::cout << " registering endpoint '" << mysource << "' for " << name<<'\n';
     auto idsource = mFed->registerEndpoint(mysource, "");
-	std::cout << " registering endpoint '" << mydestination << "' for " << name<<'\n';
-    auto iddestination = mFed->registerEndpoint(mydestination, "");
+    std::cout << " registering endpoint '" << mydestination << "' for " << name<<'\n';
+    // avoid err/warn about assigned but not used
+    //auto iddestination = mFed->registerEndpoint(mydestination, "");
+    (void)mFed->registerEndpoint(mydestination, "");
 
     std::cout << "entering init State\n";
     mFed->enterInitializationState ();
@@ -83,17 +85,17 @@ int main (int argc, char *argv[])
     mFed->enterExecutionState ();
     std::cout << "entered exec State\n";
     for (int i=1; i<10; ++i) {
-		std::string message = "message sent from "+name+"/"+mysource+" to "+target+" at time " + std::to_string(i);
-		mFed->sendMessage(idsource, target, message.data(), message.size());
+        std::string message = "message sent from "+name+"/"+mysource+" to "+target+" at time " + std::to_string(i);
+        mFed->sendMessage(idsource, target, message.data(), message.size());
         std::cout << message << std::endl;
         auto newTime = mFed->requestTime (i);
-		std::cout << "processed time " << static_cast<double> (newTime) << "\n";
-		while (mFed->hasMessage())
-		{
-			auto nmessage = mFed->getMessage();
-			std::cout << "received message from " << nmessage->source << " at " << static_cast<double>(nmessage->time) << " ::" << nmessage->data.to_string() << '\n';
-		}
-        
+        std::cout << "processed time " << static_cast<double> (newTime) << "\n";
+        while (mFed->hasMessage())
+        {
+            auto nmessage = mFed->getMessage();
+            std::cout << "received message from " << nmessage->source << " at " << static_cast<double>(nmessage->time) << " ::" << nmessage->data.to_string() << '\n';
+        }
+
     }
     mFed->finalize ();
     if (brk)
@@ -119,7 +121,7 @@ bool argumentParser (int argc, const char * const *argv, po::variables_map &vm_m
         ("target,t", po::value<std::string>(), "name of the target federate")
         ("endpoint,e", po::value<std::string>(), "name of the target endpoint")
         ("name,n", po::value<std::string>(), "name of this federate")
-        ("source,s", po::value<std::string>(), "name of the source endpoint");
+        ("source,s", po::value<std::string>(), "name of the source endpoint")
         ("destination,d", po::value<std::string>(), "name of the destination endpoint");
 
     // clang-format on
@@ -148,7 +150,7 @@ bool argumentParser (int argc, const char * const *argv, po::variables_map &vm_m
 
     if (cmd_vm.count ("version") > 0)
     {
-		std::cout << helics::helicsVersionString () << '\n';
+        std::cout << helics::versionString << '\n';
         return true;
     }
 
