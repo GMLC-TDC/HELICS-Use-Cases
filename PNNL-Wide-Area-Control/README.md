@@ -83,23 +83,22 @@ The same thing needs to be done for g++ by:
  
   * `ccmake ..`
   * make sure the following boost options in the ccamke point to the correct boost directory with gcc 4.9:  
-  `Boost_CHRONO_LIBRARY_DEBUG`       
+ `Boost_CHRONO_LIBRARY_DEBUG`       
  `Boost_CHRONO_LIBRARY_RELEASE`    
  `Boost_DATE_TIME_LIBRARY_DEBUG`   
- `Boost_DATE_TIME_LIBRARY_RELEAS`  
+ `Boost_DATE_TIME_LIBRARY_RELEASE`  
  `Boost_FILESYSTEM_LIBRARY_DEBUG`  
- `Boost_FILESYSTEM_LIBRARY_RELEA`  
- `Boost_INCLUDE_DIR`               
+ `Boost_FILESYSTEM_LIBRARY_RELEASE`              
  `Boost_LIBRARY_DIR_DEBUG`         
  `Boost_LIBRARY_DIR_RELEASE`       
- `Boost_PROGRAM_OPTIONS_LIBRARY_`  
- `Boost_PROGRAM_OPTIONS_LIBRARY_`  
+ `Boost_PROGRAM_OPTIONS_LIBRARY_DEBUG`  
+ `Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE`  
  `Boost_SYSTEM_LIBRARY_DEBUG`      
  `Boost_SYSTEM_LIBRARY_RELEASE`    
  `Boost_TIMER_LIBRARY_DEBUG`     
  `Boost_TIMER_LIBRARY_RELEASE`     
- `Boost_UNIT_TEST_FRAMEWORK_LIBR`  
- `Boost_UNIT_TEST_FRAMEWORK_LIBR`
+ `Boost_UNIT_TEST_FRAMEWORK_LIBRARY_DEBUG`  
+ `Boost_UNIT_TEST_FRAMEWORK_LIBRARY_RELEASE`
  
  then run `make -j8` followed by `make install`
 5. Build the MATLAB extension
