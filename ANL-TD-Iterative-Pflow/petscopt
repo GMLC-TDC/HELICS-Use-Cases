@@ -1,0 +1,10 @@
+# Power flow options
+-pflow_snes_linesearch_type basic
+-pflow_pc_type lu
+-pflow_pc_factor_mat_ordering_type qmd
+-pflow_snes_atol 1e-8
+-pflow_pc_factor_shift_type NONZERO
+
+#options
+# Display options left
+-options_left no
