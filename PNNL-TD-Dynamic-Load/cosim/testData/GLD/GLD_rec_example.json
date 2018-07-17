@@ -1,0 +1,6 @@
+{
+	"subscriptions": [{
+			"key": "GLD1/TotalLoad",
+			"type": "string"
+		}]
+}

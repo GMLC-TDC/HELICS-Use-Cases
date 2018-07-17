@@ -1,0 +1,6 @@
+{
+	"subscriptions": [{
+			"key": "InterPSS/Bus18Voltage",
+			"type": "complex"
+		}]
+}

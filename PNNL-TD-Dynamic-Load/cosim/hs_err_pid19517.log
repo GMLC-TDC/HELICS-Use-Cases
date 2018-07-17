@@ -1,0 +1,1797 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00007f5c9443c5be, pid=19517, tid=0x00007f5d8ccb0700
+#
+# JRE version: OpenJDK Runtime Environment (8.0_151-b12) (build 1.8.0_151-8u151-b12-0ubuntu0.16.04.2-b12)
+# Java VM: OpenJDK 64-Bit Server VM (25.151-b12 mixed mode linux-amd64 compressed oops)
+# Problematic frame:
+# C  [libhelicsSharedLib.so+0x2015be]  helicsFederateRequestTime+0x87
+#
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.java.com/bugreport/crash.jsp
+# The crash happened outside the Java Virtual Machine in native code.
+# See problematic frame for where to report the bug.
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007f5d8400b800):  JavaThread "main" [_thread_in_native, id=19523, stack(0x00007f5d8cbb0000,0x00007f5d8ccb1000)]
+
+siginfo: si_signo: 11 (SIGSEGV), si_code: 1 (SEGV_MAPERR), si_addr: 0x0000000000000000
+
+Registers:
+RAX=0x0000000000000000, RBX=0x00007f5c94d9d7d0, RCX=0x00000000004c4b40, RDX=0x3f747ae147ae147b
+RSP=0x00007f5d8ccad870, RBP=0x00007f5d8ccad8c0, RSI=0x00007f5d84000028, RDI=0x00000000004c4b40
+R8 =0x00007f5d849a2b80, R9 =0x00007f5d8c623500, R10=0x0000000000002d4f, R11=0x00007f5c9449ab34
+R12=0x0000000000000000, R13=0x00007f5c94d9d7d0, R14=0x00007f5d8ccad9f0, R15=0x00007f5d8400b800
+RIP=0x00007f5c9443c5be, EFLAGS=0x0000000000010202, CSGSFS=0x002b000000000033, ERR=0x0000000000000006
+  TRAPNO=0x000000000000000e
+
+Top of Stack: (sp=0x00007f5d8ccad870)
+0x00007f5d8ccad870:   0000000000000000 0000000000000000
+0x00007f5d8ccad880:   0000000000000000 00007f5d8498b240
+0x00007f5d8ccad890:   0000000000000000 00007f5c94d9d7d0
+0x00007f5d8ccad8a0:   00000000004c4b40 00007f5d8400b800
+0x00007f5d8ccad8b0:   00007f5d8498b3e0 ad5f3f2c55b31700
+0x00007f5d8ccad8c0:   00007f5d8ccad920 00007f5c949f45df
+0x00007f5d8ccad8d0:   0000000000000000 0000000000000000
+0x00007f5d8ccad8e0:   0000000000000000 00007f5d8498b240
+0x00007f5d8ccad8f0:   00007f5d8ccad9b8 00007f5d8400b9e0
+0x00007f5d8ccad900:   0000000000000000 00007f5d8498b240
+0x00007f5d8ccad910:   0000000000000000 0000000000000000
+0x00007f5d8ccad920:   00007f5d8ccad9a8 00007f5d75017134
+0x00007f5d8ccad930:   00007f5c94d9d7d0 0000000000000000
+0x00007f5d8ccad940:   00007f5c94d9d7d0 00007f5d8ccad9f0
+0x00007f5d8ccad950:   00007f5d8ccad9a8 00007f5d75016ec7
+0x00007f5d8ccad960:   00007f5d75016e82 00007f5d8ccad968
+0x00007f5d8ccad970:   00007f5c94d9d7d0 00007f5d8ccad9f0
+0x00007f5d8ccad980:   00007f5c94da1138 0000000000000000
+0x00007f5d8ccad990:   00007f5c94d9d7d0 0000000000000000
+0x00007f5d8ccad9a0:   00007f5d8ccad9c8 00007f5d8ccada38
+0x00007f5d8ccad9b0:   00007f5d75007a40 0000000671a45ee0
+0x00007f5d8ccad9c0:   00007f5d75011276 0000000000000000
+0x00007f5d8ccad9d0:   0000000672205cc8 0000000000000000
+0x00007f5d8ccad9e0:   00007f5d8ccada38 00007f5d8498b240
+0x00007f5d8ccad9f0:   0000000671a50f50 00007f5d8ccad9f8
+0x00007f5d8ccada00:   00007f5c94d92ed9 00007f5d8ccada60
+0x00007f5d8ccada10:   00007f5c94d979d8 0000000000000000
+0x00007f5d8ccada20:   00007f5c94d92f10 00007f5d8ccad9c8
+0x00007f5d8ccada30:   00007f5d8ccada48 00007f5d8ccadaa8
+0x00007f5d8ccada40:   00007f5d75007d80 0000000672205cc8
+0x00007f5d8ccada50:   0000000000000000 0000000000000000
+0x00007f5d8ccada60:   0000000671a50f50 00007f5d8ccada68 
+
+Instructions: (pc=0x00007f5c9443c5be)
+0x00007f5c9443c59e:   89 c7 e8 75 b7 02 00 48 89 45 e0 48 8d 45 e0 48
+0x00007f5c9443c5ae:   89 c7 e8 4f 14 00 00 66 48 0f 7e c2 48 8b 45 b8
+0x00007f5c9443c5be:   48 89 10 b8 00 00 00 00 48 8b 4d f8 64 48 33 0c
+0x00007f5c9443c5ce:   25 28 00 00 00 74 05 e8 a6 47 fd ff c9 c3 55 48 
+
+Register to memory mapping:
+
+RAX=0x0000000000000000 is an unknown value
+RBX={method} {0x00007f5c94d9d7d0} 'helicsFederateRequestTime' '(JDJ)I' in 'helicsJNI'
+RCX=0x00000000004c4b40 is an unknown value
+RDX=0x3f747ae147ae147b is an unknown value
+RSP=0x00007f5d8ccad870 is pointing into the stack for thread: 0x00007f5d8400b800
+RBP=0x00007f5d8ccad8c0 is pointing into the stack for thread: 0x00007f5d8400b800
+RSI=0x00007f5d84000028 is an unknown value
+RDI=0x00000000004c4b40 is an unknown value
+R8 =0x00007f5d849a2b80 is an unknown value
+R9 =0x00007f5d8c623500: <offset 0x158500> in /lib/x86_64-linux-gnu/libc.so.6 at 0x00007f5d8c4cb000
+R10=0x0000000000002d4f is an unknown value
+R11=0x00007f5c9449ab34: _ZN9__gnu_cxx13new_allocatorIiE10deallocateEPim+0 in /home/huan289/helics-build/src/helics/shared_api_library/libhelicsSharedLib.so at 0x00007f5c9423b000
+R12=0x0000000000000000 is an unknown value
+R13={method} {0x00007f5c94d9d7d0} 'helicsFederateRequestTime' '(JDJ)I' in 'helicsJNI'
+R14=0x00007f5d8ccad9f0 is pointing into the stack for thread: 0x00007f5d8400b800
+R15=0x00007f5d8400b800 is a thread
+
+
+Stack: [0x00007f5d8cbb0000,0x00007f5d8ccb1000],  sp=0x00007f5d8ccad870,  free space=1014k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [libhelicsSharedLib.so+0x2015be]  helicsFederateRequestTime+0x87
+C  [libJNIhelics.so+0x95df]  Java_helicsJNI_helicsFederateRequestTime+0x74
+j  helicsJNI.helicsFederateRequestTime(JDJ)I+0
+j  helics.helicsFederateRequestTime(LSWIGTYPE_p_void;DLSWIGTYPE_p_double;)Lhelics_status;+9
+j  CoSimDslRunner.runDstab(Lorg/interpss/pssl/plugin/cmd/json/DstabRunConfigBean;)Lcom/interpss/dstab/common/IDStabSimuOutputHandler;+797
+j  org.interpss.pssl.plugin.cmd.BaseDStabDslRunner.run(Lorg/interpss/pssl/plugin/cmd/json/BaseJSONBean;)Ljava/lang/Object;+149
+j  TestCoSim.testCoSim()V+27
+v  ~StubRoutines::call_stub
+V  [libjvm.so+0x66287b]
+V  [libjvm.so+0x938be6]
+V  [libjvm.so+0x93a8ff]
+V  [libjvm.so+0x6ae419]  JVM_InvokeMethod+0x119
+j  sun.reflect.NativeMethodAccessorImpl.invoke0(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+0
+j  sun.reflect.NativeMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+100
+j  sun.reflect.DelegatingMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+6
+j  java.lang.reflect.Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+56
+j  org.junit.platform.commons.util.ReflectionUtils.invokeMethod(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+41
+j  org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(Ljava/lang/reflect/Method;Ljava/lang/Object;Lorg/junit/jupiter/api/extension/ExtensionContext;Lorg/junit/jupiter/engine/extension/ExtensionRegistry;)Ljava/lang/Object;+32
+j  org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$6(Lorg/junit/jupiter/api/extension/ExtensionContext;Lorg/junit/jupiter/engine/execution/JupiterEngineExecutionContext;)V+24
+j  org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor$$Lambda$169.execute()V+12
+j  org.junit.jupiter.engine.execution.ThrowableCollector.execute(Lorg/junit/jupiter/api/function/Executable;)V+1
+j  org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(Lorg/junit/jupiter/engine/execution/JupiterEngineExecutionContext;Lorg/junit/platform/engine/support/hierarchical/Node$DynamicTestExecutor;)V+21
+j  org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(Lorg/junit/jupiter/engine/execution/JupiterEngineExecutionContext;Lorg/junit/platform/engine/support/hierarchical/Node$DynamicTestExecutor;)Lorg/junit/jupiter/engine/execution/JupiterEngineExecutionContext;+44
+j  org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(Lorg/junit/platform/engine/support/hierarchical/EngineExecutionContext;Lorg/junit/platform/engine/support/hierarchical/Node$DynamicTestExecutor;)Lorg/junit/platform/engine/support/hierarchical/EngineExecutionContext;+6
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.lambda$execute$3(Lorg/junit/platform/engine/support/hierarchical/EngineExecutionContext;Lorg/junit/platform/engine/support/hierarchical/Node;Lorg/junit/platform/engine/support/hierarchical/ExecutionTracker;Lorg/junit/platform/engine/TestDescriptor;)V+29
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor$$Lambda$138.execute()V+20
+j  org.junit.platform.engine.support.hierarchical.SingleTestExecutor.executeSafely(Lorg/junit/platform/engine/support/hierarchical/SingleTestExecutor$Executable;)Lorg/junit/platform/engine/TestExecutionResult;+1
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(Lorg/junit/platform/engine/TestDescriptor;Lorg/junit/platform/engine/support/hierarchical/EngineExecutionContext;Lorg/junit/platform/engine/support/hierarchical/ExecutionTracker;)V+126
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.lambda$null$2(Lorg/junit/platform/engine/support/hierarchical/EngineExecutionContext;Lorg/junit/platform/engine/support/hierarchical/ExecutionTracker;Lorg/junit/platform/engine/TestDescriptor;)V+4
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor$$Lambda$141.accept(Ljava/lang/Object;)V+16
+j  java.util.stream.ForEachOps$ForEachOp$OfRef.accept(Ljava/lang/Object;)V+5
+j  java.util.stream.ReferencePipeline$2$1.accept(Ljava/lang/Object;)V+21
+j  java.util.Iterator.forEachRemaining(Ljava/util/function/Consumer;)V+21
+j  java.util.Spliterators$IteratorSpliterator.forEachRemaining(Ljava/util/function/Consumer;)V+52
+j  java.util.stream.AbstractPipeline.copyInto(Ljava/util/stream/Sink;Ljava/util/Spliterator;)V+32
+j  java.util.stream.AbstractPipeline.wrapAndCopyInto(Ljava/util/stream/Sink;Ljava/util/Spliterator;)Ljava/util/stream/Sink;+13
+j  java.util.stream.ForEachOps$ForEachOp.evaluateSequential(Ljava/util/stream/PipelineHelper;Ljava/util/Spliterator;)Ljava/lang/Void;+3
+j  java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(Ljava/util/stream/PipelineHelper;Ljava/util/Spliterator;)Ljava/lang/Object;+3
+j  java.util.stream.AbstractPipeline.evaluate(Ljava/util/stream/TerminalOp;)Ljava/lang/Object;+88
+j  java.util.stream.ReferencePipeline.forEach(Ljava/util/function/Consumer;)V+6
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.lambda$execute$3(Lorg/junit/platform/engine/support/hierarchical/EngineExecutionContext;Lorg/junit/platform/engine/support/hierarchical/Node;Lorg/junit/platform/engine/support/hierarchical/ExecutionTracker;Lorg/junit/platform/engine/TestDescriptor;)V+72
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor$$Lambda$138.execute()V+20
+j  org.junit.platform.engine.support.hierarchical.SingleTestExecutor.executeSafely(Lorg/junit/platform/engine/support/hierarchical/SingleTestExecutor$Executable;)Lorg/junit/platform/engine/TestExecutionResult;+1
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(Lorg/junit/platform/engine/TestDescriptor;Lorg/junit/platform/engine/support/hierarchical/EngineExecutionContext;Lorg/junit/platform/engine/support/hierarchical/ExecutionTracker;)V+126
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.lambda$null$2(Lorg/junit/platform/engine/support/hierarchical/EngineExecutionContext;Lorg/junit/platform/engine/support/hierarchical/ExecutionTracker;Lorg/junit/platform/engine/TestDescriptor;)V+4
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor$$Lambda$141.accept(Ljava/lang/Object;)V+16
+j  java.util.stream.ForEachOps$ForEachOp$OfRef.accept(Ljava/lang/Object;)V+5
+j  java.util.stream.ReferencePipeline$2$1.accept(Ljava/lang/Object;)V+21
+j  java.util.Iterator.forEachRemaining(Ljava/util/function/Consumer;)V+21
+j  java.util.Spliterators$IteratorSpliterator.forEachRemaining(Ljava/util/function/Consumer;)V+52
+j  java.util.stream.AbstractPipeline.copyInto(Ljava/util/stream/Sink;Ljava/util/Spliterator;)V+32
+j  java.util.stream.AbstractPipeline.wrapAndCopyInto(Ljava/util/stream/Sink;Ljava/util/Spliterator;)Ljava/util/stream/Sink;+13
+j  java.util.stream.ForEachOps$ForEachOp.evaluateSequential(Ljava/util/stream/PipelineHelper;Ljava/util/Spliterator;)Ljava/lang/Void;+3
+j  java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(Ljava/util/stream/PipelineHelper;Ljava/util/Spliterator;)Ljava/lang/Object;+3
+j  java.util.stream.AbstractPipeline.evaluate(Ljava/util/stream/TerminalOp;)Ljava/lang/Object;+88
+j  java.util.stream.ReferencePipeline.forEach(Ljava/util/function/Consumer;)V+6
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.lambda$execute$3(Lorg/junit/platform/engine/support/hierarchical/EngineExecutionContext;Lorg/junit/platform/engine/support/hierarchical/Node;Lorg/junit/platform/engine/support/hierarchical/ExecutionTracker;Lorg/junit/platform/engine/TestDescriptor;)V+72
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor$$Lambda$138.execute()V+20
+j  org.junit.platform.engine.support.hierarchical.SingleTestExecutor.executeSafely(Lorg/junit/platform/engine/support/hierarchical/SingleTestExecutor$Executable;)Lorg/junit/platform/engine/TestExecutionResult;+1
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(Lorg/junit/platform/engine/TestDescriptor;Lorg/junit/platform/engine/support/hierarchical/EngineExecutionContext;Lorg/junit/platform/engine/support/hierarchical/ExecutionTracker;)V+126
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute()V+16
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(Lorg/junit/platform/engine/ExecutionRequest;)V+13
+j  org.junit.platform.launcher.core.DefaultLauncher.execute(Lorg/junit/platform/engine/TestEngine;Lorg/junit/platform/engine/ExecutionRequest;)V+2
+j  org.junit.platform.launcher.core.DefaultLauncher.execute(Lorg/junit/platform/launcher/core/Root;Lorg/junit/platform/engine/ConfigurationParameters;[Lorg/junit/platform/launcher/TestExecutionListener;)V+101
+j  org.junit.platform.launcher.core.DefaultLauncher.execute(Lorg/junit/platform/launcher/LauncherDiscoveryRequest;[Lorg/junit/platform/launcher/TestExecutionListener;)V+36
+j  org.eclipse.jdt.internal.junit5.runner.JUnit5TestReference.run(Lorg/eclipse/jdt/internal/junit/runner/TestExecution;)V+26
+j  org.eclipse.jdt.internal.junit.runner.TestExecution.run([Lorg/eclipse/jdt/internal/junit/runner/ITestReference;)V+17
+j  org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests([Ljava/lang/String;Ljava/lang/String;Lorg/eclipse/jdt/internal/junit/runner/TestExecution;)V+62
+j  org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(Lorg/eclipse/jdt/internal/junit/runner/TestExecution;)V+10
+j  org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run()V+70
+j  org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main([Ljava/lang/String;)V+10
+v  ~StubRoutines::call_stub
+V  [libjvm.so+0x66287b]
+V  [libjvm.so+0x68452e]
+V  [libjvm.so+0x686e5f]
+C  [libjli.so+0x3552]
+C  [libjli.so+0x73dd]
+C  [libpthread.so.0+0x76ba]  start_thread+0xca
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  helicsJNI.helicsFederateRequestTime(JDJ)I+0
+j  helics.helicsFederateRequestTime(LSWIGTYPE_p_void;DLSWIGTYPE_p_double;)Lhelics_status;+9
+j  CoSimDslRunner.runDstab(Lorg/interpss/pssl/plugin/cmd/json/DstabRunConfigBean;)Lcom/interpss/dstab/common/IDStabSimuOutputHandler;+797
+j  org.interpss.pssl.plugin.cmd.BaseDStabDslRunner.run(Lorg/interpss/pssl/plugin/cmd/json/BaseJSONBean;)Ljava/lang/Object;+149
+j  TestCoSim.testCoSim()V+27
+v  ~StubRoutines::call_stub
+j  sun.reflect.NativeMethodAccessorImpl.invoke0(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+0
+j  sun.reflect.NativeMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+100
+j  sun.reflect.DelegatingMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+6
+j  java.lang.reflect.Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+56
+j  org.junit.platform.commons.util.ReflectionUtils.invokeMethod(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+41
+j  org.junit.jupiter.engine.execution.ExecutableInvoker.invoke(Ljava/lang/reflect/Method;Ljava/lang/Object;Lorg/junit/jupiter/api/extension/ExtensionContext;Lorg/junit/jupiter/engine/extension/ExtensionRegistry;)Ljava/lang/Object;+32
+j  org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$6(Lorg/junit/jupiter/api/extension/ExtensionContext;Lorg/junit/jupiter/engine/execution/JupiterEngineExecutionContext;)V+24
+j  org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor$$Lambda$169.execute()V+12
+j  org.junit.jupiter.engine.execution.ThrowableCollector.execute(Lorg/junit/jupiter/api/function/Executable;)V+1
+j  org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(Lorg/junit/jupiter/engine/execution/JupiterEngineExecutionContext;Lorg/junit/platform/engine/support/hierarchical/Node$DynamicTestExecutor;)V+21
+j  org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(Lorg/junit/jupiter/engine/execution/JupiterEngineExecutionContext;Lorg/junit/platform/engine/support/hierarchical/Node$DynamicTestExecutor;)Lorg/junit/jupiter/engine/execution/JupiterEngineExecutionContext;+44
+j  org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(Lorg/junit/platform/engine/support/hierarchical/EngineExecutionContext;Lorg/junit/platform/engine/support/hierarchical/Node$DynamicTestExecutor;)Lorg/junit/platform/engine/support/hierarchical/EngineExecutionContext;+6
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.lambda$execute$3(Lorg/junit/platform/engine/support/hierarchical/EngineExecutionContext;Lorg/junit/platform/engine/support/hierarchical/Node;Lorg/junit/platform/engine/support/hierarchical/ExecutionTracker;Lorg/junit/platform/engine/TestDescriptor;)V+29
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor$$Lambda$138.execute()V+20
+j  org.junit.platform.engine.support.hierarchical.SingleTestExecutor.executeSafely(Lorg/junit/platform/engine/support/hierarchical/SingleTestExecutor$Executable;)Lorg/junit/platform/engine/TestExecutionResult;+1
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(Lorg/junit/platform/engine/TestDescriptor;Lorg/junit/platform/engine/support/hierarchical/EngineExecutionContext;Lorg/junit/platform/engine/support/hierarchical/ExecutionTracker;)V+126
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.lambda$null$2(Lorg/junit/platform/engine/support/hierarchical/EngineExecutionContext;Lorg/junit/platform/engine/support/hierarchical/ExecutionTracker;Lorg/junit/platform/engine/TestDescriptor;)V+4
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor$$Lambda$141.accept(Ljava/lang/Object;)V+16
+j  java.util.stream.ForEachOps$ForEachOp$OfRef.accept(Ljava/lang/Object;)V+5
+j  java.util.stream.ReferencePipeline$2$1.accept(Ljava/lang/Object;)V+21
+j  java.util.Iterator.forEachRemaining(Ljava/util/function/Consumer;)V+21
+j  java.util.Spliterators$IteratorSpliterator.forEachRemaining(Ljava/util/function/Consumer;)V+52
+j  java.util.stream.AbstractPipeline.copyInto(Ljava/util/stream/Sink;Ljava/util/Spliterator;)V+32
+j  java.util.stream.AbstractPipeline.wrapAndCopyInto(Ljava/util/stream/Sink;Ljava/util/Spliterator;)Ljava/util/stream/Sink;+13
+j  java.util.stream.ForEachOps$ForEachOp.evaluateSequential(Ljava/util/stream/PipelineHelper;Ljava/util/Spliterator;)Ljava/lang/Void;+3
+j  java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(Ljava/util/stream/PipelineHelper;Ljava/util/Spliterator;)Ljava/lang/Object;+3
+j  java.util.stream.AbstractPipeline.evaluate(Ljava/util/stream/TerminalOp;)Ljava/lang/Object;+88
+j  java.util.stream.ReferencePipeline.forEach(Ljava/util/function/Consumer;)V+6
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.lambda$execute$3(Lorg/junit/platform/engine/support/hierarchical/EngineExecutionContext;Lorg/junit/platform/engine/support/hierarchical/Node;Lorg/junit/platform/engine/support/hierarchical/ExecutionTracker;Lorg/junit/platform/engine/TestDescriptor;)V+72
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor$$Lambda$138.execute()V+20
+j  org.junit.platform.engine.support.hierarchical.SingleTestExecutor.executeSafely(Lorg/junit/platform/engine/support/hierarchical/SingleTestExecutor$Executable;)Lorg/junit/platform/engine/TestExecutionResult;+1
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(Lorg/junit/platform/engine/TestDescriptor;Lorg/junit/platform/engine/support/hierarchical/EngineExecutionContext;Lorg/junit/platform/engine/support/hierarchical/ExecutionTracker;)V+126
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.lambda$null$2(Lorg/junit/platform/engine/support/hierarchical/EngineExecutionContext;Lorg/junit/platform/engine/support/hierarchical/ExecutionTracker;Lorg/junit/platform/engine/TestDescriptor;)V+4
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor$$Lambda$141.accept(Ljava/lang/Object;)V+16
+j  java.util.stream.ForEachOps$ForEachOp$OfRef.accept(Ljava/lang/Object;)V+5
+j  java.util.stream.ReferencePipeline$2$1.accept(Ljava/lang/Object;)V+21
+j  java.util.Iterator.forEachRemaining(Ljava/util/function/Consumer;)V+21
+j  java.util.Spliterators$IteratorSpliterator.forEachRemaining(Ljava/util/function/Consumer;)V+52
+j  java.util.stream.AbstractPipeline.copyInto(Ljava/util/stream/Sink;Ljava/util/Spliterator;)V+32
+j  java.util.stream.AbstractPipeline.wrapAndCopyInto(Ljava/util/stream/Sink;Ljava/util/Spliterator;)Ljava/util/stream/Sink;+13
+j  java.util.stream.ForEachOps$ForEachOp.evaluateSequential(Ljava/util/stream/PipelineHelper;Ljava/util/Spliterator;)Ljava/lang/Void;+3
+j  java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(Ljava/util/stream/PipelineHelper;Ljava/util/Spliterator;)Ljava/lang/Object;+3
+j  java.util.stream.AbstractPipeline.evaluate(Ljava/util/stream/TerminalOp;)Ljava/lang/Object;+88
+j  java.util.stream.ReferencePipeline.forEach(Ljava/util/function/Consumer;)V+6
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.lambda$execute$3(Lorg/junit/platform/engine/support/hierarchical/EngineExecutionContext;Lorg/junit/platform/engine/support/hierarchical/Node;Lorg/junit/platform/engine/support/hierarchical/ExecutionTracker;Lorg/junit/platform/engine/TestDescriptor;)V+72
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor$$Lambda$138.execute()V+20
+j  org.junit.platform.engine.support.hierarchical.SingleTestExecutor.executeSafely(Lorg/junit/platform/engine/support/hierarchical/SingleTestExecutor$Executable;)Lorg/junit/platform/engine/TestExecutionResult;+1
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(Lorg/junit/platform/engine/TestDescriptor;Lorg/junit/platform/engine/support/hierarchical/EngineExecutionContext;Lorg/junit/platform/engine/support/hierarchical/ExecutionTracker;)V+126
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute()V+16
+j  org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(Lorg/junit/platform/engine/ExecutionRequest;)V+13
+j  org.junit.platform.launcher.core.DefaultLauncher.execute(Lorg/junit/platform/engine/TestEngine;Lorg/junit/platform/engine/ExecutionRequest;)V+2
+j  org.junit.platform.launcher.core.DefaultLauncher.execute(Lorg/junit/platform/launcher/core/Root;Lorg/junit/platform/engine/ConfigurationParameters;[Lorg/junit/platform/launcher/TestExecutionListener;)V+101
+j  org.junit.platform.launcher.core.DefaultLauncher.execute(Lorg/junit/platform/launcher/LauncherDiscoveryRequest;[Lorg/junit/platform/launcher/TestExecutionListener;)V+36
+j  org.eclipse.jdt.internal.junit5.runner.JUnit5TestReference.run(Lorg/eclipse/jdt/internal/junit/runner/TestExecution;)V+26
+j  org.eclipse.jdt.internal.junit.runner.TestExecution.run([Lorg/eclipse/jdt/internal/junit/runner/ITestReference;)V+17
+j  org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests([Ljava/lang/String;Ljava/lang/String;Lorg/eclipse/jdt/internal/junit/runner/TestExecution;)V+62
+j  org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(Lorg/eclipse/jdt/internal/junit/runner/TestExecution;)V+10
+j  org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run()V+70
+j  org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main([Ljava/lang/String;)V+10
+v  ~StubRoutines::call_stub
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x00007f5d84854800 JavaThread "EMF Reference Cleaner" daemon [_thread_blocked, id=19569, stack(0x00007f5cec1f1000,0x00007f5cec2f2000)]
+  0x00007f5d843c6800 JavaThread "ReaderThread" [_thread_in_native, id=19568, stack(0x00007f5cecaf2000,0x00007f5cecbf3000)]
+  0x00007f5d84103000 JavaThread "Service Thread" daemon [_thread_blocked, id=19566, stack(0x00007f5ced1ca000,0x00007f5ced2cb000)]
+  0x00007f5d840fe000 JavaThread "C1 CompilerThread14" daemon [_thread_blocked, id=19565, stack(0x00007f5ced2cb000,0x00007f5ced3cc000)]
+  0x00007f5d840fc000 JavaThread "C1 CompilerThread13" daemon [_thread_blocked, id=19564, stack(0x00007f5ced3cc000,0x00007f5ced4cd000)]
+  0x00007f5d840fa000 JavaThread "C1 CompilerThread12" daemon [_thread_blocked, id=19563, stack(0x00007f5ced4cd000,0x00007f5ced5ce000)]
+  0x00007f5d840f8000 JavaThread "C1 CompilerThread11" daemon [_thread_blocked, id=19562, stack(0x00007f5ced5ce000,0x00007f5ced6cf000)]
+  0x00007f5d840f5800 JavaThread "C1 CompilerThread10" daemon [_thread_blocked, id=19561, stack(0x00007f5ced6cf000,0x00007f5ced7d0000)]
+  0x00007f5d840f3800 JavaThread "C2 CompilerThread9" daemon [_thread_blocked, id=19560, stack(0x00007f5ced7d0000,0x00007f5ced8d1000)]
+  0x00007f5d840f1800 JavaThread "C2 CompilerThread8" daemon [_thread_blocked, id=19559, stack(0x00007f5ced8d1000,0x00007f5ced9d2000)]
+  0x00007f5d840ef800 JavaThread "C2 CompilerThread7" daemon [_thread_blocked, id=19558, stack(0x00007f5ced9d2000,0x00007f5cedad3000)]
+  0x00007f5d840ed000 JavaThread "C2 CompilerThread6" daemon [_thread_blocked, id=19557, stack(0x00007f5cedad3000,0x00007f5cedbd4000)]
+  0x00007f5d840eb000 JavaThread "C2 CompilerThread5" daemon [_thread_blocked, id=19556, stack(0x00007f5cedbd4000,0x00007f5cedcd5000)]
+  0x00007f5d840e1000 JavaThread "C2 CompilerThread4" daemon [_thread_blocked, id=19555, stack(0x00007f5cedcd5000,0x00007f5ceddd6000)]
+  0x00007f5d840de800 JavaThread "C2 CompilerThread3" daemon [_thread_blocked, id=19554, stack(0x00007f5ceddd6000,0x00007f5ceded7000)]
+  0x00007f5d840da000 JavaThread "C2 CompilerThread2" daemon [_thread_blocked, id=19553, stack(0x00007f5ceded7000,0x00007f5cedfd8000)]
+  0x00007f5d840d8800 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=19552, stack(0x00007f5cedfd8000,0x00007f5cee0d9000)]
+  0x00007f5d840d5800 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=19551, stack(0x00007f5cee0d9000,0x00007f5cee1da000)]
+  0x00007f5d840d3800 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=19550, stack(0x00007f5cee1da000,0x00007f5cee2db000)]
+  0x00007f5d840ac000 JavaThread "Finalizer" daemon [_thread_blocked, id=19549, stack(0x00007f5cee5b8000,0x00007f5cee6b9000)]
+  0x00007f5d840a7800 JavaThread "Reference Handler" daemon [_thread_blocked, id=19548, stack(0x00007f5cee6b9000,0x00007f5cee7ba000)]
+=>0x00007f5d8400b800 JavaThread "main" [_thread_in_native, id=19523, stack(0x00007f5d8cbb0000,0x00007f5d8ccb1000)]
+
+Other Threads:
+  0x00007f5d8409f800 VMThread [stack: 0x00007f5cee7ba000,0x00007f5cee8bb000] [id=19547]
+  0x00007f5d84105800 WatcherThread [stack: 0x00007f5ced0c9000,0x00007f5ced1ca000] [id=19567]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap:
+ PSYoungGen      total 301056K, used 31423K [0x0000000670700000, 0x0000000695300000, 0x00000007c0000000)
+  eden space 258048K, 12% used [0x0000000670700000,0x00000006725afd40,0x0000000680300000)
+  from space 43008K, 0% used [0x0000000680300000,0x0000000680300000,0x0000000682d00000)
+  to   space 43008K, 0% used [0x0000000692900000,0x0000000692900000,0x0000000695300000)
+ ParOldGen       total 459264K, used 13568K [0x00000003d1400000, 0x00000003ed480000, 0x0000000670700000)
+  object space 459264K, 2% used [0x00000003d1400000,0x00000003d21403b8,0x00000003ed480000)
+ Metaspace       used 22928K, capacity 23606K, committed 23984K, reserved 1071104K
+  class space    used 3025K, capacity 3178K, committed 3248K, reserved 1048576K
+
+Card table byte_map: [0x00007f5d73089000,0x00007f5d75000000] byte_map_base: 0x00007f5d711ff000
+
+Marking Bits: (ParMarkBitMap*) 0x00007f5d8be642c0
+ Begin Bits: [0x00007f5cf48a0000, 0x00007f5d04450000)
+ End Bits:   [0x00007f5d04450000, 0x00007f5d14000000)
+
+Polling page: 0x00007f5d8cccf000
+
+CodeCache: size=245760Kb used=11759Kb max_used=11759Kb free=234000Kb
+ bounds [0x00007f5d75000000, 0x00007f5d75b90000, 0x00007f5d84000000]
+ total_blobs=3197 nmethods=2718 adapters=389
+ compilation: enabled
+
+Compilation events (10 events):
+Event: 2.920 Thread 0x00007f5d840fc000 2715       1       java.util.Hashtable::access$500 (5 bytes)
+Event: 2.920 Thread 0x00007f5d840f5800 nmethod 2714 0x00007f5d75b7c890 code [0x00007f5d75b7ca00, 0x00007f5d75b7cdd0]
+Event: 2.920 Thread 0x00007f5d840fc000 nmethod 2715 0x00007f5d75b7ce90 code [0x00007f5d75b7cfe0, 0x00007f5d75b7d0d0]
+Event: 2.922 Thread 0x00007f5d840fc000 2716       3       com.interpss.dstab.mach.impl.MachineImpl::getDStabBus (13 bytes)
+Event: 2.922 Thread 0x00007f5d840fe000 nmethod 2710 0x00007f5d75b7d150 code [0x00007f5d75b7d440, 0x00007f5d75b7e838]
+Event: 2.922 Thread 0x00007f5d840fe000 2717       1       java.util.Hashtable$Entry::getKey (5 bytes)
+Event: 2.922 Thread 0x00007f5d840fa000 2718       1       java.util.Hashtable$Entry::getValue (5 bytes)
+Event: 2.922 Thread 0x00007f5d840fa000 nmethod 2718 0x00007f5d75b7f190 code [0x00007f5d75b7f2e0, 0x00007f5d75b7f3f0]
+Event: 2.922 Thread 0x00007f5d840fe000 nmethod 2717 0x00007f5d75b7f450 code [0x00007f5d75b7f5a0, 0x00007f5d75b7f6b0]
+Event: 2.922 Thread 0x00007f5d840fc000 nmethod 2716 0x00007f5d75b7f710 code [0x00007f5d75b7f8a0, 0x00007f5d75b7ff10]
+
+GC Heap History (4 events):
+Event: 2.359 GC heap before
+{Heap before GC invocations=1 (full 0):
+ PSYoungGen      total 301056K, used 228231K [0x0000000670700000, 0x0000000685700000, 0x00000007c0000000)
+  eden space 258048K, 88% used [0x0000000670700000,0x000000067e5e1dc0,0x0000000680300000)
+  from space 43008K, 0% used [0x0000000682d00000,0x0000000682d00000,0x0000000685700000)
+  to   space 43008K, 0% used [0x0000000680300000,0x0000000680300000,0x0000000682d00000)
+ ParOldGen       total 688128K, used 0K [0x00000003d1400000, 0x00000003fb400000, 0x0000000670700000)
+  object space 688128K, 0% used [0x00000003d1400000,0x00000003d1400000,0x00000003fb400000)
+ Metaspace       used 20508K, capacity 21108K, committed 21296K, reserved 1067008K
+  class space    used 2678K, capacity 2829K, committed 2864K, reserved 1048576K
+Event: 2.394 GC heap after
+Heap after GC invocations=1 (full 0):
+ PSYoungGen      total 301056K, used 14353K [0x0000000670700000, 0x0000000695300000, 0x00000007c0000000)
+  eden space 258048K, 0% used [0x0000000670700000,0x0000000670700000,0x0000000680300000)
+  from space 43008K, 33% used [0x0000000680300000,0x0000000681104540,0x0000000682d00000)
+  to   space 43008K, 0% used [0x0000000692900000,0x0000000692900000,0x0000000695300000)
+ ParOldGen       total 688128K, used 96K [0x00000003d1400000, 0x00000003fb400000, 0x0000000670700000)
+  object space 688128K, 0% used [0x00000003d1400000,0x00000003d1418010,0x00000003fb400000)
+ Metaspace       used 20508K, capacity 21108K, committed 21296K, reserved 1067008K
+  class space    used 2678K, capacity 2829K, committed 2864K, reserved 1048576K
+}
+Event: 2.394 GC heap before
+{Heap before GC invocations=2 (full 1):
+ PSYoungGen      total 301056K, used 14353K [0x0000000670700000, 0x0000000695300000, 0x00000007c0000000)
+  eden space 258048K, 0% used [0x0000000670700000,0x0000000670700000,0x0000000680300000)
+  from space 43008K, 33% used [0x0000000680300000,0x0000000681104540,0x0000000682d00000)
+  to   space 43008K, 0% used [0x0000000692900000,0x0000000692900000,0x0000000695300000)
+ ParOldGen       total 688128K, used 96K [0x00000003d1400000, 0x00000003fb400000, 0x0000000670700000)
+  object space 688128K, 0% used [0x00000003d1400000,0x00000003d1418010,0x00000003fb400000)
+ Metaspace       used 20508K, capacity 21108K, committed 21296K, reserved 1067008K
+  class space    used 2678K, capacity 2829K, committed 2864K, reserved 1048576K
+Event: 2.485 GC heap after
+Heap after GC invocations=2 (full 1):
+ PSYoungGen      total 301056K, used 0K [0x0000000670700000, 0x0000000695300000, 0x00000007c0000000)
+  eden space 258048K, 0% used [0x0000000670700000,0x0000000670700000,0x0000000680300000)
+  from space 43008K, 0% used [0x0000000680300000,0x0000000680300000,0x0000000682d00000)
+  to   space 43008K, 0% used [0x0000000692900000,0x0000000692900000,0x0000000695300000)
+ ParOldGen       total 459264K, used 13568K [0x00000003d1400000, 0x00000003ed480000, 0x0000000670700000)
+  object space 459264K, 2% used [0x00000003d1400000,0x00000003d21403b8,0x00000003ed480000)
+ Metaspace       used 20508K, capacity 21108K, committed 21296K, reserved 1067008K
+  class space    used 2678K, capacity 2829K, committed 2864K, reserved 1048576K
+}
+
+Deoptimization events (10 events):
+Event: 0.756 Thread 0x00007f5d8400b800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f5d7554ead8 method=java.util.HashMap.putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; @ 253
+Event: 0.757 Thread 0x00007f5d8400b800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f5d7554ead8 method=java.util.HashMap.putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; @ 253
+Event: 0.764 Thread 0x00007f5d8400b800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f5d75581b14 method=jdk.internal.org.objectweb.asm.Type.getArgumentsAndReturnSizes(Ljava/lang/String;)I @ 47
+Event: 0.819 Thread 0x00007f5d8400b800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f5d7554ead8 method=java.util.HashMap.putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; @ 253
+Event: 1.445 Thread 0x00007f5d8400b800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f5d753debac method=java.math.BigInteger.addOne([IIII)I @ 55
+Event: 1.635 Thread 0x00007f5d8400b800 Uncommon trap: reason=range_check action=make_not_entrant pc=0x00007f5d7558d788 method=sun.reflect.generics.parser.SignatureParser.current()C @ 34
+Event: 1.710 Thread 0x00007f5d8400b800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007f5d7563bfbc method=java.util.HashMap.putVal(ILjava/lang/Object;Ljava/lang/Object;ZZ)Ljava/lang/Object; @ 203
+Event: 2.589 Thread 0x00007f5d8400b800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f5d75877f7c method=java.lang.ref.SoftReference.get()Ljava/lang/Object; @ 17
+Event: 2.730 Thread 0x00007f5d8400b800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f5d7589f2e0 method=java.lang.ref.SoftReference.get()Ljava/lang/Object; @ 17
+Event: 2.834 Thread 0x00007f5d8400b800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007f5d756bee60 method=java.lang.ThreadLocal$ThreadLocalMap.getEntry(Ljava/lang/ThreadLocal;)Ljava/lang/ThreadLocal$ThreadLocalMap$Entry; @ 29
+
+Internal exceptions (10 events):
+Event: 1.633 Thread 0x00007f5d8400b800 Exception <a 'java/lang/ClassNotFoundException': java/util/EventObjectBeanInfo> (0x000000067bc390e8) thrown at [/build/openjdk-8-W2Qe27/openjdk-8-8u151-b12/src/hotspot/src/share/vm/classfile/systemDictionary.cpp, line 210]
+Event: 1.633 Thread 0x00007f5d8400b800 Exception <a 'java/lang/ClassNotFoundException': java/lang/ObjectBeanInfo> (0x000000067bc40aa8) thrown at [/build/openjdk-8-W2Qe27/openjdk-8-8u151-b12/src/hotspot/src/share/vm/classfile/systemDictionary.cpp, line 210]
+Event: 1.634 Thread 0x00007f5d8400b800 Exception <a 'java/lang/ClassNotFoundException': java/lang/ObjectCustomizer> (0x000000067bc487d8) thrown at [/build/openjdk-8-W2Qe27/openjdk-8-8u151-b12/src/hotspot/src/share/vm/classfile/systemDictionary.cpp, line 210]
+Event: 1.635 Thread 0x00007f5d8400b800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException': 18> (0x000000067bc4a618) thrown at [/build/openjdk-8-W2Qe27/openjdk-8-8u151-b12/src/hotspot/src/share/vm/interpreter/interpreterRuntime.cpp, line 366]
+Event: 1.637 Thread 0x00007f5d8400b800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException': 22> (0x000000067bc4da50) thrown at [/build/openjdk-8-W2Qe27/openjdk-8-8u151-b12/src/hotspot/src/share/vm/interpreter/interpreterRuntime.cpp, line 366]
+Event: 1.637 Thread 0x00007f5d8400b800 Exception <a 'java/lang/ArrayIndexOutOfBoundsException': 160> (0x000000067bc50070) thrown at [/build/openjdk-8-W2Qe27/openjdk-8-8u151-b12/src/hotspot/src/share/vm/interpreter/interpreterRuntime.cpp, line 366]
+Event: 1.640 Thread 0x00007f5d8400b800 Exception <a 'java/lang/ClassNotFoundException': java/util/EventObjectCustomizer> (0x000000067bc5a670) thrown at [/build/openjdk-8-W2Qe27/openjdk-8-8u151-b12/src/hotspot/src/share/vm/classfile/systemDictionary.cpp, line 210]
+Event: 1.641 Thread 0x00007f5d8400b800 Exception <a 'java/lang/ClassNotFoundException': com/interpss/common/msg/impl/IPSSMsgHubBaseImplCustomizer> (0x000000067bc71a50) thrown at [/build/openjdk-8-W2Qe27/openjdk-8-8u151-b12/src/hotspot/src/share/vm/classfile/systemDictionary.cpp, line 210]
+Event: 1.642 Thread 0x00007f5d8400b800 Exception <a 'java/lang/ClassNotFoundException': com/interpss/common/msg/impl/IPSSMsgHubImplCustomizer> (0x000000067bc88d08) thrown at [/build/openjdk-8-W2Qe27/openjdk-8-8u151-b12/src/hotspot/src/share/vm/classfile/systemDictionary.cpp, line 210]
+Event: 1.969 Thread 0x00007f5d8400b800 Exception <a 'java/lang/NoClassDefFoundError': org/eclipse/core/runtime/Platform> (0x000000067d447670) thrown at [/build/openjdk-8-W2Qe27/openjdk-8-8u151-b12/src/hotspot/src/share/vm/classfile/systemDictionary.cpp, line 199]
+
+Events (10 events):
+Event: 2.909 loading class com/interpss/core/sparse/solver/CSparseJEqnComplexSolver
+Event: 2.909 loading class com/interpss/core/sparse/solver/CSparseJEqnComplexSolver done
+Event: 2.910 loading class com/interpss/core/sparse/SparseEqnDataType$ComAii
+Event: 2.910 loading class com/interpss/core/sparse/SparseEqnDataType$ComAii done
+Event: 2.914 loading class com/interpss/core/sparse/SparseEqnDataType$ComAij
+Event: 2.914 loading class com/interpss/core/sparse/SparseEqnDataType$ComAij done
+Event: 2.916 loading class com/interpss/dstab/datatype/DStabSimuEvent
+Event: 2.916 loading class com/interpss/dstab/datatype/DStabSimuEvent done
+Event: 2.923 loading class SWIGTYPE_p_double
+Event: 2.923 loading class SWIGTYPE_p_double done
+
+
+Dynamic libraries:
+00400000-00401000 r-xp 00000000 08:01 920013                             /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+00600000-00601000 r--p 00000000 08:01 920013                             /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+00601000-00602000 rw-p 00001000 08:01 920013                             /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+008ae000-008cf000 rw-p 00000000 00:00 0                                  [heap]
+3d1400000-3ed480000 rw-p 00000000 00:00 0 
+3ed480000-670700000 ---p 00000000 00:00 0 
+670700000-695300000 rw-p 00000000 00:00 0 
+695300000-7c0000000 ---p 00000000 00:00 0 
+7c0000000-7c032c000 rw-p 00000000 00:00 0 
+7c032c000-800000000 ---p 00000000 00:00 0 
+7f5c6c000000-7f5c6c021000 rw-p 00000000 00:00 0 
+7f5c6c021000-7f5c70000000 ---p 00000000 00:00 0 
+7f5c73e00000-7f5c73e40000 rw-p 00000000 00:00 0 
+7f5c73e40000-7f5c74000000 ---p 00000000 00:00 0 
+7f5c74000000-7f5c74026000 rw-p 00000000 00:00 0 
+7f5c74026000-7f5c78000000 ---p 00000000 00:00 0 
+7f5c78000000-7f5c78091000 rw-p 00000000 00:00 0 
+7f5c78091000-7f5c7c000000 ---p 00000000 00:00 0 
+7f5c7c000000-7f5c7c021000 rw-p 00000000 00:00 0 
+7f5c7c021000-7f5c80000000 ---p 00000000 00:00 0 
+7f5c80000000-7f5c80021000 rw-p 00000000 00:00 0 
+7f5c80021000-7f5c84000000 ---p 00000000 00:00 0 
+7f5c84000000-7f5c84021000 rw-p 00000000 00:00 0 
+7f5c84021000-7f5c88000000 ---p 00000000 00:00 0 
+7f5c88000000-7f5c88021000 rw-p 00000000 00:00 0 
+7f5c88021000-7f5c8c000000 ---p 00000000 00:00 0 
+7f5c8c0ec000-7f5c8c0ed000 ---p 00000000 00:00 0 
+7f5c8c0ed000-7f5c8c8ed000 rw-p 00000000 00:00 0 
+7f5c8c8ed000-7f5c8c8ee000 ---p 00000000 00:00 0 
+7f5c8c8ee000-7f5c8d0ee000 rw-p 00000000 00:00 0 
+7f5c8d0ee000-7f5c8d0ef000 ---p 00000000 00:00 0 
+7f5c8d0ef000-7f5c8d8ef000 rw-p 00000000 00:00 0 
+7f5c8d8ef000-7f5c8d8f0000 ---p 00000000 00:00 0 
+7f5c8d8f0000-7f5c8e0f0000 rw-p 00000000 00:00 0 
+7f5c8e0f0000-7f5c8e0f1000 ---p 00000000 00:00 0 
+7f5c8e0f1000-7f5c8e8f1000 rw-p 00000000 00:00 0 
+7f5c8e8f1000-7f5c8e8f2000 ---p 00000000 00:00 0 
+7f5c8e8f2000-7f5c8f0f2000 rw-p 00000000 00:00 0 
+7f5c8f0f2000-7f5c8f0f3000 ---p 00000000 00:00 0 
+7f5c8f0f3000-7f5c8f8f3000 rw-p 00000000 00:00 0 
+7f5c8f8f3000-7f5c8f8f6000 r-xp 00000000 08:01 4330050                    /home/huan289/boost-1.65.1/lib/libboost_system.so.1.65.1
+7f5c8f8f6000-7f5c8faf5000 ---p 00003000 08:01 4330050                    /home/huan289/boost-1.65.1/lib/libboost_system.so.1.65.1
+7f5c8faf5000-7f5c8faf6000 r--p 00002000 08:01 4330050                    /home/huan289/boost-1.65.1/lib/libboost_system.so.1.65.1
+7f5c8faf6000-7f5c8faf7000 rw-p 00003000 08:01 4330050                    /home/huan289/boost-1.65.1/lib/libboost_system.so.1.65.1
+7f5c8fafb000-7f5c8fb77000 r-xp 00000000 08:01 4330103                    /home/huan289/boost-1.65.1/lib/libboost_program_options.so.1.65.1
+7f5c8fb77000-7f5c8fd77000 ---p 0007c000 08:01 4330103                    /home/huan289/boost-1.65.1/lib/libboost_program_options.so.1.65.1
+7f5c8fd77000-7f5c8fd7a000 r--p 0007c000 08:01 4330103                    /home/huan289/boost-1.65.1/lib/libboost_program_options.so.1.65.1
+7f5c8fd7a000-7f5c8fd7b000 rw-p 0007f000 08:01 4330103                    /home/huan289/boost-1.65.1/lib/libboost_program_options.so.1.65.1
+7f5c8fd7b000-7f5c8fdfa000 r-xp 00000000 08:01 925167                     /usr/local/lib/libzmq.so.5.1.2
+7f5c8fdfa000-7f5c8fffa000 ---p 0007f000 08:01 925167                     /usr/local/lib/libzmq.so.5.1.2
+7f5c8fffa000-7f5c8ffff000 r--p 0007f000 08:01 925167                     /usr/local/lib/libzmq.so.5.1.2
+7f5c8ffff000-7f5c90000000 rw-p 00084000 08:01 925167                     /usr/local/lib/libzmq.so.5.1.2
+7f5c90000000-7f5c90021000 rw-p 00000000 00:00 0 
+7f5c90021000-7f5c94000000 ---p 00000000 00:00 0 
+7f5c9401b000-7f5c94034000 r-xp 00000000 08:01 4330064                    /home/huan289/boost-1.65.1/lib/libboost_filesystem.so.1.65.1
+7f5c94034000-7f5c94234000 ---p 00019000 08:01 4330064                    /home/huan289/boost-1.65.1/lib/libboost_filesystem.so.1.65.1
+7f5c94234000-7f5c94235000 r--p 00019000 08:01 4330064                    /home/huan289/boost-1.65.1/lib/libboost_filesystem.so.1.65.1
+7f5c94235000-7f5c94236000 rw-p 0001a000 08:01 4330064                    /home/huan289/boost-1.65.1/lib/libboost_filesystem.so.1.65.1
+7f5c9423b000-7f5c947ca000 r-xp 00000000 08:01 4604666                    /home/huan289/helics-build/src/helics/shared_api_library/libhelicsSharedLib.so
+7f5c947ca000-7f5c949c9000 ---p 0058f000 08:01 4604666                    /home/huan289/helics-build/src/helics/shared_api_library/libhelicsSharedLib.so
+7f5c949c9000-7f5c949d6000 r--p 0058e000 08:01 4604666                    /home/huan289/helics-build/src/helics/shared_api_library/libhelicsSharedLib.so
+7f5c949d6000-7f5c949e7000 rw-p 0059b000 08:01 4604666                    /home/huan289/helics-build/src/helics/shared_api_library/libhelicsSharedLib.so
+7f5c949e7000-7f5c949e8000 rw-p 00000000 00:00 0 
+7f5c949eb000-7f5c949fb000 r-xp 00000000 08:01 5124031                    /home/huan289/helics-build/swig/java/libJNIhelics.so
+7f5c949fb000-7f5c94bfa000 ---p 00010000 08:01 5124031                    /home/huan289/helics-build/swig/java/libJNIhelics.so
+7f5c94bfa000-7f5c94bfb000 r--p 0000f000 08:01 5124031                    /home/huan289/helics-build/swig/java/libJNIhelics.so
+7f5c94bfb000-7f5c94bfc000 rw-p 00010000 08:01 5124031                    /home/huan289/helics-build/swig/java/libJNIhelics.so
+7f5c94bff000-7f5c94dff000 rw-p 00000000 00:00 0 
+7f5c94dff000-7f5c94fff000 rw-p 00000000 00:00 0 
+7f5c94fff000-7f5c98000000 rw-p 00000000 00:00 0 
+7f5c98000000-7f5c98021000 rw-p 00000000 00:00 0 
+7f5c98021000-7f5c9c000000 ---p 00000000 00:00 0 
+7f5c9c000000-7f5c9c021000 rw-p 00000000 00:00 0 
+7f5c9c021000-7f5ca0000000 ---p 00000000 00:00 0 
+7f5ca0000000-7f5ca0251000 rw-p 00000000 00:00 0 
+7f5ca0251000-7f5ca4000000 ---p 00000000 00:00 0 
+7f5ca4000000-7f5ca41aa000 rw-p 00000000 00:00 0 
+7f5ca41aa000-7f5ca8000000 ---p 00000000 00:00 0 
+7f5ca8000000-7f5ca818d000 rw-p 00000000 00:00 0 
+7f5ca818d000-7f5cac000000 ---p 00000000 00:00 0 
+7f5cac000000-7f5cac1ce000 rw-p 00000000 00:00 0 
+7f5cac1ce000-7f5cb0000000 ---p 00000000 00:00 0 
+7f5cb0000000-7f5cb009e000 rw-p 00000000 00:00 0 
+7f5cb009e000-7f5cb4000000 ---p 00000000 00:00 0 
+7f5cb4000000-7f5cb4204000 rw-p 00000000 00:00 0 
+7f5cb4204000-7f5cb8000000 ---p 00000000 00:00 0 
+7f5cb8000000-7f5cb812b000 rw-p 00000000 00:00 0 
+7f5cb812b000-7f5cbc000000 ---p 00000000 00:00 0 
+7f5cbc000000-7f5cbc0a4000 rw-p 00000000 00:00 0 
+7f5cbc0a4000-7f5cc0000000 ---p 00000000 00:00 0 
+7f5cc0000000-7f5cc00f3000 rw-p 00000000 00:00 0 
+7f5cc00f3000-7f5cc4000000 ---p 00000000 00:00 0 
+7f5cc4000000-7f5cc42d2000 rw-p 00000000 00:00 0 
+7f5cc42d2000-7f5cc8000000 ---p 00000000 00:00 0 
+7f5cc8000000-7f5cc83d4000 rw-p 00000000 00:00 0 
+7f5cc83d4000-7f5ccc000000 ---p 00000000 00:00 0 
+7f5ccc000000-7f5ccc17d000 rw-p 00000000 00:00 0 
+7f5ccc17d000-7f5cd0000000 ---p 00000000 00:00 0 
+7f5cd0000000-7f5cd0482000 rw-p 00000000 00:00 0 
+7f5cd0482000-7f5cd4000000 ---p 00000000 00:00 0 
+7f5cd4000000-7f5cd4287000 rw-p 00000000 00:00 0 
+7f5cd4287000-7f5cd8000000 ---p 00000000 00:00 0 
+7f5cd8000000-7f5cd8021000 rw-p 00000000 00:00 0 
+7f5cd8021000-7f5cdc000000 ---p 00000000 00:00 0 
+7f5cdc000000-7f5cdc41e000 rw-p 00000000 00:00 0 
+7f5cdc41e000-7f5ce0000000 ---p 00000000 00:00 0 
+7f5ce0000000-7f5ce0021000 rw-p 00000000 00:00 0 
+7f5ce0021000-7f5ce4000000 ---p 00000000 00:00 0 
+7f5ce4000000-7f5ce4021000 rw-p 00000000 00:00 0 
+7f5ce4021000-7f5ce8000000 ---p 00000000 00:00 0 
+7f5ce8000000-7f5ce8021000 rw-p 00000000 00:00 0 
+7f5ce8021000-7f5cec000000 ---p 00000000 00:00 0 
+7f5cec1f1000-7f5cec1f4000 ---p 00000000 00:00 0 
+7f5cec1f4000-7f5cec4f2000 rw-p 00000000 00:00 0 
+7f5cec4f2000-7f5cec6f2000 rw-p 00000000 00:00 0 
+7f5cec6f2000-7f5cec8f2000 rw-p 00000000 00:00 0 
+7f5cec8f2000-7f5cecaf2000 rw-p 00000000 00:00 0 
+7f5cecaf2000-7f5cecaf5000 ---p 00000000 00:00 0 
+7f5cecaf5000-7f5cecbf3000 rw-p 00000000 00:00 0 
+7f5cecbf3000-7f5cecc0a000 r-xp 00000000 08:01 919974                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libnet.so
+7f5cecc0a000-7f5cece09000 ---p 00017000 08:01 919974                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libnet.so
+7f5cece09000-7f5cece0a000 r--p 00016000 08:01 919974                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libnet.so
+7f5cece0a000-7f5cece0b000 rw-p 00017000 08:01 919974                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libnet.so
+7f5cece10000-7f5cece13000 r--s 00015000 08:01 919932                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jce.jar
+7f5cece15000-7f5cece1a000 r--s 0009a000 08:01 919995                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jsse.jar
+7f5cece1f000-7f5cece21000 r--s 0000c000 08:01 5644173                    /home/huan289/.p2/pool/plugins/org.hamcrest.core_1.3.0.v201303031735.jar
+7f5cece28000-7f5cece30000 r--s 00045000 08:01 5768109                    /home/huan289/.p2/pool/plugins/org.junit_4.12.0.v201504281640/junit.jar
+7f5cece36000-7f5cece37000 r--s 00003000 08:01 5644112                    /home/huan289/.p2/pool/plugins/org.apiguardian_1.0.0.v20170910-2246.jar
+7f5cece37000-7f5cece39000 r--s 00004000 08:01 5644125                    /home/huan289/.p2/pool/plugins/org.opentest4j_1.0.0.v20170910-2246.jar
+7f5cece3b000-7f5cece3e000 r--s 00010000 08:01 5644520                    /home/huan289/.p2/pool/plugins/org.junit.vintage.engine_4.12.0.v20170910-2246.jar
+7f5cece41000-7f5cece43000 r--s 00006000 08:01 5644222                    /home/huan289/.p2/pool/plugins/org.junit.platform.suite.api_1.0.0.v20170910-2246.jar
+7f5cece4a000-7f5cece4c000 r--s 00007000 08:01 5644177                    /home/huan289/.p2/pool/plugins/org.junit.platform.runner_1.0.0.v20170910-2246.jar
+7f5cece53000-7f5cece55000 r--s 00010000 08:01 5644527                    /home/huan289/.p2/pool/plugins/org.junit.platform.launcher_1.0.0.v20170910-2246.jar
+7f5cece5b000-7f5cece5e000 r--s 00018000 08:01 5644456                    /home/huan289/.p2/pool/plugins/org.junit.platform.engine_1.0.0.v20170910-2246.jar
+7f5cece65000-7f5cece67000 r--s 00012000 08:01 5644246                    /home/huan289/.p2/pool/plugins/org.junit.platform.commons_1.0.0.v20170910-2246.jar
+7f5cece68000-7f5cece74000 r--s 0006d000 08:01 5644348                    /home/huan289/.p2/pool/plugins/org.junit.jupiter.params_5.0.0.v20170910-2246.jar
+7f5cece74000-7f5cece76000 r--s 00009000 08:01 5644264                    /home/huan289/.p2/pool/plugins/org.junit.jupiter.migrationsupport_5.0.0.v20170910-2246.jar
+7f5cece7a000-7f5cece7e000 r--s 0001f000 08:01 5644431                    /home/huan289/.p2/pool/plugins/org.junit.jupiter.engine_5.0.0.v20170910-2246.jar
+7f5cece81000-7f5cece83000 r--s 00016000 08:01 5644478                    /home/huan289/.p2/pool/plugins/org.junit.jupiter.api_5.0.0.v20170910-2246.jar
+7f5cece87000-7f5cecec4000 r--s 00294000 08:01 4469920                    /home/huan289/git/ipss-common/ipss.lib.3rdPty/lib/spring/spring-2.5.6.jar
+7f5cecec5000-7f5cececa000 r--s 0002a000 08:01 4602534                    /home/huan289/git/ipss-common/ipss.lib.3rdPty/lib/json/gson-2.2.2.jar
+7f5ceced1000-7f5ceced7000 r--s 0002e000 08:01 4602530                    /home/huan289/git/ipss-common/ipss.lib.3rdPty/lib/sparse/csparsej-1.1.1.jar
+7f5cecedd000-7f5cecede000 r--s 00002000 08:01 4469896                    /home/huan289/git/ipss-common/ipss.lib.3rdPty/lib/eclipse/org.eclipse.emf.jar
+7f5cecee0000-7f5cecee4000 r--s 00035000 08:01 4469886                    /home/huan289/git/ipss-common/ipss.lib.3rdPty/lib/eclipse/org.eclipse.emf.ecore.xmi.jar
+7f5cecee4000-7f5cecef6000 r--s 00111000 08:01 4469989                    /home/huan289/git/ipss-common/ipss.lib.3rdPty/lib/eclipse/org.eclipse.emf.ecore.jar
+7f5cecef7000-7f5cecef9000 r--s 00014000 08:01 4469913                    /home/huan289/git/ipss-common/ipss.lib.3rdPty/lib/eclipse/org.eclipse.emf.ecore.change.jar
+7f5cecefb000-7f5cecf02000 r--s 00050000 08:01 4469962                    /home/huan289/git/ipss-common/ipss.lib.3rdPty/lib/eclipse/org.eclipse.emf.common.jar
+7f5cecf02000-7f5cecfb7000 r--s 00747000 08:01 4469898                    /home/huan289/git/ipss-common/ipss.lib.3rdPty/lib/cache/hazelcast-3.8.jar
+7f5cecfb9000-7f5cecfe0000 r--s 001f6000 08:01 4469883                    /home/huan289/git/ipss-common/ipss.lib.3rdPty/lib/apache/commons-math3-3.6.1.jar
+7f5cecfe1000-7f5cecff4000 r--s 00116000 08:01 4469893                    /home/huan289/git/ipss-common/ipss.lib/lib/ipss/ipss_plugin.jar
+7f5cecff8000-7f5ced01a000 r--s 00195000 08:01 4469802                    /home/huan289/git/ipss-common/ipss.lib/lib/ipss/ipss_core.jar
+7f5ced01e000-7f5ced023000 r--s 00073000 08:01 4469866                    /home/huan289/git/ipss-common/ipss.lib/lib/ipss/ipss_core.impl.jar
+7f5ced027000-7f5ced033000 r--s 0006c000 08:01 4469876                    /home/huan289/git/ipss-common/ipss.lib/lib/ieee/ieee.odm.schema.jar
+7f5ced03a000-7f5ced043000 r--s 0007f000 08:01 4469818                    /home/huan289/git/ipss-common/ipss.lib/lib/ieee/ieee.odm_pss.jar
+7f5ced044000-7f5ced049000 r--s 002f9000 08:01 919993                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/charsets.jar
+7f5ced050000-7f5ced053000 r--s 00015000 08:01 919932                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jce.jar
+7f5ced055000-7f5ced05a000 r--s 0009a000 08:01 919995                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jsse.jar
+7f5ced061000-7f5ced074000 r--s 00346000 08:01 919994                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/resources.jar
+7f5ced075000-7f5ced07b000 r--s 0003a000 08:01 919938                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/sunjce_provider.jar
+7f5ced082000-7f5ced085000 r--s 0000f000 08:01 919934                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/icedtea-sound.jar
+7f5ced089000-7f5ced0a4000 r--s 001d6000 08:01 919937                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/nashorn.jar
+7f5ced0a7000-7f5ced0c2000 r--s 00394000 08:01 919935                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/cldrdata.jar
+7f5ced0c9000-7f5ced0ca000 ---p 00000000 00:00 0 
+7f5ced0ca000-7f5ced1ca000 rw-p 00000000 00:00 0 
+7f5ced1ca000-7f5ced1cd000 ---p 00000000 00:00 0 
+7f5ced1cd000-7f5ced2cb000 rw-p 00000000 00:00 0 
+7f5ced2cb000-7f5ced2ce000 ---p 00000000 00:00 0 
+7f5ced2ce000-7f5ced3cc000 rw-p 00000000 00:00 0 
+7f5ced3cc000-7f5ced3cf000 ---p 00000000 00:00 0 
+7f5ced3cf000-7f5ced4cd000 rw-p 00000000 00:00 0 
+7f5ced4cd000-7f5ced4d0000 ---p 00000000 00:00 0 
+7f5ced4d0000-7f5ced5ce000 rw-p 00000000 00:00 0 
+7f5ced5ce000-7f5ced5d1000 ---p 00000000 00:00 0 
+7f5ced5d1000-7f5ced6cf000 rw-p 00000000 00:00 0 
+7f5ced6cf000-7f5ced6d2000 ---p 00000000 00:00 0 
+7f5ced6d2000-7f5ced7d0000 rw-p 00000000 00:00 0 
+7f5ced7d0000-7f5ced7d3000 ---p 00000000 00:00 0 
+7f5ced7d3000-7f5ced8d1000 rw-p 00000000 00:00 0 
+7f5ced8d1000-7f5ced8d4000 ---p 00000000 00:00 0 
+7f5ced8d4000-7f5ced9d2000 rw-p 00000000 00:00 0 
+7f5ced9d2000-7f5ced9d5000 ---p 00000000 00:00 0 
+7f5ced9d5000-7f5cedad3000 rw-p 00000000 00:00 0 
+7f5cedad3000-7f5cedad6000 ---p 00000000 00:00 0 
+7f5cedad6000-7f5cedbd4000 rw-p 00000000 00:00 0 
+7f5cedbd4000-7f5cedbd7000 ---p 00000000 00:00 0 
+7f5cedbd7000-7f5cedcd5000 rw-p 00000000 00:00 0 
+7f5cedcd5000-7f5cedcd8000 ---p 00000000 00:00 0 
+7f5cedcd8000-7f5ceddd6000 rw-p 00000000 00:00 0 
+7f5ceddd6000-7f5ceddd9000 ---p 00000000 00:00 0 
+7f5ceddd9000-7f5ceded7000 rw-p 00000000 00:00 0 
+7f5ceded7000-7f5cededa000 ---p 00000000 00:00 0 
+7f5cededa000-7f5cedfd8000 rw-p 00000000 00:00 0 
+7f5cedfd8000-7f5cedfdb000 ---p 00000000 00:00 0 
+7f5cedfdb000-7f5cee0d9000 rw-p 00000000 00:00 0 
+7f5cee0d9000-7f5cee0dc000 ---p 00000000 00:00 0 
+7f5cee0dc000-7f5cee1da000 rw-p 00000000 00:00 0 
+7f5cee1da000-7f5cee1dd000 ---p 00000000 00:00 0 
+7f5cee1dd000-7f5cee2db000 rw-p 00000000 00:00 0 
+7f5cee2db000-7f5cee5b3000 r--p 00000000 08:01 787924                     /usr/lib/locale/locale-archive
+7f5cee5b8000-7f5cee5bb000 ---p 00000000 00:00 0 
+7f5cee5bb000-7f5cee6b9000 rw-p 00000000 00:00 0 
+7f5cee6b9000-7f5cee6bc000 ---p 00000000 00:00 0 
+7f5cee6bc000-7f5cee7ba000 rw-p 00000000 00:00 0 
+7f5cee7ba000-7f5cee7bb000 ---p 00000000 00:00 0 
+7f5cee7bb000-7f5d14000000 rw-p 00000000 00:00 0 
+7f5d14000000-7f5d14021000 rw-p 00000000 00:00 0 
+7f5d14021000-7f5d18000000 ---p 00000000 00:00 0 
+7f5d18000000-7f5d18021000 rw-p 00000000 00:00 0 
+7f5d18021000-7f5d1c000000 ---p 00000000 00:00 0 
+7f5d1c000000-7f5d1c021000 rw-p 00000000 00:00 0 
+7f5d1c021000-7f5d20000000 ---p 00000000 00:00 0 
+7f5d20000000-7f5d20021000 rw-p 00000000 00:00 0 
+7f5d20021000-7f5d24000000 ---p 00000000 00:00 0 
+7f5d24000000-7f5d24021000 rw-p 00000000 00:00 0 
+7f5d24021000-7f5d28000000 ---p 00000000 00:00 0 
+7f5d28000000-7f5d28021000 rw-p 00000000 00:00 0 
+7f5d28021000-7f5d2c000000 ---p 00000000 00:00 0 
+7f5d2c000000-7f5d2c021000 rw-p 00000000 00:00 0 
+7f5d2c021000-7f5d30000000 ---p 00000000 00:00 0 
+7f5d30000000-7f5d30021000 rw-p 00000000 00:00 0 
+7f5d30021000-7f5d34000000 ---p 00000000 00:00 0 
+7f5d34000000-7f5d34021000 rw-p 00000000 00:00 0 
+7f5d34021000-7f5d38000000 ---p 00000000 00:00 0 
+7f5d38000000-7f5d38021000 rw-p 00000000 00:00 0 
+7f5d38021000-7f5d3c000000 ---p 00000000 00:00 0 
+7f5d3c000000-7f5d3c021000 rw-p 00000000 00:00 0 
+7f5d3c021000-7f5d40000000 ---p 00000000 00:00 0 
+7f5d40000000-7f5d40021000 rw-p 00000000 00:00 0 
+7f5d40021000-7f5d44000000 ---p 00000000 00:00 0 
+7f5d44000000-7f5d44021000 rw-p 00000000 00:00 0 
+7f5d44021000-7f5d48000000 ---p 00000000 00:00 0 
+7f5d48000000-7f5d48021000 rw-p 00000000 00:00 0 
+7f5d48021000-7f5d4c000000 ---p 00000000 00:00 0 
+7f5d4c000000-7f5d4c021000 rw-p 00000000 00:00 0 
+7f5d4c021000-7f5d50000000 ---p 00000000 00:00 0 
+7f5d50000000-7f5d50021000 rw-p 00000000 00:00 0 
+7f5d50021000-7f5d54000000 ---p 00000000 00:00 0 
+7f5d54000000-7f5d54021000 rw-p 00000000 00:00 0 
+7f5d54021000-7f5d58000000 ---p 00000000 00:00 0 
+7f5d58000000-7f5d58021000 rw-p 00000000 00:00 0 
+7f5d58021000-7f5d5c000000 ---p 00000000 00:00 0 
+7f5d5c000000-7f5d5c021000 rw-p 00000000 00:00 0 
+7f5d5c021000-7f5d60000000 ---p 00000000 00:00 0 
+7f5d60000000-7f5d60021000 rw-p 00000000 00:00 0 
+7f5d60021000-7f5d64000000 ---p 00000000 00:00 0 
+7f5d64000000-7f5d64021000 rw-p 00000000 00:00 0 
+7f5d64021000-7f5d68000000 ---p 00000000 00:00 0 
+7f5d68000000-7f5d6802b000 rw-p 00000000 00:00 0 
+7f5d6802b000-7f5d6c000000 ---p 00000000 00:00 0 
+7f5d6c000000-7f5d6c021000 rw-p 00000000 00:00 0 
+7f5d6c021000-7f5d70000000 ---p 00000000 00:00 0 
+7f5d70001000-7f5d70002000 r--s 00006000 08:01 4469979                    /home/huan289/git/ipss-common/ipss.lib.3rdPty/lib/apache/commons-logging.jar
+7f5d70009000-7f5d70013000 r--s 00116000 08:01 919940                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/localedata.jar
+7f5d70013000-7f5d70b04000 rw-p 00000000 00:00 0 
+7f5d70b04000-7f5d70cd3000 r--s 03c21000 08:01 919930                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar
+7f5d70cd9000-7f5d7168a000 rw-p 00000000 00:00 0 
+7f5d7168a000-7f5d7168b000 ---p 00000000 00:00 0 
+7f5d7168b000-7f5d7178b000 rw-p 00000000 00:00 0 
+7f5d7178b000-7f5d7178c000 ---p 00000000 00:00 0 
+7f5d7178c000-7f5d7188c000 rw-p 00000000 00:00 0 
+7f5d7188c000-7f5d7188d000 ---p 00000000 00:00 0 
+7f5d7188d000-7f5d7198d000 rw-p 00000000 00:00 0 
+7f5d7198d000-7f5d7198e000 ---p 00000000 00:00 0 
+7f5d7198e000-7f5d71a8e000 rw-p 00000000 00:00 0 
+7f5d71a8e000-7f5d71a8f000 ---p 00000000 00:00 0 
+7f5d71a8f000-7f5d71c70000 rw-p 00000000 00:00 0 
+7f5d71c70000-7f5d73089000 ---p 00000000 00:00 0 
+7f5d73089000-7f5d7316a000 rw-p 00000000 00:00 0 
+7f5d7316a000-7f5d74582000 ---p 00000000 00:00 0 
+7f5d74582000-7f5d746a9000 rw-p 00000000 00:00 0 
+7f5d746a9000-7f5d74fff000 ---p 00000000 00:00 0 
+7f5d74fff000-7f5d75000000 rw-p 00000000 00:00 0 
+7f5d75000000-7f5d75b90000 rwxp 00000000 00:00 0 
+7f5d75b90000-7f5d84000000 ---p 00000000 00:00 0 
+7f5d84000000-7f5d84a2f000 rw-p 00000000 00:00 0 
+7f5d84a2f000-7f5d88000000 ---p 00000000 00:00 0 
+7f5d88004000-7f5d88006000 r--s 00001000 08:01 919943                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/dnsns.jar
+7f5d88009000-7f5d8800a000 ---p 00000000 00:00 0 
+7f5d8800a000-7f5d8810a000 rw-p 00000000 00:00 0 
+7f5d8810a000-7f5d8810b000 ---p 00000000 00:00 0 
+7f5d8810b000-7f5d8820b000 rw-p 00000000 00:00 0 
+7f5d8820b000-7f5d8820c000 ---p 00000000 00:00 0 
+7f5d8820c000-7f5d8830c000 rw-p 00000000 00:00 0 
+7f5d8830c000-7f5d8830d000 ---p 00000000 00:00 0 
+7f5d8830d000-7f5d8840d000 rw-p 00000000 00:00 0 
+7f5d8840d000-7f5d8840e000 ---p 00000000 00:00 0 
+7f5d8840e000-7f5d8850e000 rw-p 00000000 00:00 0 
+7f5d8850e000-7f5d8850f000 ---p 00000000 00:00 0 
+7f5d8850f000-7f5d8860f000 rw-p 00000000 00:00 0 
+7f5d8860f000-7f5d88610000 ---p 00000000 00:00 0 
+7f5d88610000-7f5d88710000 rw-p 00000000 00:00 0 
+7f5d88710000-7f5d88711000 ---p 00000000 00:00 0 
+7f5d88711000-7f5d88811000 rw-p 00000000 00:00 0 
+7f5d88811000-7f5d88812000 ---p 00000000 00:00 0 
+7f5d88812000-7f5d88912000 rw-p 00000000 00:00 0 
+7f5d88912000-7f5d88913000 ---p 00000000 00:00 0 
+7f5d88913000-7f5d88a13000 rw-p 00000000 00:00 0 
+7f5d88a13000-7f5d88a14000 ---p 00000000 00:00 0 
+7f5d88a14000-7f5d88b14000 rw-p 00000000 00:00 0 
+7f5d88b14000-7f5d88b15000 ---p 00000000 00:00 0 
+7f5d88b15000-7f5d88c15000 rw-p 00000000 00:00 0 
+7f5d88c15000-7f5d88c16000 ---p 00000000 00:00 0 
+7f5d88c16000-7f5d88d16000 rw-p 00000000 00:00 0 
+7f5d88d16000-7f5d88d17000 ---p 00000000 00:00 0 
+7f5d88d17000-7f5d88e17000 rw-p 00000000 00:00 0 
+7f5d88e17000-7f5d88e18000 ---p 00000000 00:00 0 
+7f5d88e18000-7f5d88f18000 rw-p 00000000 00:00 0 
+7f5d88f18000-7f5d88f19000 ---p 00000000 00:00 0 
+7f5d88f19000-7f5d89019000 rw-p 00000000 00:00 0 
+7f5d89019000-7f5d8901a000 ---p 00000000 00:00 0 
+7f5d8901a000-7f5d8911a000 rw-p 00000000 00:00 0 
+7f5d8911a000-7f5d8911b000 ---p 00000000 00:00 0 
+7f5d8911b000-7f5d8924a000 rw-p 00000000 00:00 0 
+7f5d8924a000-7f5d895db000 ---p 00000000 00:00 0 
+7f5d895db000-7f5d895e3000 r-xp 00000000 08:01 919981                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libzip.so
+7f5d895e3000-7f5d897e2000 ---p 00008000 08:01 919981                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libzip.so
+7f5d897e2000-7f5d897e3000 r--p 00007000 08:01 919981                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libzip.so
+7f5d897e3000-7f5d897e4000 rw-p 00008000 08:01 919981                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libzip.so
+7f5d897eb000-7f5d897f6000 r-xp 00000000 08:01 8661829                    /lib/x86_64-linux-gnu/libnss_files-2.23.so
+7f5d897f6000-7f5d899f5000 ---p 0000b000 08:01 8661829                    /lib/x86_64-linux-gnu/libnss_files-2.23.so
+7f5d899f5000-7f5d899f6000 r--p 0000a000 08:01 8661829                    /lib/x86_64-linux-gnu/libnss_files-2.23.so
+7f5d899f6000-7f5d899f7000 rw-p 0000b000 08:01 8661829                    /lib/x86_64-linux-gnu/libnss_files-2.23.so
+7f5d899f7000-7f5d899fd000 rw-p 00000000 00:00 0 
+7f5d89a03000-7f5d89a0e000 r-xp 00000000 08:01 8661833                    /lib/x86_64-linux-gnu/libnss_nis-2.23.so
+7f5d89a0e000-7f5d89c0d000 ---p 0000b000 08:01 8661833                    /lib/x86_64-linux-gnu/libnss_nis-2.23.so
+7f5d89c0d000-7f5d89c0e000 r--p 0000a000 08:01 8661833                    /lib/x86_64-linux-gnu/libnss_nis-2.23.so
+7f5d89c0e000-7f5d89c0f000 rw-p 0000b000 08:01 8661833                    /lib/x86_64-linux-gnu/libnss_nis-2.23.so
+7f5d89c13000-7f5d89c29000 r-xp 00000000 08:01 8661813                    /lib/x86_64-linux-gnu/libnsl-2.23.so
+7f5d89c29000-7f5d89e28000 ---p 00016000 08:01 8661813                    /lib/x86_64-linux-gnu/libnsl-2.23.so
+7f5d89e28000-7f5d89e29000 r--p 00015000 08:01 8661813                    /lib/x86_64-linux-gnu/libnsl-2.23.so
+7f5d89e29000-7f5d89e2a000 rw-p 00016000 08:01 8661813                    /lib/x86_64-linux-gnu/libnsl-2.23.so
+7f5d89e2a000-7f5d89e2c000 rw-p 00000000 00:00 0 
+7f5d89e33000-7f5d89e3b000 r-xp 00000000 08:01 8661824                    /lib/x86_64-linux-gnu/libnss_compat-2.23.so
+7f5d89e3b000-7f5d8a03a000 ---p 00008000 08:01 8661824                    /lib/x86_64-linux-gnu/libnss_compat-2.23.so
+7f5d8a03a000-7f5d8a03b000 r--p 00007000 08:01 8661824                    /lib/x86_64-linux-gnu/libnss_compat-2.23.so
+7f5d8a03b000-7f5d8a03c000 rw-p 00008000 08:01 8661824                    /lib/x86_64-linux-gnu/libnss_compat-2.23.so
+7f5d8a043000-7f5d8a070000 r-xp 00000000 08:01 919962                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libjava.so
+7f5d8a070000-7f5d8a26f000 ---p 0002d000 08:01 919962                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libjava.so
+7f5d8a26f000-7f5d8a270000 r--p 0002c000 08:01 919962                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libjava.so
+7f5d8a270000-7f5d8a272000 rw-p 0002d000 08:01 919962                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libjava.so
+7f5d8a273000-7f5d8a282000 r-xp 00000000 08:01 919979                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libverify.so
+7f5d8a282000-7f5d8a481000 ---p 0000f000 08:01 919979                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libverify.so
+7f5d8a481000-7f5d8a483000 r--p 0000e000 08:01 919979                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libverify.so
+7f5d8a483000-7f5d8a484000 rw-p 00010000 08:01 919979                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libverify.so
+7f5d8a48b000-7f5d8a492000 r-xp 00000000 08:01 8661834                    /lib/x86_64-linux-gnu/librt-2.23.so
+7f5d8a492000-7f5d8a691000 ---p 00007000 08:01 8661834                    /lib/x86_64-linux-gnu/librt-2.23.so
+7f5d8a691000-7f5d8a692000 r--p 00006000 08:01 8661834                    /lib/x86_64-linux-gnu/librt-2.23.so
+7f5d8a692000-7f5d8a693000 rw-p 00007000 08:01 8661834                    /lib/x86_64-linux-gnu/librt-2.23.so
+7f5d8a693000-7f5d8a6a9000 r-xp 00000000 08:01 8655369                    /lib/x86_64-linux-gnu/libgcc_s.so.1
+7f5d8a6a9000-7f5d8a8a8000 ---p 00016000 08:01 8655369                    /lib/x86_64-linux-gnu/libgcc_s.so.1
+7f5d8a8a8000-7f5d8a8a9000 rw-p 00015000 08:01 8655369                    /lib/x86_64-linux-gnu/libgcc_s.so.1
+7f5d8a8ab000-7f5d8a9b3000 r-xp 00000000 08:01 8661811                    /lib/x86_64-linux-gnu/libm-2.23.so
+7f5d8a9b3000-7f5d8abb2000 ---p 00108000 08:01 8661811                    /lib/x86_64-linux-gnu/libm-2.23.so
+7f5d8abb2000-7f5d8abb3000 r--p 00107000 08:01 8661811                    /lib/x86_64-linux-gnu/libm-2.23.so
+7f5d8abb3000-7f5d8abb4000 rw-p 00108000 08:01 8661811                    /lib/x86_64-linux-gnu/libm-2.23.so
+7f5d8abbb000-7f5d8ad2d000 r-xp 00000000 08:01 786835                     /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21
+7f5d8ad2d000-7f5d8af2d000 ---p 00172000 08:01 786835                     /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21
+7f5d8af2d000-7f5d8af37000 r--p 00172000 08:01 786835                     /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21
+7f5d8af37000-7f5d8af39000 rw-p 0017c000 08:01 786835                     /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21
+7f5d8af39000-7f5d8af3d000 rw-p 00000000 00:00 0 
+7f5d8af43000-7f5d8bb95000 r-xp 00000000 08:01 919973                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/server/libjvm.so
+7f5d8bb95000-7f5d8bd95000 ---p 00c52000 08:01 919973                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/server/libjvm.so
+7f5d8bd95000-7f5d8be28000 r--p 00c52000 08:01 919973                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/server/libjvm.so
+7f5d8be28000-7f5d8be51000 rw-p 00ce5000 08:01 919973                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/server/libjvm.so
+7f5d8be51000-7f5d8be81000 rw-p 00000000 00:00 0 
+7f5d8be83000-7f5d8be9b000 r-xp 00000000 08:01 8661815                    /lib/x86_64-linux-gnu/libpthread-2.23.so
+7f5d8be9b000-7f5d8c09a000 ---p 00018000 08:01 8661815                    /lib/x86_64-linux-gnu/libpthread-2.23.so
+7f5d8c09a000-7f5d8c09b000 r--p 00017000 08:01 8661815                    /lib/x86_64-linux-gnu/libpthread-2.23.so
+7f5d8c09b000-7f5d8c09c000 rw-p 00018000 08:01 8661815                    /lib/x86_64-linux-gnu/libpthread-2.23.so
+7f5d8c09c000-7f5d8c0a0000 rw-p 00000000 00:00 0 
+7f5d8c0a3000-7f5d8c0a6000 r-xp 00000000 08:01 8661818                    /lib/x86_64-linux-gnu/libdl-2.23.so
+7f5d8c0a6000-7f5d8c2a5000 ---p 00003000 08:01 8661818                    /lib/x86_64-linux-gnu/libdl-2.23.so
+7f5d8c2a5000-7f5d8c2a6000 r--p 00002000 08:01 8661818                    /lib/x86_64-linux-gnu/libdl-2.23.so
+7f5d8c2a6000-7f5d8c2a7000 rw-p 00003000 08:01 8661818                    /lib/x86_64-linux-gnu/libdl-2.23.so
+7f5d8c2ab000-7f5d8c2c4000 r-xp 00000000 08:01 8655522                    /lib/x86_64-linux-gnu/libz.so.1.2.8
+7f5d8c2c4000-7f5d8c4c3000 ---p 00019000 08:01 8655522                    /lib/x86_64-linux-gnu/libz.so.1.2.8
+7f5d8c4c3000-7f5d8c4c4000 r--p 00018000 08:01 8655522                    /lib/x86_64-linux-gnu/libz.so.1.2.8
+7f5d8c4c4000-7f5d8c4c5000 rw-p 00019000 08:01 8655522                    /lib/x86_64-linux-gnu/libz.so.1.2.8
+7f5d8c4cb000-7f5d8c68b000 r-xp 00000000 08:01 8661816                    /lib/x86_64-linux-gnu/libc-2.23.so
+7f5d8c68b000-7f5d8c88b000 ---p 001c0000 08:01 8661816                    /lib/x86_64-linux-gnu/libc-2.23.so
+7f5d8c88b000-7f5d8c88f000 r--p 001c0000 08:01 8661816                    /lib/x86_64-linux-gnu/libc-2.23.so
+7f5d8c88f000-7f5d8c891000 rw-p 001c4000 08:01 8661816                    /lib/x86_64-linux-gnu/libc-2.23.so
+7f5d8c891000-7f5d8c895000 rw-p 00000000 00:00 0 
+7f5d8c89b000-7f5d8c8a8000 r-xp 00000000 08:01 919977                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/jli/libjli.so
+7f5d8c8a8000-7f5d8caa8000 ---p 0000d000 08:01 919977                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/jli/libjli.so
+7f5d8caa8000-7f5d8caa9000 r--p 0000d000 08:01 919977                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/jli/libjli.so
+7f5d8caa9000-7f5d8caaa000 rw-p 0000e000 08:01 919977                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/jli/libjli.so
+7f5d8caab000-7f5d8cad1000 r-xp 00000000 08:01 8661814                    /lib/x86_64-linux-gnu/ld-2.23.so
+7f5d8cad3000-7f5d8cad5000 r--s 00008000 08:01 919939                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/sunec.jar
+7f5d8cada000-7f5d8cade000 r--s 00037000 08:01 919941                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/sunpkcs11.jar
+7f5d8cadf000-7f5d8cbb0000 rw-p 00000000 00:00 0 
+7f5d8cbb0000-7f5d8cbb3000 ---p 00000000 00:00 0 
+7f5d8cbb3000-7f5d8ccb3000 rw-p 00000000 00:00 0 
+7f5d8ccb5000-7f5d8ccb6000 r--s 0000a000 08:01 919942                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/jaccess.jar
+7f5d8ccbb000-7f5d8ccbc000 r--s 00010000 08:01 919936                     /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/zipfs.jar
+7f5d8ccc3000-7f5d8cccb000 rw-s 00000000 08:01 10223656                   /tmp/hsperfdata_huan289/19517
+7f5d8ccce000-7f5d8cccf000 rw-p 00000000 00:00 0 
+7f5d8cccf000-7f5d8ccd0000 r--p 00000000 00:00 0 
+7f5d8ccd0000-7f5d8ccd1000 r--p 00025000 08:01 8661814                    /lib/x86_64-linux-gnu/ld-2.23.so
+7f5d8ccd1000-7f5d8ccd2000 rw-p 00026000 08:01 8661814                    /lib/x86_64-linux-gnu/ld-2.23.so
+7f5d8ccd2000-7f5d8ccd4000 rw-p 00000000 00:00 0 
+7f5d8ccd4000-7f5d8ccd6000 rw-p 00000000 00:00 0 
+7fffa5068000-7fffa508a000 rw-p 00000000 00:00 0                          [stack]
+7fffa5103000-7fffa5105000 r--p 00000000 00:00 0                          [vvar]
+7fffa5105000-7fffa5107000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+
+VM Arguments:
+jvm_args: -Djava.library.path=/home/huan289/helics-build/swig/java -Dfile.encoding=UTF-8 
+java_command: org.eclipse.jdt.internal.junit.runner.RemoteTestRunner -version 3 -port 36989 -testLoaderClass org.eclipse.jdt.internal.junit5.runner.JUnit5TestLoader -loaderpluginname org.eclipse.jdt.junit5.runtime -classNames TestCoSim
+java_class_path (initial): /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/resources.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jsse.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jce.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/charsets.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/cldrdata.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/localedata.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/zipfs.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/sunpkcs11.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/nashorn.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/icedtea-sound.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/sunjce_provider.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/sunec.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/dnsns.jar:/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/jaccess.jar:/home/huan289/eclipse-workspace/ipss.plugin.external.cosim/bin:/home/huan289/git/ipss-common/ipss.lib/lib/ieee/ieee.odm_pss.jar:/home/huan289/git/ipss-common/ipss.lib/lib/ieee/ieee.odm.schema.jar:/home/huan289/git/ipss-common/ipss.lib/lib/ipss/ipss_core.impl.jar:/home/huan289/git/ipss-common/ipss.lib/lib/ipss/ipss_core.jar:/home/huan289/git/ipss-common/ipss.lib/lib/ipss/ipss_plugin.jar:/home/huan289/git/ipss-common/ipss.lib.3rdPty/lib/apache/commons-logging.jar:/home/huan289/git/ipss-common/ipss.lib.3rdPty/lib/apache/commons-math3-3.6.1.jar:/home/huan289/git/ipss-common/ipss.lib.3rdPty/lib/cache/hazelcast-3.8.jar:/home/huan289/git/ipss-common/ipss.lib.3rdPty/lib/eclipse/org.eclipse.emf.common.jar:/home/huan289/git/ipss-common/ipss.lib.3rdPty/lib/eclipse/org.eclipse.emf.ecore.change.jar:/home/huan289/git/ipss-common/ipss.lib.3rdPty/lib/eclipse/org.eclipse.emf.ecore.jar:/home/huan289/git/ipss-common/ipss.lib.3rdPty/lib/eclipse/org.eclipse.emf.ecore.xmi.jar:/home/huan289/git/ipss-common/ipss.lib.3rdPty/lib/eclipse/org.eclipse.emf.jar:/home/huan289/git/ipss-common/ipss.lib.3rdPty/lib/sparse/csparsej-1.1
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+PATH=/home/huan289/bin:/home/huan289/.local/bin:/home/huan289/gridlab-d/install/bin:/home/huan289/helics-install/bin:/home/huan289/cmake-3.9.6-Linux-x86_64/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+LD_LIBRARY_PATH=/home/huan289/helics-install/lib:/home/huan289/boost-1.65.1/lib
+SHELL=/bin/bash
+DISPLAY=localhost:10.0
+
+Signal Handlers:
+SIGSEGV: [libjvm.so+0xa69040], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGBUS: [libjvm.so+0xa69040], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGFPE: [libjvm.so+0x8b2170], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGPIPE: [libjvm.so+0x8b2170], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGXFSZ: [libjvm.so+0x8b2170], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGILL: [libjvm.so+0x8b2170], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGUSR1: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGUSR2: [libjvm.so+0x8b2020], sa_mask[0]=00100000000000000000000000000000, sa_flags=SA_RESTART|SA_SIGINFO
+SIGHUP: [libjvm.so+0x8b24f0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGINT: [libjvm.so+0x8b24f0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGTERM: [libjvm.so+0x8b24f0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGQUIT: [libjvm.so+0x8b24f0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+
+
+---------------  S Y S T E M  ---------------
+
+OS:DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=16.04
+DISTRIB_CODENAME=xenial
+DISTRIB_DESCRIPTION="Ubuntu 16.04.3 LTS"
+
+uname:Linux 4.10.0-40-generic #44~16.04.1-Ubuntu SMP Thu Nov 9 15:37:44 UTC 2017 x86_64
+libc:glibc 2.23 NPTL 2.23 
+rlimit: STACK 8192k, CORE 0k, NPROC 257265, NOFILE 1048576, AS infinity
+load average:1.91 1.88 1.55
+
+/proc/meminfo:
+MemTotal:       65970444 kB
+MemFree:        43609536 kB
+MemAvailable:   60226680 kB
+Buffers:          766744 kB
+Cached:         15466964 kB
+SwapCached:            0 kB
+Active:          9573912 kB
+Inactive:       11090864 kB
+Active(anon):    4392512 kB
+Inactive(anon):   101644 kB
+Active(file):    5181400 kB
+Inactive(file): 10989220 kB
+Unevictable:           0 kB
+Mlocked:               0 kB
+SwapTotal:      67105788 kB
+SwapFree:       67105788 kB
+Dirty:               300 kB
+Writeback:             0 kB
+AnonPages:       4372456 kB
+Mapped:           237624 kB
+Shmem:             63092 kB
+Slab:            1285900 kB
+SReclaimable:    1181296 kB
+SUnreclaim:       104604 kB
+KernelStack:       16848 kB
+PageTables:        40092 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:    100091008 kB
+Committed_AS:    9310520 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:           0 kB
+VmallocChunk:          0 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:   2951168 kB
+ShmemHugePages:        0 kB
+ShmemPmdMapped:        0 kB
+CmaTotal:              0 kB
+CmaFree:               0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:      211584 kB
+DirectMap2M:    13418496 kB
+DirectMap1G:    53477376 kB
+
+
+CPU:total 32 (initial active 32) (16 cores per cpu, 1 threads per core) family 21 model 1 stepping 2, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, aes, clmul, mmxext, 3dnowpref, lzcnt, sse4a, tsc, tscinvbit, tscinv
+
+/proc/cpuinfo:
+processor	: 0
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 1400.000
+cache size	: 2048 KB
+physical id	: 0
+siblings	: 16
+core id		: 0
+cpu cores	: 8
+apicid		: 32
+initial apicid	: 0
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 1
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 1400.000
+cache size	: 2048 KB
+physical id	: 0
+siblings	: 16
+core id		: 1
+cpu cores	: 8
+apicid		: 33
+initial apicid	: 1
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 2
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 1400.000
+cache size	: 2048 KB
+physical id	: 0
+siblings	: 16
+core id		: 2
+cpu cores	: 8
+apicid		: 34
+initial apicid	: 2
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 3
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 1400.000
+cache size	: 2048 KB
+physical id	: 0
+siblings	: 16
+core id		: 3
+cpu cores	: 8
+apicid		: 35
+initial apicid	: 3
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 4
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 1400.000
+cache size	: 2048 KB
+physical id	: 0
+siblings	: 16
+core id		: 4
+cpu cores	: 8
+apicid		: 36
+initial apicid	: 4
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 5
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 1400.000
+cache size	: 2048 KB
+physical id	: 0
+siblings	: 16
+core id		: 5
+cpu cores	: 8
+apicid		: 37
+initial apicid	: 5
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 6
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 1400.000
+cache size	: 2048 KB
+physical id	: 0
+siblings	: 16
+core id		: 6
+cpu cores	: 8
+apicid		: 38
+initial apicid	: 6
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 7
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 1400.000
+cache size	: 2048 KB
+physical id	: 0
+siblings	: 16
+core id		: 7
+cpu cores	: 8
+apicid		: 39
+initial apicid	: 7
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 8
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 2100.000
+cache size	: 2048 KB
+physical id	: 0
+siblings	: 16
+core id		: 0
+cpu cores	: 8
+apicid		: 40
+initial apicid	: 8
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 9
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 1400.000
+cache size	: 2048 KB
+physical id	: 0
+siblings	: 16
+core id		: 1
+cpu cores	: 8
+apicid		: 41
+initial apicid	: 9
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 10
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 1400.000
+cache size	: 2048 KB
+physical id	: 0
+siblings	: 16
+core id		: 2
+cpu cores	: 8
+apicid		: 42
+initial apicid	: 10
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 11
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 1400.000
+cache size	: 2048 KB
+physical id	: 0
+siblings	: 16
+core id		: 3
+cpu cores	: 8
+apicid		: 43
+initial apicid	: 11
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 12
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 1400.000
+cache size	: 2048 KB
+physical id	: 0
+siblings	: 16
+core id		: 4
+cpu cores	: 8
+apicid		: 44
+initial apicid	: 12
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 13
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 1400.000
+cache size	: 2048 KB
+physical id	: 0
+siblings	: 16
+core id		: 5
+cpu cores	: 8
+apicid		: 45
+initial apicid	: 13
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 14
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 1400.000
+cache size	: 2048 KB
+physical id	: 0
+siblings	: 16
+core id		: 6
+cpu cores	: 8
+apicid		: 46
+initial apicid	: 14
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 15
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 1400.000
+cache size	: 2048 KB
+physical id	: 0
+siblings	: 16
+core id		: 7
+cpu cores	: 8
+apicid		: 47
+initial apicid	: 15
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 16
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 1400.000
+cache size	: 2048 KB
+physical id	: 1
+siblings	: 16
+core id		: 0
+cpu cores	: 8
+apicid		: 64
+initial apicid	: 32
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 17
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 2100.000
+cache size	: 2048 KB
+physical id	: 1
+siblings	: 16
+core id		: 1
+cpu cores	: 8
+apicid		: 65
+initial apicid	: 33
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 18
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 1400.000
+cache size	: 2048 KB
+physical id	: 1
+siblings	: 16
+core id		: 2
+cpu cores	: 8
+apicid		: 66
+initial apicid	: 34
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 19
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 2100.000
+cache size	: 2048 KB
+physical id	: 1
+siblings	: 16
+core id		: 3
+cpu cores	: 8
+apicid		: 67
+initial apicid	: 35
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 20
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 2100.000
+cache size	: 2048 KB
+physical id	: 1
+siblings	: 16
+core id		: 4
+cpu cores	: 8
+apicid		: 68
+initial apicid	: 36
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 21
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 1400.000
+cache size	: 2048 KB
+physical id	: 1
+siblings	: 16
+core id		: 5
+cpu cores	: 8
+apicid		: 69
+initial apicid	: 37
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 22
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 1400.000
+cache size	: 2048 KB
+physical id	: 1
+siblings	: 16
+core id		: 6
+cpu cores	: 8
+apicid		: 70
+initial apicid	: 38
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 23
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 2100.000
+cache size	: 2048 KB
+physical id	: 1
+siblings	: 16
+core id		: 7
+cpu cores	: 8
+apicid		: 71
+initial apicid	: 39
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 24
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 1400.000
+cache size	: 2048 KB
+physical id	: 1
+siblings	: 16
+core id		: 0
+cpu cores	: 8
+apicid		: 72
+initial apicid	: 40
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 25
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 1400.000
+cache size	: 2048 KB
+physical id	: 1
+siblings	: 16
+core id		: 1
+cpu cores	: 8
+apicid		: 73
+initial apicid	: 41
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 26
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 1400.000
+cache size	: 2048 KB
+physical id	: 1
+siblings	: 16
+core id		: 2
+cpu cores	: 8
+apicid		: 74
+initial apicid	: 42
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 27
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 1400.000
+cache size	: 2048 KB
+physical id	: 1
+siblings	: 16
+core id		: 3
+cpu cores	: 8
+apicid		: 75
+initial apicid	: 43
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 28
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 1400.000
+cache size	: 2048 KB
+physical id	: 1
+siblings	: 16
+core id		: 4
+cpu cores	: 8
+apicid		: 76
+initial apicid	: 44
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 29
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 1400.000
+cache size	: 2048 KB
+physical id	: 1
+siblings	: 16
+core id		: 5
+cpu cores	: 8
+apicid		: 77
+initial apicid	: 45
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 30
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 1400.000
+cache size	: 2048 KB
+physical id	: 1
+siblings	: 16
+core id		: 6
+cpu cores	: 8
+apicid		: 78
+initial apicid	: 46
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+processor	: 31
+vendor_id	: AuthenticAMD
+cpu family	: 21
+model		: 1
+model name	: AMD Opteron(TM) Processor 6272
+stepping	: 2
+microcode	: 0x6000629
+cpu MHz		: 1400.000
+cache size	: 2048 KB
+physical id	: 1
+siblings	: 16
+core id		: 7
+cpu cores	: 8
+apicid		: 79
+initial apicid	: 47
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc extd_apicid amd_dcm aperfmperf pni pclmulqdq monitor ssse3 cx16 sse4_1 sse4_2 popcnt aes xsave avx lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs xop skinit wdt lwp fma4 nodeid_msr topoext perfctr_core perfctr_nb cpb hw_pstate vmmcall arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold
+bugs		: fxsave_leak sysret_ss_attrs null_seg
+bogomips	: 4200.14
+TLB size	: 1536 4K pages
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 48 bits physical, 48 bits virtual
+power management: ts ttp tm 100mhzsteps hwpstate cpb
+
+
+
+Memory: 4k page, physical 65970444k(43609536k free), swap 67105788k(67105788k free)
+
+vm_info: OpenJDK 64-Bit Server VM (25.151-b12) for linux-amd64 JRE (1.8.0_151-8u151-b12-0ubuntu0.16.04.2-b12), built on Oct 27 2017 21:59:02 by "buildd" with gcc 5.4.0 20160609
+
+time: Mon Mar 12 03:16:23 2018
+elapsed time: 2 seconds (0d 0h 0m 2s)
+
