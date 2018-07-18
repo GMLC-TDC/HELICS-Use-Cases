@@ -48,12 +48,13 @@ Given that compiling the simulation java file for this use case using InterPSS a
    * Select Project->Right Click->Build Path->Link Source..., 
    * Select the `<Path to HELICS Build folder>/swig/java` folder as the Linked folder location.
    * Configure Build Path:
-     * For the libraries, select and add all those under the `ipss.lib` folder of the [ipss-common](https://github.com/InterPSS-Project/ipss-common) , select and add the following jar files under the `ipss.lib.3rdPty` folder:
+       * For the libraries, select and add all those under the `ipss.lib` folder of the [ipss-common](https://github.com/InterPSS-Project/ipss-common) , select and add the following jar files under the `ipss.lib.3rdPty` folder:
        * apache: commons-logging, commons-math3
        * cache: hazelcast-3.8.jar
        * eclipse: all emf  jar files
 
-###Case files
+
+### Case files
 
 1. Transmissions: 
    * A dataset for IEEE 39-Bus system, including power flow, dynamic and sequence data
@@ -70,6 +71,4 @@ Given that compiling the simulation java file for this use case using InterPSS a
 2. Open *terminal 2*, start Eclipse, run `TestTransCoSim.java`
 3. Open *terminal 3*, first get the case folder: `cd /home/huan289/eclipse-workspace/ipss.plugin.external.cosim/testData/GLD/`, then run `gridlab-d IEEE-13_Dynamic_2gen_swingsub_helics.glm`
 
-
-
-###  
+  
