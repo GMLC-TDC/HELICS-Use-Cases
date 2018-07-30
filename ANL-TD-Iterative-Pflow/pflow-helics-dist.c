@@ -1,4 +1,4 @@
-static char help[] = "User example for pflow helics distribution federate.\n\n";
+static char help[] = "This code implements the distribution federate of the T-D power flow use-case. A global convergence for the federation is implemented in this use-case. The The distribution federate obtains the upstream distribution substation voltage from transmission federate, solves power flow, and sends the updated injection into transmission. This code does not use HELICS iterative API\n\n";
 
 #include <petsc.h>
 #include <ValueFederate.h>
@@ -10,6 +10,7 @@ typedef struct {
   helics_publication pub;
   helics_subscription sub;
   helics_time_t currenttime;
+  helics_iteration_status currenttimeiter;
   char       pub_topic[PETSC_MAX_PATH_LEN];
 } UserData;
 
@@ -46,6 +47,7 @@ helics_status CreateDistributionFederate(helics_federate *distfed,char* pub_topi
 
   status = helicsFederateInfoSetLoggingLevel(fedinfo,1);
 
+  status = helicsFederateInfoSetMaxIterations(fedinfo,100);
   /* Create value federate */
   vfed = helicsCreateValueFederate(fedinfo);
 
@@ -66,12 +68,11 @@ int main(int argc,char **argv)
   double complex *Stotal;
   PetscInt      iter=0;
   PetscScalar   Vm,Va;
-  int           isupdated;
-  PetscScalar   Pg,Qg;
-  PetscBool     converged,pflow_conv=PETSC_FALSE;
+  PetscScalar   Pg,Qg,Pgprv,Qgprv;
+  PetscInt      pflowT_conv=0,pflowD_conv=0,global_conv=0;
   char          pubstr[PETSC_MAX_PATH_LEN],substr[PETSC_MAX_PATH_LEN];
-  PetscInt      max_it=100;
   PetscInt      strlen;
+  PetscReal     tol=1E-6,mis;
 
   
   PetscInitialize(&argc,&argv,NULL,help);
@@ -114,57 +115,74 @@ int main(int argc,char **argv)
   status = helicsFederateEnterInitializationMode(user.vfed);
   printf("D FEDERATE %s: Entered initialization mode\n",user.pub_topic);
 
+  user.currenttime = 0.0;
+  user.currenttimeiter = iterating;
+
+  PetscInt solve;
+  /* Solve power flow */
+  //  printf("D FEDERATE %s running power flow\n",user.pub_topic);
+  ierr = OpenDSSSolutionGetSolve(&solve);CHKERRQ(ierr);
+
+  /* Send power injection to transmission */
+  /* Get the net injection at the boundary bus */
+  ierr = OpenDSSCircuitGetTotalPower(&Stotal);CHKERRQ(ierr);
+  Pgprv = -creal(Stotal[0])/1000.0; /* Conversion to MW */
+  Qgprv = -cimag(Stotal[0])/1000.0;
+
+  ierr = PetscSNPrintf(pubstr,PETSC_MAX_PATH_LEN-1,"%18.16f,%18.16f,%d",Pgprv,Qgprv,pflowD_conv);CHKERRQ(ierr);
+  status = helicsPublicationPublishString(user.pub,pubstr);
+  //  printf("D FEDERATE %s sent Pg = %4.3f, Qg = %4.3f, conv = %d from T FEDERATE\n",user.pub_topic,Pgprv,Qgprv,pflowD_conv);
+
   status = helicsFederateEnterExecutionMode(user.vfed);
   printf("D FEDERATE %s: Entered execution mode\n",user.pub_topic);
-  
-  user.currenttime = 0.0;
-
-  while(!pflow_conv && iter < max_it) {
+    
+  while(user.currenttimeiter == iterating) {
     iter++;
 
-    /*1. Get bus voltage from transmission */
-    status = helicsFederateRequestTime(user.vfed,user.currenttime,&user.currenttime);
+    status = helicsSubscriptionGetString(user.sub,substr,PETSC_MAX_PATH_LEN-1,&strlen);
+    sscanf(substr,"%lf,%lf,%d",&Vm,&Va,&pflowT_conv);
+    //    printf("D FEDERATE %s received Vm = %4.3f, Va = %4.3f, conv = %d from T FEDERATE\n",user.pub_topic,Vm,Va,pflowT_conv);
+
+    global_conv = pflowT_conv & pflowD_conv;
+
+    if(global_conv) {
+      helicsFederateRequestTimeIterative(user.vfed,user.currenttime,no_iteration,&user.currenttime,&user.currenttimeiter);
+    } else {
+      /* Set source bus voltage */
+      ierr = OpenDSSVsourcesSetPU(Vm);CHKERRQ(ierr);
+      ierr = OpenDSSVsourcesSetAngleDeg(Va);CHKERRQ(ierr);
+
+      /* 2. Solve power flow */
+      //      printf("D FEDERATE %s running power flow\n",user.pub_topic);
+      ierr = OpenDSSSolutionGetSolve(&solve);CHKERRQ(ierr);
+
+      /* Send power injection to transmission */    
+      /* Get the net injection at the boundary bus */
+      ierr = OpenDSSCircuitGetTotalPower(&Stotal);CHKERRQ(ierr);
+      Pg = -creal(Stotal[0])/1000.0; /* Conversion to MW */
+      Qg = -cimag(Stotal[0])/1000.0;
+
+      mis = PetscSqrtScalar((Pg-Pgprv)/100*(Pg-Pgprv)/100 + (Qg-Qgprv)/100*(Qg-Qgprv)/100); /* Divide by 100 for conversion to pu */
+      if(mis < tol) {
+	pflowD_conv = 1;
+      } else {
+	pflowD_conv = 0;
+	Pgprv = Pg;
+	Qgprv = Qg;
+      }
+      ierr = PetscSNPrintf(pubstr,PETSC_MAX_PATH_LEN-1,"%18.16f,%18.16f,%d",Pg,Qg,pflowD_conv);CHKERRQ(ierr);
+      status = helicsPublicationPublishString(user.pub,pubstr);
+      //      printf("D FEDERATE %s sent Pg = %4.3f, Qg = %4.3f, conv = %d to T FEDERATE\n",user.pub_topic,Pg,Qg,pflowD_conv);
     
-    isupdated = helicsSubscriptionIsUpdated(user.sub);
-    if(isupdated) {
-      status = helicsSubscriptionGetString(user.sub,substr,PETSC_MAX_PATH_LEN-1,&strlen);
-      sscanf(substr,"%lf,%lf",&Vm,&Va);
-      printf("D FEDERATE %s received Vm = %4.3f, Va = %4.3f from T FEDERATE\n",user.pub_topic,Vm,Va);
+      fflush(NULL);
+
+      /*3. Publish Pg, Qg, and convergence status to transmission */
+      status = helicsFederateRequestTimeIterative(user.vfed,user.currenttime,force_iteration,&user.currenttime,&user.currenttimeiter);
+
+      printf("Iteration %d: D Federate %s mis = %g,converged = %d\n",iter,user.pub_topic,mis,pflowD_conv);
+
     }
-
-        /* Set source bus voltage */
-    ierr = OpenDSSVsourcesSetPU(Vm);CHKERRQ(ierr);
-    ierr = OpenDSSVsourcesSetAngleDeg(Va);CHKERRQ(ierr);
-
-    converged = PETSC_FALSE;
-
-    PetscInt solve;
-    /* 2. Solve power flow */
-    printf("D FEDERATE %s running power flow\n",user.pub_topic);
-    ierr = OpenDSSSolutionGetSolve(&solve);CHKERRQ(ierr);
-
-    /* Send power injection to transmission */
     
-       /* Get the net injection at the boundary bus */
-    ierr = OpenDSSCircuitGetTotalPower(&Stotal);CHKERRQ(ierr);
-    Pg = -creal(Stotal[0])/1000.0; /* Conversion to MW */
-    Qg = -cimag(Stotal[0])/1000.0;
-
-    ierr = PetscSNPrintf(pubstr,PETSC_MAX_PATH_LEN-1,"%18.16f,%18.16f",Pg,Qg);CHKERRQ(ierr);
-    status = helicsPublicationPublishString(user.pub,pubstr);
-    printf("D FEDERATE %s sent Pg = %4.3f, Qg = %4.3f from T FEDERATE\n",user.pub_topic,Pg,Qg);
-    
-    /*2. Publish Pg and Qg */
-    status = helicsFederateRequestTime(user.vfed,user.currenttime,&user.currenttime);
-
-    /*3. Receiving convergence status from transmission */
-    status = helicsFederateRequestTime(user.vfed,user.currenttime,&user.currenttime);
-    
-    isupdated = helicsSubscriptionIsUpdated(user.sub);
-    if(isupdated) {
-      status = helicsSubscriptionGetString(user.sub,substr,PETSC_MAX_PATH_LEN-1,&strlen);
-      sscanf(substr,"%d",(PetscBool*)&pflow_conv);
-    }
   }
   
   status = helicsFederateEnterExecutionModeComplete(user.vfed);
