@@ -8,7 +8,8 @@ This example code demonstrates a transmission-distribution steady-state power fl
 Clone the repository
 
 ```
-git clone https://xgitlab.cels.anl.gov/abhyshr/td-powerflow.git
+git clone https://github.com/GMLC-TDC/HELICS-Use-Cases.git
+cd HELICS-Use-Cases/ANL-TD-Iterative-Pflow/
 ```
 
 ## Installation
