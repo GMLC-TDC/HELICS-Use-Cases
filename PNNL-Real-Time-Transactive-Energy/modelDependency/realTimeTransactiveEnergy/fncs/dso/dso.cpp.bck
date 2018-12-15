@@ -1,0 +1,499 @@
+//#include <stdio.h>
+#include <cmath>
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include <sstream>
+#include <string.h>
+#include <ctime>
+#include <vector>
+#include <algorithm>
+#include <sys/resource.h>
+#include <numeric>
+#include <iterator>
+
+#include "fncs.hpp"
+#include "polyfit.hpp"
+#include "logging.hpp"
+
+
+using namespace std;
+
+// set the definition for the logger
+loglevel_e loglevel;
+
+// Fill the zipped vector with pairs consisting of the
+// corresponding elements of a and b. (This assumes 
+// that the vectors have equal length)
+template <typename A, typename B>
+void zip(
+    const std::vector<A> &a, 
+    const std::vector<B> &b, 
+    std::vector<std::pair<A,B>> &zipped)
+{
+    for(size_t i=0; i<a.size(); ++i)
+    {
+        zipped.push_back(std::make_pair(a[i], b[i]));
+    }
+}
+
+// Write the first and second element of the pairs in 
+// the given zipped vector into a and b. (This assumes 
+// that the vectors have equal length)
+template <typename A, typename B>
+void unzip(
+    const std::vector<std::pair<A, B>> &zipped, 
+    std::vector<A> &a, 
+    std::vector<B> &b)
+{
+    for(size_t i=0; i<a.size(); i++)
+    {
+        a[i] = zipped[i].first;
+        b[i] = zipped[i].second;
+    }
+}
+
+// Function for comparing second entry in s struct
+// Used to sort the zipped vectors
+struct CompareSecond {
+    template <class Fst, class Snd>
+    bool operator()(const pair<Fst,Snd>& l, const pair<Fst,Snd>& r) const {
+        return l.second < r.second;
+    }
+};
+
+string delSpace(string str) {
+  int ind = 0;
+  do {
+    if (isspace(str[ind])) {
+      str.erase(ind, 1);
+      str = delSpace(str);
+    }
+    ind += 1;
+  } while (ind < str.length());
+  return str;
+};
+
+vector<double> linspace(double minVal, double maxVal, int num) {
+  vector<double> linSpace(num);
+  for (int i = 0; i < num; i++) {
+    linSpace[i] = minVal + i * (maxVal - minVal) / num;
+  }
+  return linSpace;
+};
+
+/* ==================================================================================================================
+====================== MAIN PART ====================================================================================
+===================================================================================================================*/
+
+int main(int argc, const char *argv[]) {
+    // variable to keep track of the total time used
+    time_t tStart = time(0);
+
+    // Setting up the logger based on user input
+    char *log_level_export = NULL;
+    log_level_export = getenv("DSO_LOG_LEVEL");
+    
+    if (!log_level_export) {
+        loglevel = logWARNING; 
+    } else if (strcmp(log_level_export,"ERROR") == 0) {
+        loglevel = logERROR;
+    } else if (strcmp(log_level_export,"WARNING") == 0) {
+        loglevel = logWARNING;
+    } else if (strcmp(log_level_export,"INFO") == 0) {
+        loglevel = logINFO;
+    } else if (strcmp(log_level_export,"DEBUG") == 0) {
+        loglevel = logDEBUG;
+    } else if (strcmp(log_level_export,"DEBUG1") == 0) {
+        loglevel = logDEBUG1;
+    } else if (strcmp(log_level_export,"DEBUG2") == 0) {
+        loglevel = logDEBUG2;
+    } else if (strcmp(log_level_export,"DEBUG3") == 0) {
+        loglevel = logDEBUG3;
+    } else if (strcmp(log_level_export,"DEBUG4") == 0) {
+        loglevel = logDEBUG4;
+    }
+
+    // increase the possible stack size for the application
+    const rlim_t kStackSize = 1024L * 1024L * 1024L;   // min stack size = 1024 Mb
+    struct rlimit rl;
+    int result;
+
+    result = getrlimit(RLIMIT_STACK, &rl);
+    if (result == 0)
+    {
+        if (rl.rlim_cur < kStackSize)
+        {
+            rl.rlim_cur = kStackSize;
+            result = setrlimit(RLIMIT_STACK, &rl);
+            if (result != 0)
+            {
+                LERROR << "setrlimit returned result = " << result ;
+            }
+        }
+    }    
+    
+    LINFO << "Running process -> " << argv[0] ;
+    LINFO << "with a simulation stop time of " << argv[1] << " seconds";    
+    
+    try {                
+        // time keeping variables
+        int simStopTime; // simulation stop time
+        sscanf(argv[1], "%d%*s", &simStopTime);
+        double amp_fact;
+        sscanf(argv[2], "%lf%*s", &amp_fact);
+        int currentTime = 0; //current time in seconds
+        int nextTime = 0; // next time in seconds
+        int nextFNCSTime = 0; // next time returned by FNCS for the simulator to run
+        int dtTime = 300;
+        int iteration = 1;
+        
+        LINFO << "Amplication factor is set at -> " << amp_fact;    
+        
+        // a string stream we use to transfer from double to string
+        stringstream doubleToString;
+        
+        // portion to initialize FNCS
+        LINFO << "Initializing FNCS";                  
+        fncs::initialize();
+
+        // After FNCS is initialized we can adjust the start time to be three timestep earlier than when the OPF results
+        // are needed in other applications. This time is dictated by the zpl file.
+        nextFNCSTime = -1*fncs::get_time_delta();
+        nextTime = -1*fncs::get_time_delta();
+        
+        LINFO << "FNCS delta time is set at " << dtTime;
+        
+        // determine simulator name
+        string simName = fncs::get_name();
+        LINFO << "Name of simulator is -> " << simName;        
+        
+        // get a vector list of the values we subscribe to and create a vector for bid price and quantity
+        vector<string> subscription_keys = fncs::get_keys();
+        vector<string> subscription_mdCurveCoeff_keys;    
+        vector<string> subscription_MinMaxCumQuant_keys;
+            
+        // loop through subscriptions and seperate them out into different vectors bid price and quantity
+        for(vector<string>::size_type i = 0; i != subscription_keys.size(); i++) {
+            if (subscription_keys[i].find("mdCurveCoeff") != string::npos) {
+                subscription_mdCurveCoeff_keys.push_back(subscription_keys[i]);
+            } else if (subscription_keys[i].find("MinMaxCumQuant") != string::npos) {
+                subscription_MinMaxCumQuant_keys.push_back(subscription_keys[i]);
+            }
+        }
+        
+        // vectors of equal size for the actual values
+        //vector<double> subscription_values (subscription_keys.size());
+        vector<string> subscription_mdCurveCoeff_values (subscription_mdCurveCoeff_keys.size());
+        vector<string> subscription_MinMaxCumQuant_values (subscription_MinMaxCumQuant_keys.size());
+        
+                
+        // show the user what is being subscribed to
+        LDEBUG << "Subscriptions:";
+        for (vector<string>::const_iterator i = subscription_keys.begin(); i != subscription_keys.end(); ++i) {
+            LDEBUG << "    " << *i ;
+        }
+
+        // let's create new data sets with only the value that are not 0 or pricecap (1000)
+        vector<double> xData;
+        vector<double> yData;
+        vector<double> loadData;
+        vector<double> marginalDemandCurve;
+        vector<double> demandCurve;
+        double actualDispLoad;
+        
+        vector<vector<double>> lseMPcoeff, lseMinMaxCumQuants, lseCumQuants, lseMargPrices;
+        int qLinSpaceLength = 1000;
+        
+    do {
+            // update time
+            currentTime = nextFNCSTime;
+        
+            if (currentTime == nextTime) { // calculate next step        
+                // info for what iteration we are calculating for
+                LINFO << "=== calculating at iteration -> " << iteration << " ===";
+                
+                // obtain marginal price curve coefficients from LSE as a string,
+                // split it in 2 at the comma, create the 2 substrings,
+                // eliminate spaces if any in the substrings, then stream them into a 2D array
+                lseMPcoeff.resize(subscription_mdCurveCoeff_keys.size());
+                for(vector<double>::size_type i = 0; i != subscription_mdCurveCoeff_keys.size(); i++) {
+                    subscription_mdCurveCoeff_values[i] = fncs::get_value(subscription_mdCurveCoeff_keys[i]);
+                    LDEBUG << subscription_mdCurveCoeff_keys[i] << " -> " << subscription_mdCurveCoeff_values[i];
+                    size_t splitInd = subscription_mdCurveCoeff_values[i].find(",");
+                    lseMPcoeff[i].resize(2);
+                    stringstream(delSpace(subscription_mdCurveCoeff_values[i].substr(0, splitInd))) >> lseMPcoeff[i][0];
+                    stringstream(delSpace(subscription_mdCurveCoeff_values[i].substr(splitInd + 1))) >> lseMPcoeff[i][1];
+                    LDEBUG << "<<<<<<< " << lseMPcoeff[i][0] << " <<<<<<>>>>>>> " << lseMPcoeff[i][1] << " >>>>>>>>>>\n";
+                }    
+
+                // obtain minimum and maximum cumulative quantities from LSE as a string
+                lseMinMaxCumQuants.resize(subscription_MinMaxCumQuant_keys.size());
+                lseCumQuants.resize(subscription_MinMaxCumQuant_keys.size());
+                lseMargPrices.resize(subscription_MinMaxCumQuant_keys.size());
+                for(vector<double>::size_type i = 0; i != subscription_MinMaxCumQuant_keys.size(); i++) {
+                  subscription_MinMaxCumQuant_values[i] = fncs::get_value(subscription_MinMaxCumQuant_keys[i]);
+                  LDEBUG << subscription_MinMaxCumQuant_keys[i] << " -> " << subscription_MinMaxCumQuant_values[i];
+                  size_t splitInd = subscription_MinMaxCumQuant_values[i].find(",");
+                  lseMinMaxCumQuants[i].resize(2);
+                  stringstream(delSpace(subscription_MinMaxCumQuant_values[i].substr(0, splitInd))) >> lseMinMaxCumQuants[i][0];
+                  stringstream(delSpace(subscription_MinMaxCumQuant_values[i].substr(splitInd + 1))) >> lseMinMaxCumQuants[i][1];
+                  LDEBUG << "<<<<<<< " << lseMinMaxCumQuants[i][0] << " <<<<<<>>>>>>> " << lseMinMaxCumQuants[i][1] << " >>>>>>>>>>\n";
+                  lseCumQuants[i].resize(qLinSpaceLength);
+                  lseCumQuants[i] = linspace(lseMinMaxCumQuants[i][0], lseMinMaxCumQuants[i][1], qLinSpaceLength);
+                  lseMargPrices[i].resize(qLinSpaceLength);
+                  for (int j = 0; j < qLinSpaceLength; j++) {
+                	lseMargPrices[i][j] = lseMPcoeff[i][0] * lseCumQuants[i][j] + lseMPcoeff[i][1];
+                  }
+                }    
+
+                /*
+                // let's create new data sets with only the value that are not 0 or pricecap (1000)
+                xData.clear();
+                yData.clear();
+                loadData.clear();
+                demandCurve.clear();
+                            
+                // then let's get that curve going
+                for(vector<double>::size_type i = 0; i != subscription_bid_price_keys.size(); i++) {
+                    // check that bid price is greater than 0 but less than 1000. Also check that bid_quantity is greater than zero
+                    if (subscription_bid_price_values[i] > 0.0 && subscription_bid_price_values[i] < 1000.0 && subscription_bid_quantity_values[i] > 0.0) {
+                        // for now we are using units in MW
+                        xData.push_back(subscription_bid_quantity_values[i] / 1e6 * amp_fact);
+                        loadData.push_back(subscription_actual_load_values[i] / 1e3 * amp_fact);
+                        yData.push_back(subscription_bid_price_values[i]);
+                    }        
+                }
+                
+                // some debug messages for what is in the curve
+                for(vector<double>::size_type i = 0; i != xData.size(); i++) {
+                    LDEBUG << "    xData -> " << xData[i] << "    yData -> " << yData[i];
+                }
+                
+                // check if we have enough points to continue
+                if (static_cast<int>(xData.size()) >= (int) 3) {
+                
+                    // Zip the demand curve vectors together
+                    vector<pair<double, double>> zipped;
+                    zip(xData, yData, zipped);
+                    
+                    // Sort the vector of pairs descending according to price, that is the 2nd column in the marginal demand curve zip
+                    sort(zipped.rbegin(), zipped.rend(), CompareSecond());
+        
+                    // Write the sorted pairs back to the original vectors
+                    unzip(zipped, xData, yData);
+                    
+                    // some debug messages for what is in the curve
+                    LDEBUG << "";
+                    for(vector<double>::size_type i = 0; i != xData.size(); i++) {
+                        LDEBUG << "    xData -> " << xData[i] << "    yData -> " << yData[i];
+                    }
+                    
+                    // create the cumulative sum of the quantity vector
+                    vector<double> xDataSum(xData.size());
+                    partial_sum(xData.begin(), xData.end(), xDataSum.begin());
+                    
+                    // some debug messages for what is in cumulative sum vector
+                    LDEBUG << "";
+                    for(vector<double>::size_type i = 0; i != xDataSum.size(); i++) {
+                        LDEBUG << "    xDataSum -> " << xDataSum[i] ;
+                    }
+                    
+                    // approximating the marginal demand curve with a linear curve
+                    marginalDemandCurve = polyfit(xDataSum, yData, 1);
+                    // some debug messages for what is in the marginalDemandCurve vector
+                    LDEBUG << "";                
+                    for (vector<double>::const_iterator i = marginalDemandCurve.begin(); i != marginalDemandCurve.end(); ++i) {
+                        LDEBUG << "    marginalDemandCurve -> " << *i;
+                    }
+                    
+                    // loop through and multiply marginal price and quantity
+                    // to get the total cost for each point
+                    vector<double> xyData(xData.size());
+                    vector<double> totalCost(xData.size());
+                    for(vector<double>::size_type i = 0; i != xyData.size(); i++) {
+                        xyData[i] = xData[i]*yData[i];
+                    }
+            
+                    // then get the total cost by taking the cumulative sum 
+                    partial_sum(xyData.begin(), xyData.end(), totalCost.begin());
+                    
+                    // some debug messages for what is in total cost vector
+                    LDEBUG << "";
+                    for(vector<double>::size_type i = 0; i != totalCost.size(); i++) {
+                        LDEBUG << "    total cost -> " << totalCost[i] ;
+                    }
+                    
+                    // now time to actually do the fit
+                    demandCurve = polyfit(xDataSum, totalCost, 2);
+                    
+                    // some debug messages for what is in the demandCurve vector
+                    LDEBUG << "";                
+                    for (vector<double>::const_iterator i = demandCurve.begin(); i != demandCurve.end(); ++i) {
+                        LDEBUG << "    demandCurve -> " << *i;
+                    }
+                    */    
+                    // publish maximum controllable load
+                    /*
+                    actualDispLoad = accumulate(loadData.begin(), loadData.end(), 0.0);
+                    doubleToString << xDataSum.back() << "," << actualDispLoad;
+                    fncs::publish("dispLoad", doubleToString.str());
+                    LINFO << "control load -> " << doubleToString.str();
+                    doubleToString.str(string());        
+                    */
+                    // publish demand curve coefficients
+                    /*
+                    for (vector<double>::const_iterator i = demandCurve.end()-1; i != demandCurve.begin()-1; --i) {
+                        if (i != demandCurve.end()-1) {
+                            doubleToString << ",";
+                        }
+                        doubleToString << *i;
+                    }
+                    fncs::publish("dispLoadDemandCurve", doubleToString.str());
+                    LINFO << "curve coefficients -> " << doubleToString.str();
+                    doubleToString.str(string());
+                    */    
+
+
+/*
+          // publish marginal demand curve coefficients
+          for (vector<double>::const_iterator i = marginalDemandCurve.end() - 1; i != marginalDemandCurve.begin() - 1; --i) {
+            if (i != marginalDemandCurve.end() - 1) {
+              doubleToString << ",";
+            }
+            doubleToString << *i;
+          }
+          fncs::publish("dispLoadMarginalDemandCurve", doubleToString.str());
+          LINFO << "marginal demand curve coefficients -> " << doubleToString.str();
+          doubleToString.str(string());
+          
+          // publish the minimum and maximum quantity bids, that is first and last element in xDataSum
+          doubleToString << xDataSum.front() << "," << xDataSum.back();
+          fncs::publish("min-max Q bids", doubleToString.str());
+          LINFO << "min and max Q bids -> " << doubleToString.str();
+          doubleToString.str(string());
+          
+                    // update the outcome data file
+                    controller_outcome_data << iteration << "," << currentTime;
+                    for (vector<double>::const_iterator i = marginalDemandCurve.end() - 1; i != marginalDemandCurve.begin() - 1; --i) {
+                      controller_outcome_data << "," << *i;
+                    }
+                    controller_outcome_data << "," << xDataSum.front() << "," << xDataSum.back();
+                    for (vector<double>::const_iterator i = demandCurve.end()-1; i != demandCurve.begin()-1; --i) {
+                        controller_outcome_data << "," << *i;
+                    }
+                    controller_outcome_data << "," << xDataSum.back() << "," << actualDispLoad << endl;    
+                    
+                } else {
+                    LWARNING << "not enough controllers are bidding";
+                    
+
+                    // publish minimum and maximum qunatity bids
+                    fncs::publish("min-max Q bids", "0,0");
+                    LINFO << "min and max Q bids -> " << "0,0";
+                    doubleToString.str(string());        
+                    // publish marginal demand curve coefficients
+                    fncs::publish("dispLoadMarginalDemandCurve", "0,0");
+                    LINFO << "marginal demand curve coefficients -> " << "0,0";
+                    doubleToString.str(string());
+                                        
+                    // update the outcome data file
+                    controller_outcome_data << iteration << "," << currentTime << ",0,0,0,0,0,0,0,0,0" << endl;
+                }
+                
+                // update the price data file
+                controller_price_data << iteration << "," << currentTime;
+                for (vector<double>::const_iterator i = subscription_bid_price_values.begin(); i != subscription_bid_price_values.end(); ++i) {
+                    controller_price_data << "," << *i;
+                }
+                controller_price_data << endl;
+
+                // update the quantity data file
+                controller_quantity_data << iteration << "," << currentTime;
+                for (vector<double>::const_iterator i = subscription_bid_quantity_values.begin(); i != subscription_bid_quantity_values.end(); ++i) {
+                    controller_quantity_data << "," << *i;
+                }
+                controller_quantity_data << endl;                
+                
+                // update the actual load data file
+                controller_actual_load_data << iteration << "," << currentTime;
+                for (vector<double>::const_iterator i = subscription_actual_load_values.begin(); i != subscription_actual_load_values.end(); ++i) {
+                    controller_actual_load_data << "," << *i;
+                }
+                controller_actual_load_data << endl;
+                
+                
+                */
+                
+                // request new time from FNCS
+                nextTime = min(currentTime + dtTime, simStopTime);
+                nextFNCSTime = fncs::time_request(nextTime);
+                
+                iteration += 1;
+            }
+            else {
+                nextFNCSTime = fncs::time_request(nextTime);    
+            }
+            LDEBUG << "=== current time is -> " << currentTime << " ===";
+            LDEBUG << "=== next FNCS time is -> " << nextFNCSTime << " ===";
+            //currentTime = nextFNCSTime;
+        }
+        while(currentTime < simStopTime);        
+    }    
+    catch (const exception& e) {
+        LERROR << "Caught a standard exception, see below for details";
+        cerr << e.what() << endl;
+        cerr << "Terminating program..." << endl;
+        fncs::die();
+        return -2;
+      }
+    catch (...) {
+        LERROR << "Unknown and unexpected error thrown";
+        cerr << "Terminating program..." << endl;
+        fncs::die();
+        return -3;
+    }    
+    
+    time_t tStop = time(0);
+    LINFO << "Simulation took " << (float) (tStop-tStart) << " seconds";
+    LINFO << "Terminating FNCS";
+    fncs::finalize();
+       return 0;
+}
+
+
+/*
+
+// adding in a file that collects data for bid price
+        ofstream controller_price_data("lsePriceData.csv", ios::out);
+        // creating the beginning of the header for the file
+        controller_price_data << "iteration, current time";
+        for (vector<string>::const_iterator i = subscription_bid_price_keys.begin(); i != subscription_bid_price_keys.end(); ++i) {
+            controller_price_data << "," << *i ;
+        }
+        controller_price_data << endl;
+
+        // adding in a file that collects data for bid quantity
+        ofstream controller_quantity_data("lseQuantityData.csv", ios::out);
+        // creating the beginning of the header for the file
+        controller_quantity_data << "iteration, current time";
+        for (vector<string>::const_iterator i = subscription_bid_quantity_keys.begin(); i != subscription_bid_quantity_keys.end(); ++i) {
+            controller_quantity_data << "," << *i ;
+        }
+        controller_quantity_data << endl;
+
+        // adding in a file that collects data for actual load
+        ofstream controller_actual_load_data("lseActualLoadData.csv", ios::out);
+        // creating the beginning of the header for the file
+        controller_actual_load_data << "iteration, current time";
+        for (vector<string>::const_iterator i = subscription_actual_load_keys.begin(); i != subscription_actual_load_keys.end(); ++i) {
+            controller_actual_load_data << "," << *i ;
+        }
+        controller_actual_load_data << endl;        
+        
+        // adding in a file that collects data for aggregator demand curve and maximun controllable load
+        ofstream controller_outcome_data("lseOutcomeData.csv", ios::out);
+        // creating the beginning of the header for the file
+        controller_outcome_data << "iteration, current time,mc1,mc0,min Q bid, max Q bid,c2,c1,c0,maximum controllable load,controllable load" << endl;        
+
+*/
