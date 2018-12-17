@@ -1,12 +1,14 @@
 """
-This file contains a functions  to ccsi control
-
-Created April 23, 2018 by Jacob Hansen (jacob.hansen@pnnl.gov)
-
-Copyright (c) 2018 Battelle Memorial Institute.  The Government retains a paid-up nonexclusive, irrevocable
-worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the
-Government, including the right to distribute to other Government contractors.
+This file contains functions to add Transactive Control to the simulation
 """
+##################################################################################################################
+# Created April 23, 2018 by Jacob Hansen (jacob.hansen@pnnl.gov)
+
+# Copyright (c) 2018 Battelle Memorial Institute.  The Government retains a paid-up nonexclusive, irrevocable
+# worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the
+# Government, including the right to distribute to other Government contractors.
+##################################################################################################################
+
 import random, os
 
 
@@ -16,7 +18,9 @@ def add_dso(selectedFeederDict):
 
 	Inputs
 		selectedFeederDict - dictionary containing properties for feeders we are using
+
 	Outputs
+		None
 
 	"""	
 	# Get information about the co-sim we are working on
@@ -46,7 +50,9 @@ def add_lse(selectedFeederDict):
 
 	Inputs
 		selectedFeederDict - dictionary containing properties for feeders we are using
+
 	Outputs
+		None
 
 	"""	
 	# Get information about the co-sim we are working on
@@ -70,7 +76,9 @@ def add_residential_controller(feeder_dict, selectedFeederDict, last_key=0):
 
 	Inputs
 		feeder_dict - dictionary containing the full feeder
+
 		selectedFeederDict - settings for the specific feeder
+		
 		last_object_key - Last object key
 
 	Outputs

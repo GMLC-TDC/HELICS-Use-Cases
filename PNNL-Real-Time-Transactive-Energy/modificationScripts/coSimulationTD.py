@@ -24,7 +24,7 @@ import time, os, shutil, math, tqdm, multiprocessing, platform, sys
 start = time.time()
 
 # name of the experiment
-experimentName = 'coSimulationExample'
+experimentName = 'tdExample'
 
 # number of distribution systems in the experiment
 distributionSystemNumber = 2

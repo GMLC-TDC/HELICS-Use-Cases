@@ -1,13 +1,14 @@
 
 """
 This file contains functions to create FNCS config files for each simulator
-
-Created April 16, 2018 by Jacob Hansen (jacob.hansen@pnnl.gov)
-
-Copyright (c) 2018 Battelle Memorial Institute.  The Government retains a paid-up nonexclusive, irrevocable
-worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the
-Government, including the right to distribute to other Government contractors.
 """
+##################################################################################################################
+# Created April 16, 2018 by Jacob Hansen (jacob.hansen@pnnl.gov)
+
+# Copyright (c) 2018 Battelle Memorial Institute.  The Government retains a paid-up nonexclusive, irrevocable
+# worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the
+# Government, including the right to distribute to other Government contractors.
+##################################################################################################################
 
 import os
 
@@ -17,7 +18,9 @@ def gridlabd_fncs_config(glmDict, selectedFeederDict):
 
 	Inputs
 		glmDict - dictionary of the feeder
+
 		selectedFeederDict - settings for the specific feeder
+
 	Outputs
 		glmDict - the modified feeder dictionary
 	"""	
@@ -64,9 +67,12 @@ def gridlabd_fncs_config(glmDict, selectedFeederDict):
 def matpower_fncs_config(populationDict, transmissionDict):
 	"""
 	This function adds FNCS capabilities to matpower
+	
 	Inputs
 		populationDict - dictionary containing properties for all the feeders we are using
+
 		transmissionDict - - dictionary containing properties for the transmission system we are using
+		
 	Outputs
 		None
 	"""	

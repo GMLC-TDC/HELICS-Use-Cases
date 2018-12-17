@@ -1,12 +1,13 @@
 """
 This file contains functions to add execution scripts that can run the experiment 
-
-Created April 7, 2018 by Jacob Hansen (jacob.hansen@pnnl.gov)
-
-Copyright (c) 2018 Battelle Memorial Institute.  The Government retains a paid-up nonexclusive, irrevocable
-worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the
-Government, including the right to distribute to other Government contractors.
 """
+##################################################################################################################
+# Created April 7, 2018 by Jacob Hansen (jacob.hansen@pnnl.gov)
+
+# Copyright (c) 2018 Battelle Memorial Institute.  The Government retains a paid-up nonexclusive, irrevocable
+# worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the
+# Government, including the right to distribute to other Government contractors.
+
 from . import feederConfiguration
 import subprocess, os, math, datetime, itertools
 
@@ -16,7 +17,9 @@ def add_simple_run_script(experimentFilePath, experimentName):
 
 	Inputs
 		experimentFilePath - path to where we want to save the experiment
+
 		experimentName - name of the experiment
+
 	Outputs
 		None
 	"""
@@ -67,13 +70,18 @@ def add_simple_run_script(experimentFilePath, experimentName):
 
 def add_fncs_run_script(populationDict, transmissionDict, simulatorLogLevels, fncsPort):
 	"""
-	This function creates convenience scripts for running the experiment
+	This function creates convenience scripts for running a Co-Simulation experiment using FNCS. 
+	Supports GridLAB-D, MATPOWER, LSE, DSO federates
 
 	Inputs
 		populationDict - dictionary containing properties for all the feeders we are using
+
 		transmissionDict - dictionary containing properties for the transmission system we are using
+
 		simulatorLogLevels - log level for each type of federate
+
 		fncsPort - the port to run FNCS on
+
 	Outputs
 		None
 	"""
@@ -232,12 +240,16 @@ def add_fncs_run_script(populationDict, transmissionDict, simulatorLogLevels, fn
 
 def add_helics_run_script(populationDict, transmissionDict, simulatorLogLevels):
 	"""
-	This function creates convenience scripts for running the experiment
+	This function creates convenience scripts for running a Co-Simulation experiment using HELICS. 
+	Supports GridLAB-D, MATPOWER, LSE, DSO federates
 
 	Inputs
 		populationDict - dictionary containing properties for all the feeders we are using
+
 		transmissionDict - dictionary containing properties for the transmission system we are using
+
 		simulatorLogLevels - log level for each type of federate
+
 	Outputs
 		None
 	"""
@@ -359,12 +371,16 @@ def add_helics_run_script(populationDict, transmissionDict, simulatorLogLevels):
 
 def add_fncs_HPC_script(populationDict, transmissionDict, simulatorLogLevels):
 	"""
-	This function creates convenience scripts for running the experiment on HPC resource
+	This function creates convenience scripts for running a Co-Simulation experiment using FNCS on HPC platforms. 
+	Supports GridLAB-D, MATPOWER, LSE, DSO federates
 
 	Inputs
 		populationDict - dictionary containing properties for all the feeders we are using
+
 		transmissionDict - dictionary containing properties for the transmission system we are using
+
 		simulatorLogLevels - log level for each type of federate
+
 	Outputs
 		None
 	"""
@@ -458,12 +474,16 @@ def add_fncs_HPC_script(populationDict, transmissionDict, simulatorLogLevels):
 
 def add_helics_HPC_script(populationDict, transmissionDict, simulatorLogLevels):
 	"""
-	This function creates convenience scripts for running the experiment on HPC resource
+	This function creates convenience scripts for running a Co-Simulation experiment using HELICS on HPC platforms. 
+	Supports GridLAB-D, MATPOWER, LSE, DSO federates
 
 	Inputs
 		populationDict - dictionary containing properties for all the feeders we are using
+
 		transmissionDict - dictionary containing properties for the transmission system we are using
+
 		simulatorLogLevels - log level for each type of federate
+
 	Outputs
 		None
 	"""

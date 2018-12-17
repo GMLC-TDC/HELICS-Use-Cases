@@ -1,16 +1,14 @@
 """
 This file contains a fuction to add recorders to a feeder based on the use flags defined
-
-	add_recorders(recorder_dict, config_file, file_path, feeder_name, last_key=0):
-		This fuction add recorders based on the configuration of the feeder
-
-
-Created December 20, 2016 by Jacob Hansen (jacob.hansen@pnnl.gov)
-
-Copyright (c) 2016 Battelle Memorial Institute.  The Government retains a paid-up nonexclusive, irrevocable
-worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the
-Government, including the right to distribute to other Government contractors.
 """
+
+##################################################################################################################
+# Created December 20, 2016 by Jacob Hansen (jacob.hansen@pnnl.gov)
+
+# Copyright (c) 2016 Battelle Memorial Institute.  The Government retains a paid-up nonexclusive, irrevocable
+# worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the
+# Government, including the right to distribute to other Government contractors.
+##################################################################################################################
 
 import os, random
 
@@ -20,9 +18,13 @@ def add_recorders(recorder_dict, config_file, file_path, selectedFeederDict, las
 
 	Inputs
 		recorder_dict - dictionary containing the full feeder
+
 		config_file - dictionary that contains the configurations of the feeder
+
 		file_path - file path to where you created the modified GLM
+
 		feeder_name - name of the feeder we are working with
+		
 		last_object_key - Last object key
 
 	Outputs

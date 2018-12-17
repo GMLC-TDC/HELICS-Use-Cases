@@ -1,13 +1,14 @@
 """
 This file contains functions to upgrade transformers
-
-Created April 16, 2018 by Jacob Hansen (jacob.hansen@pnnl.gov)
-
-Copyright (c) 2018 Battelle Memorial Institute.  The Government retains a paid-up nonexclusive, irrevocable
-worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the
-Government, including the right to distribute to other Government contractors.
 """
 
+##################################################################################################################
+# Created April 16, 2018 by Jacob Hansen (jacob.hansen@pnnl.gov)
+
+# Copyright (c) 2018 Battelle Memorial Institute.  The Government retains a paid-up nonexclusive, irrevocable
+# worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the
+# Government, including the right to distribute to other Government contractors.
+##################################################################################################################
 
 from . import feederConfiguration
 import subprocess, os, math
@@ -95,8 +96,11 @@ def upgrade_transformers(feederDict, upgradeLevel, upgradeCutOff=1e6):
 
 	Inputs
 		feederDict - The dictionary that hold the feeder information
+
 		upgradeLevel - a number that describes the levels of upgrade you want to make
+
 		upgradeCutOff - a value for when to not upgrade transformers, smaller number means that only small transformers are upgraded
+	
 	Outputs
 		feederDict
 	"""
@@ -175,8 +179,11 @@ def upgrade_fuses(feederDict, upgradeLevel, upgradeCutOff=1e6):
 
 	Inputs
 		feederDict - The dictionary that hold the feeder information
+
 		upgradeLevel - a number that describes the levels of upgrade you want to make
+
 		upgradeCutOff - a value for when to not upgrade transformers, smaller number means that only small transformers are upgraded
+	
 	Outputs
 		feederDict
 	"""

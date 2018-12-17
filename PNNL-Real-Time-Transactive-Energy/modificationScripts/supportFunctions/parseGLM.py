@@ -1,29 +1,16 @@
 """
 This script contains function to parse a GLM into a dictionary that can then be modified and then exported to a
 modified glm
-
-    parse(inputStr, filePath=True):
-        Main function to parse in glm
-    _tokenizeGlm(inputStr, filePath=True):
-        Helper function to parse glm
-    _parseTokenList(tokenList):
-        Helper function to parse glm
-    sortedWrite(inTree):
-        Main function to write out glm
-    _dictToString(inDict):
-        Helper function to write out glm
-    _gatherKeyValues(inDict, keyToAvoid):
-        Helper function to write out glm
-
-
-Modified March 28, 2017 by Jacob Hansen (jacob.hansen@pnnl.gov)
-Created October 27, 2014 by Ebony Mayhorn (ebony.mayhorn@pnnl.gov)
-
-Copyright (c) 2014 Battelle Memorial Institute.  The Government retains a paid-up nonexclusive, irrevocable
-worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the
-Government, including the right to distribute to other Government contractors.
 """
 
+##################################################################################################################
+# Modified March 28, 2017 by Jacob Hansen (jacob.hansen@pnnl.gov)
+# Created October 27, 2014 by Ebony Mayhorn (ebony.mayhorn@pnnl.gov)
+
+# Copyright (c) 2014 Battelle Memorial Institute.  The Government retains a paid-up nonexclusive, irrevocable
+# worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the
+# Government, including the right to distribute to other Government contractors.
+##################################################################################################################
 
 import re, warnings
 from functools import reduce

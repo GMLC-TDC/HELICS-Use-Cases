@@ -1,13 +1,13 @@
 """
 This file contains functions that help configure the transmission system 
-
-Created April 16, 2018 by Jacob Hansen (jacob.hansen@pnnl.gov)
-
-Copyright (c) 2018 Battelle Memorial Institute.  The Government retains a paid-up nonexclusive, irrevocable
-worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the
-Government, including the right to distribute to other Government contractors.
 """
+##################################################################################################################
+# Created April 16, 2018 by Jacob Hansen (jacob.hansen@pnnl.gov)
 
+# Copyright (c) 2018 Battelle Memorial Institute.  The Government retains a paid-up nonexclusive, irrevocable
+# worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the
+# Government, including the right to distribute to other Government contractors.
+##################################################################################################################
 
 import numpy as np
 import scipy.io as sio
@@ -19,7 +19,9 @@ def create_transmission_system(populationDict, transmissionDict, haveMATLAB=Fals
 
 	Inputs
 		populationDict - dictionary containing properties for all the feeders we are using
+
 		transmissionDict - - dictionary containing properties for the transmission system we are using
+
 		haveMATLAB - setting to tell the script if you have MATLAB installed
 
 	Outputs
@@ -497,6 +499,7 @@ def pythonSaveCase(casePath, matpowerCaseStruct):
 
 	Inputs
 		casePath - path where you want to save the modified MATPOWER case file
+		
 		matpowerCaseStruct - MATPOWER case struct
 
 	Outputs

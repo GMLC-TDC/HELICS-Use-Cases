@@ -1,24 +1,14 @@
 """
 This file contains four fuctions to add residential load types to a feeder based on the use flags and cofiguration defined
-
-	append_residential(ResTechDict, use_flags, residential_dict, last_object_key, configuration_file):
-		Adds residential houses to a feeder based on existing triplex loads
-	add_normalized_residential_ziploads(loadshape_dict, residenntial_dict, config_data, last_key):
-		Adds residential zip load to a feeder based on existing triplex loads
-	add_residential_EVs(glmCaseDict, config_file, last_key):
-		Adds residential EVs to a feeder
-	add_utility_storage(glmCaseDict, config_file, use_flags, peakLoad, last_key=0):
-		Adds storage to the substation of the feeder
-	add_residential_storage(glmCaseDict, config_file, use_flags, last_key=0):
-		Adds storage to a feeder
-
-Modified April 11, 2018 by Jacob Hansen (jacob.hansen@pnnl.gov)
-Created April 13, 2013 by Andy Fisher (andy.fisher@pnnl.gov)
-
-Copyright (c) 2013 Battelle Memorial Institute.  The Government retains a paid-up nonexclusive, irrevocable
-worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the
-Government, including the right to distribute to other Government contractors.
 """
+##################################################################################################################
+# Modified April 11, 2018 by Jacob Hansen (jacob.hansen@pnnl.gov)
+# Created April 13, 2013 by Andy Fisher (andy.fisher@pnnl.gov)
+
+# Copyright (c) 2013 Battelle Memorial Institute.  The Government retains a paid-up nonexclusive, irrevocable
+# worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the
+# Government, including the right to distribute to other Government contractors.
+##################################################################################################################
 
 import math, random
 
@@ -28,13 +18,18 @@ def append_residential(ResTechDict, use_flags, residential_dict, last_object_key
 
 	Inputs
 		ResTechDict - dictionary containing the full feeder
+
 		use_flags - dictionary that contains the use flags
+
 		residential_dict - dictionary that contains information about residential loads spots
+
 		last_object_key - Last object key
+
 		configuration_file - dictionary that contains the configurations of the feeder
 
 	Outputs
 		ResTechDict -  dictionary containing the full feeder
+
 		last_object_key - Last object key
 	"""
 
@@ -595,12 +590,16 @@ def add_normalized_residential_ziploads(loadshape_dict, residenntial_dict, confi
 
 	Inputs
 		loadshape_dict - dictionary containing the full feeder
+
 		residenntial_dict - dictionary that contains information about residential loads spots
+
 		last_key - Last object key
+
 		config_data - dictionary that contains the configurations of the feeder
 
 	Outputs
 		loadshape_dict -  dictionary containing the full feeder
+
 		last_key - Last object key
 	"""
 
@@ -640,11 +639,12 @@ def add_residential_EVs(glmCaseDict, config_file, use_flags, last_key=0):
 
 	Inputs
 		glmCaseDict - dictionary containing the full feeder
-		config_file - dictionary that contains the configurations of the feeder
-		use_flags - dictionary that contains the use flags
-		file_path - file path for the experiment. Used to get the EV trip log
-		last_key - Last object key
 
+		config_file - dictionary that contains the configurations of the feeder
+
+		use_flags - dictionary that contains the use flags
+
+		last_key - Last object key
 
 	Outputs
 		glmCaseDict -  dictionary containing the full feeder
@@ -709,17 +709,19 @@ def add_residential_EVs(glmCaseDict, config_file, use_flags, last_key=0):
 
 	return glmCaseDict
 
+
 def add_residential_storage(glmCaseDict, config_file, use_flags, last_key=0):
 	"""
 	This fucntion appends residential battery storage to a feeder
 
 	Inputs
 		glmCaseDict - dictionary containing the full feeder
-		config_file - dictionary that contains the configurations of the feeder
-		use_flags - dictionary that contains the use flags
-		file_path - file path for the experiment. Used to get the EV trip log
-		last_key - Last object key
 
+		config_file - dictionary that contains the configurations of the feeder
+
+		use_flags - dictionary that contains the use flags
+
+		last_key - Last object key
 
 	Outputs
 		glmCaseDict -  dictionary containing the full feeder
@@ -800,11 +802,12 @@ def add_utility_storage(glmCaseDict, config_file, use_flags, peakLoad, last_key=
 
 	Inputs
 		glmCaseDict - dictionary containing the full feeder
-		config_file - dictionary that contains the configurations of the feeder
-		use_flags - dictionary that contains the use flags
-		file_path - file path for the experiment. Used to get the EV trip log
-		last_key - Last object key
 
+		config_file - dictionary that contains the configurations of the feeder
+
+		use_flags - dictionary that contains the use flags
+
+		last_key - Last object key
 
 	Outputs
 		glmCaseDict -  dictionary containing the full feeder

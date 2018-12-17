@@ -1,21 +1,24 @@
 """
 This file contains functions to add FNCS configurations to the simulation
-
-Created April 23, 2018 by Jacob Hansen (jacob.hansen@pnnl.gov)
-
-Copyright (c) 2018 Battelle Memorial Institute.  The Government retains a paid-up nonexclusive, irrevocable
-worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the
-Government, including the right to distribute to other Government contractors.
 """
+##################################################################################################################
+# Created April 23, 2018 by Jacob Hansen (jacob.hansen@pnnl.gov)
+
+# Copyright (c) 2018 Battelle Memorial Institute.  The Government retains a paid-up nonexclusive, irrevocable
+# worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the
+# Government, including the right to distribute to other Government contractors.
+##################################################################################################################
+
 import os
 import pprint
 
 def dso_fncs_config(selectedFeederDict):
 	"""
-	This function adds FNCS capabilities to the feeder in question
+	This function adds FNCS capabilities to the dso in question
 
 	Inputs
 		feeder_dict - dictionary containing the full feeder
+
 		selectedFeederDict - dictionary containing properties for the feeders we are using
 
 	Outputs
@@ -94,10 +97,11 @@ def dso_fncs_config(selectedFeederDict):
 
 def lse_fncs_config(feeder_dict, selectedFeederDict):
 	"""
-	This function adds FNCS capabilities to the feeder in question
+	This function adds FNCS capabilities to the lse in question
 
 	Inputs
 		feeder_dict - dictionary containing the full feeder
+
 		selectedFeederDict - dictionary containing properties for the feeders we are using
 
 	Outputs
@@ -168,10 +172,11 @@ def lse_fncs_config(feeder_dict, selectedFeederDict):
 
 def residential_controllers_fncs_config(feeder_dict, selectedFeederDict, transactiveActive):
 	"""
-	This function adds FNCS capabilities to the feeder in question
+	This function adds FNCS capabilities to the residential controllers in question
 
 	Inputs
 		feeder_dict - dictionary containing the full feeder
+
 		selectedFeederDict - dictionary containing properties for the feeders we are using
 
 	Outputs

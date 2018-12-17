@@ -1,12 +1,14 @@
 """
-This file contains functions that help build specific distribution feeders:
-
-Created April 11, 2018 by Jacob Hansen (jacob.hansen@pnnl.gov)
-
-Copyright (c) 2018 Battelle Memorial Institute.  The Government retains a paid-up nonexclusive, irrevocable
-worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the
-Government, including the right to distribute to other Government contractors.
+This file contains functions that help build specific distribution feeders
 """
+##################################################################################################################
+# Created April 11, 2018 by Jacob Hansen (jacob.hansen@pnnl.gov)
+
+# Copyright (c) 2018 Battelle Memorial Institute.  The Government retains a paid-up nonexclusive, irrevocable
+# worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the
+# Government, including the right to distribute to other Government contractors.
+##################################################################################################################
+
 from supportFunctions import feederConfiguration
 from supportFunctions import technologyConfiguration
 from supportFunctions import feederGenerator
@@ -26,16 +28,24 @@ def initLock(l):
 
 def createDistributionSystem(feederModel, selectedFeederDict, hpc, parallel, randomSeed=10):
 	"""
-	This function is used to create distribution systems according the user specified settings
+	This function is used to create distribution systems according the user specified settings. This function is specifically
+	used for the Real-Time Transactive Use cases.
 
 	Inputs
-		feederModel - the model file for the feeder
+		feederModel - the base model file for the feeder
+
 		selectedFeederDict - dictionary with the information of the feeder
+
+		hpc - flag set if run on HPC platforms. Will zip the model files to save space
+
+		parallel - flag that determines if this function is being run in parallel. If so lock are used on shared files
+
 		randomSeed - this is the random seed so we can reproduce the results
 
 	Outputs
 		None
 	"""
+
 	try:
 		# path for this specific system
 		filePath =	selectedFeederDict['experimentFilePath'] / selectedFeederDict['experimentName'] / selectedFeederDict['desiredName']

@@ -1,16 +1,14 @@
 """
 This file takes in the original GLM dictionary and output the modified GLM dictionary
-
-	modifyFeeder(glmDict, config_data, use_flags, randomSeed=2)
-		This fucntion modifies the feeder based on feeder configuration and use flags
-
-Modified April 11, 2018 by Jacob Hansen (jacob.hansen@pnnl.gov)
-Created April 13, 2013 by Andy Fisher (andy.fisher@pnnl.gov)
-
-Copyright (c) 2013 Battelle Memorial Institute.  The Government retains a paid-up nonexclusive, irrevocable
-worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the
-Government, including the right to distribute to other Government contractors.
 """
+##################################################################################################################
+# Modified April 11, 2018 by Jacob Hansen (jacob.hansen@pnnl.gov)
+# Created April 13, 2013 by Andy Fisher (andy.fisher@pnnl.gov)
+
+# Copyright (c) 2013 Battelle Memorial Institute.  The Government retains a paid-up nonexclusive, irrevocable
+# worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the
+# Government, including the right to distribute to other Government contractors.
+##################################################################################################################
 
 
 from . import residentialLoads
@@ -24,9 +22,13 @@ def modifyFeeder(glmDict, selectedFeederDict, randomSeed=2):
 
 	Inputs
 		glmDict - dictionary containing the full feeder unmodified
+
 		configuration_file - dictionary that contains the configurations of the feeder
+
 		use_flags - dictionary that contains flags for what technology case to tack on to the GridLAB-D model
+
 		randomSeed - initialize psuedo-random seed (defaults to 2)
+		
 	Outputs
 		glmCaseDict -  dictionary containing the full feeder modified
 	"""

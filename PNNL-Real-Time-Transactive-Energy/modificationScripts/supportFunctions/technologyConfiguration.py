@@ -1,26 +1,22 @@
 """
 This file contains functions to define user specifications for feeder models
-
-	technologyConfiguration():
-		Creates the complete configuration dictionary needed to populate the feeder
-
-Modified April 11, 2018 by Jacob Hansen (jacob.hansen@pnnl.gov)
-Created December 20, 2016 by Jacob Hansen (jacob.hansen@pnnl.gov)
-
-Copyright (c) 2016 Battelle Memorial Institute.  The Government retains a paid-up nonexclusive, irrevocable
-worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the
-Government, including the right to distribute to other Government contractors.
 """
+##################################################################################################################
+# Modified April 11, 2018 by Jacob Hansen (jacob.hansen@pnnl.gov)
+# Created December 20, 2016 by Jacob Hansen (jacob.hansen@pnnl.gov)
 
-
-
+# Copyright (c) 2016 Battelle Memorial Institute.  The Government retains a paid-up nonexclusive, irrevocable
+# worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the
+# Government, including the right to distribute to other Government contractors.
+##################################################################################################################
 
 def technologyConfiguration(use_flags=0):
 	"""
-	Creates the specific settings for each feeder needed to populate the feeder
+	Creates the specific settings for the simulation you are about to run.
 
 	Inputs
 		feederName - name of the specific feeder we are working on
+		
 	Outputs
 		data - dictionary with full configuration specifications
 	"""

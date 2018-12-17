@@ -1,21 +1,24 @@
 
 """
-This file contains functions to create HELICS config files for each simulator
-
-Created October 20, 2018 by Jacob Hansen (jacob.hansen@pnnl.gov)
-
-Copyright (c) 2018 Battelle Memorial Institute.  The Government retains a paid-up nonexclusive, irrevocable
-worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the
-Government, including the right to distribute to other Government contractors.
+This file contains functions to create HELICS config files for each simulator. This time with Transactive Enegy simulators
 """
+##################################################################################################################
+# Created October 20, 2018 by Jacob Hansen (jacob.hansen@pnnl.gov)
+
+# Copyright (c) 2018 Battelle Memorial Institute.  The Government retains a paid-up nonexclusive, irrevocable
+# worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the
+# Government, including the right to distribute to other Government contractors.
+##################################################################################################################
 
 import os, json
 
 def write_config(configString):
 	"""
 	This function writes the HELICS configuration file to disk
+	
 	Inputs
 		configString - Python dictionary that hold the JSON config information to write to disk
+
 	Outputs
 		None
 	"""	
@@ -32,9 +35,12 @@ def write_config(configString):
 def matpower_config(populationDict, transmissionDict):
 	"""
 	This function adds HELICS capabilities to matpower
+	
 	Inputs
 		populationDict - dictionary containing properties for all the feeders we are using
+
 		transmissionDict - - dictionary containing properties for the transmission system we are using
+
 	Outputs
 		None
 	"""	
@@ -138,10 +144,11 @@ def matpower_config(populationDict, transmissionDict):
 
 def dso_config(populationDict):
 	"""
-	This function adds HELICS capabilities to the feeder in question
+	This function adds HELICS capabilities to the dso in question
 
 	Inputs
 		populationDict - dictionary containing properties for the feeders we are using
+
 	Outputs
 		None
 
@@ -276,10 +283,11 @@ def dso_config(populationDict):
 
 def lse_config(feeder_dict, selectedFeederDict):
 	"""
-	This function adds FNCS capabilities to the feeder in question
+	This function adds FNCS capabilities to the lse in question
 
 	Inputs
 		feeder_dict - dictionary containing the full feeder
+
 		selectedFeederDict - dictionary containing properties for the feeders we are using
 
 	Outputs
@@ -409,8 +417,11 @@ def gridlabd_config(glmDict, selectedFeederDict, transactiveActive):
 
 	Inputs
 		glmDict - dictionary of the feeder
+
 		selectedFeederDict - settings for the specific feeder
+
 		transactiveActive - add transactive control to the feeder
+		
 	Outputs
 		glmDict - the modified feeder dictionary
 	"""	

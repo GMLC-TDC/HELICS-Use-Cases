@@ -25,7 +25,7 @@ import time, os, shutil, math, tqdm, multiprocessing, platform, sys, random
 start = time.time()
 
 # name of the experiment
-experimentName = 'rtteSimTest'
+experimentName = 'rtteExample'
 
 # number of distribution systems in the experiment
 distributionSystemNumber = 2
