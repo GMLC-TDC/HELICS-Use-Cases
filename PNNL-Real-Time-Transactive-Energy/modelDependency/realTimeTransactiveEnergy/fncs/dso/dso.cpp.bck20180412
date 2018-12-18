@@ -1,0 +1,328 @@
+//#include <stdio.h>
+#include <cmath>
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include <sstream>
+#include <string.h>
+#include <ctime>
+#include <vector>
+#include <algorithm>
+#include <sys/resource.h>
+#include <numeric>
+#include <iterator>
+
+#include "fncs.hpp"
+#include "polyfit.hpp"
+#include "logging.hpp"
+
+
+using namespace std;
+
+// set the definition for the logger
+loglevel_e loglevel;
+
+// Fill the zipped vector with pairs consisting of the
+// corresponding elements of a and b. (This assumes 
+// that the vectors have equal length)
+template <typename A, typename B>
+void zip(
+    const std::vector<A> &a, 
+    const std::vector<B> &b, 
+    std::vector<std::pair<A,B>> &zipped)
+{
+    for(size_t i=0; i<a.size(); ++i)
+    {
+        zipped.push_back(std::make_pair(a[i], b[i]));
+    }
+}
+
+// Write the first and second element of the pairs in 
+// the given zipped vector into a and b. (This assumes 
+// that the vectors have equal length)
+template <typename A, typename B>
+void unzip(
+    const std::vector<std::pair<A, B>> &zipped, 
+    std::vector<A> &a, 
+    std::vector<B> &b)
+{
+    for(size_t i=0; i<a.size(); i++)
+    {
+        a[i] = zipped[i].first;
+        b[i] = zipped[i].second;
+    }
+}
+
+// Function for comparing second entry in s struct
+// Used to sort the zipped vectors
+struct CompareSecond {
+    template <class Fst, class Snd>
+    bool operator()(const pair<Fst,Snd>& l, const pair<Fst,Snd>& r) const {
+        return l.second < r.second;
+    }
+};
+
+string delSpace(string str) {
+  int ind = 0;
+  do {
+    if (isspace(str[ind])) {
+      str.erase(ind, 1);
+      str = delSpace(str);
+    }
+    ind += 1;
+  } while (ind < str.length());
+  return str;
+};
+
+vector<double> linspace(double minVal, double maxVal, int num) {
+  vector<double> linSpace(num);
+  for (int i = 0; i < num; i++) {
+    linSpace[i] = minVal + i * (maxVal - minVal) / (num - 1);
+  }
+  return linSpace;
+};
+
+/* ==================================================================================================================
+====================== MAIN PART ====================================================================================
+===================================================================================================================*/
+
+int main(int argc, const char *argv[]) {
+    // variable to keep track of the total time used
+    time_t tStart = time(0);
+
+    // Setting up the logger based on user input
+    char *log_level_export = NULL;
+    log_level_export = getenv("DSO_LOG_LEVEL");
+    
+    if (!log_level_export) {
+        loglevel = logWARNING; 
+    } else if (strcmp(log_level_export,"ERROR") == 0) {
+        loglevel = logERROR;
+    } else if (strcmp(log_level_export,"WARNING") == 0) {
+        loglevel = logWARNING;
+    } else if (strcmp(log_level_export,"INFO") == 0) {
+        loglevel = logINFO;
+    } else if (strcmp(log_level_export,"DEBUG") == 0) {
+        loglevel = logDEBUG;
+    } else if (strcmp(log_level_export,"DEBUG1") == 0) {
+        loglevel = logDEBUG1;
+    } else if (strcmp(log_level_export,"DEBUG2") == 0) {
+        loglevel = logDEBUG2;
+    } else if (strcmp(log_level_export,"DEBUG3") == 0) {
+        loglevel = logDEBUG3;
+    } else if (strcmp(log_level_export,"DEBUG4") == 0) {
+        loglevel = logDEBUG4;
+    }
+
+    // increase the possible stack size for the application
+    const rlim_t kStackSize = 1024L * 1024L * 1024L;   // min stack size = 1024 Mb
+    struct rlimit rl;
+    int result;
+
+    result = getrlimit(RLIMIT_STACK, &rl);
+    if (result == 0)
+    {
+        if (rl.rlim_cur < kStackSize)
+        {
+            rl.rlim_cur = kStackSize;
+            result = setrlimit(RLIMIT_STACK, &rl);
+            if (result != 0)
+            {
+                LERROR << "setrlimit returned result = " << result ;
+            }
+        }
+    }    
+    
+    LINFO << "Running process -> " << argv[0] ;
+    LINFO << "with a simulation stop time of " << argv[1] << " seconds";    
+    
+    try {                
+        // time keeping variables
+        int simStopTime; // simulation stop time
+        sscanf(argv[1], "%d%*s", &simStopTime);
+        double amp_fact;
+        sscanf(argv[2], "%lf%*s", &amp_fact);
+        int currentTime = 0; //current time in seconds
+        int nextTime = 0; // next time in seconds
+        int nextFNCSTime = 0; // next time returned by FNCS for the simulator to run
+        int dtTime = 300;
+        int iteration = 1;
+        
+        LINFO << "Amplication factor is set at -> " << amp_fact;    
+        
+        // a string stream we use to transfer from double to string
+        stringstream doubleToString;
+        
+        // portion to initialize FNCS
+        LINFO << "Initializing FNCS";                  
+        fncs::initialize();
+
+        // After FNCS is initialized we can adjust the start time to be three timestep earlier than when the OPF results
+        // are needed in other applications. This time is dictated by the zpl file.
+        nextFNCSTime = -1*fncs::get_time_delta();
+        nextTime = -1*fncs::get_time_delta();
+        
+        LINFO << "FNCS delta time is set at " << dtTime;
+        
+        // determine simulator name
+        string simName = fncs::get_name();
+        LINFO << "Name of simulator is -> " << simName;        
+        
+        // get a vector list of the values we subscribe to and create a vector for bid price and quantity
+        vector<string> subscription_keys = fncs::get_keys();
+        vector<string> subscription_mdCurveCoeff_keys;    
+        vector<string> subscription_MinMaxCumQuant_keys;
+        vector<string> subscription_currDispLoad_keys;
+            
+        // loop through subscriptions and seperate them out into different vectors bid price and quantity
+        for(vector<string>::size_type i = 0; i != subscription_keys.size(); i++) {
+            if (subscription_keys[i].find("mdCurveCoeff") != string::npos) {
+                subscription_mdCurveCoeff_keys.push_back(subscription_keys[i]);
+            } else if (subscription_keys[i].find("MinMaxCumQuant") != string::npos) {
+                subscription_MinMaxCumQuant_keys.push_back(subscription_keys[i]);
+            } else if (subscription_keys[i].find("currDispLoad") != string::npos) {
+            	subscription_currDispLoad_keys.push_back(subscription_keys[i]);
+            }
+        }
+        
+        // vectors of equal size for the actual values
+        //vector<double> subscription_values (subscription_keys.size());
+        vector<string> subscription_mdCurveCoeff_values(subscription_mdCurveCoeff_keys.size());
+        vector<string> subscription_MinMaxCumQuant_values(subscription_MinMaxCumQuant_keys.size());
+        vector<double> subscription_currDispLoad_values(subscription_currDispLoad_keys.size());
+               
+        // show the user what is being subscribed to
+        LDEBUG << "Subscriptions:";
+        for (vector<string>::const_iterator i = subscription_keys.begin(); i != subscription_keys.end(); ++i) {
+            LDEBUG << "    " << *i ;
+        }
+        
+        vector<double> lseMPcoeff(2 * subscription_mdCurveCoeff_keys.size());
+        vector<double> lseMinMaxCumQuants(2 * subscription_MinMaxCumQuant_keys.size());
+        int qLinSpaceLength = 5, costFitOrder = 2;
+        vector<double> lseCumQuants(qLinSpaceLength * subscription_MinMaxCumQuant_keys.size());
+        vector<double> lseQuants(qLinSpaceLength * subscription_MinMaxCumQuant_keys.size());
+        vector<double> lseMargPrices(qLinSpaceLength * subscription_MinMaxCumQuant_keys.size());
+        vector<double> dsoCosts(qLinSpaceLength * subscription_MinMaxCumQuant_keys.size());
+        vector<double> dsoCumCosts(qLinSpaceLength * subscription_MinMaxCumQuant_keys.size());
+        vector<double> demandCurveCoeff(costFitOrder + 1, 0);
+        vector<double> temp(qLinSpaceLength);
+        // output CSV file to save the data in
+        ofstream dsoOutputData("dsoOutputData.csv", ios::out);
+        dsoOutputData << "iteration, current time, available dispatchable load, c2, c1, c0, currently dispatched load" << endl;
+        
+        do {
+            // update time
+            currentTime = nextFNCSTime;
+        
+            if (currentTime == nextTime) { // calculate next step        
+                // info for what iteration we are calculating for
+                LINFO << "=== calculating at iteration -> " << iteration << " ===";
+                
+                // obtain the currently dispatched load at the level of each LSE
+                for (vector<string>::size_type i = 0; i != subscription_currDispLoad_keys.size(); i++) {
+                	subscription_currDispLoad_values[i] = atof((fncs::get_value(subscription_currDispLoad_keys[i])).c_str());
+                	LDEBUG << subscription_currDispLoad_keys[i] << " -> " << subscription_currDispLoad_values[i];
+                }
+                
+                // obtain marginal price curve coefficients from LSE as a string,
+                // split it in 2 at the comma, create the 2 substrings,
+                // eliminate spaces if any in the substrings, then stream them into a 2D array
+                for(vector<string>::size_type i = 0; i != subscription_mdCurveCoeff_keys.size(); i++) {
+                    subscription_mdCurveCoeff_values[i] = fncs::get_value(subscription_mdCurveCoeff_keys[i]);
+                    LDEBUG << subscription_mdCurveCoeff_keys[i] << " -> " << subscription_mdCurveCoeff_values[i];
+                    size_t splitInd = subscription_mdCurveCoeff_values[i].find(",");
+                    stringstream(delSpace(subscription_mdCurveCoeff_values[i].substr(0, splitInd))) >> lseMPcoeff[2 * i];
+                    stringstream(delSpace(subscription_mdCurveCoeff_values[i].substr(splitInd + 1))) >> lseMPcoeff[2 * i + 1];
+                    //LDEBUG << "<<<<<<< " << lseMPcoeff[2 * i] << " <<<<<<>>>>>>> " << lseMPcoeff[2 * i + 1] << " >>>>>>>>>>\n";
+                }    
+
+                // obtain minimum and maximum cumulative quantities from each LSE as a string
+                for(vector<string>::size_type i = 0; i != subscription_MinMaxCumQuant_keys.size(); i++) {
+                  subscription_MinMaxCumQuant_values[i] = fncs::get_value(subscription_MinMaxCumQuant_keys[i]);
+                  LDEBUG << subscription_MinMaxCumQuant_keys[i] << " -> " << subscription_MinMaxCumQuant_values[i];
+                  size_t splitInd = subscription_MinMaxCumQuant_values[i].find(",");
+                  stringstream(delSpace(subscription_MinMaxCumQuant_values[i].substr(0, splitInd))) >> lseMinMaxCumQuants[2 * i];
+                  stringstream(delSpace(subscription_MinMaxCumQuant_values[i].substr(splitInd + 1))) >> lseMinMaxCumQuants[2 * i + 1];
+                  //LDEBUG << "<<<<<<< " << lseMinMaxCumQuants[2 * i] << " <<<<<<>>>>>>> " << lseMinMaxCumQuants[2 * i + 1] << " >>>>>>>>>>\n";
+                  temp = linspace(lseMinMaxCumQuants[2 * i], lseMinMaxCumQuants[2 * i + 1], qLinSpaceLength);
+                  for (int j = 0; j < qLinSpaceLength; j++) {
+                	lseCumQuants[qLinSpaceLength * i + j] = temp[j];
+                	lseMargPrices[qLinSpaceLength * i + j] = lseMPcoeff[2 * i] * lseCumQuants[qLinSpaceLength * i + j] + lseMPcoeff[2 * i + 1];
+                	//LDEBUG << "<<<<<<< " << lseCumQuants[qLinSpaceLength * i + j] << " <<<<<<>>>>>>> " << lseMargPrices[qLinSpaceLength * i + j] << " >>>>>>>>>>\n";
+                  }
+                  vector<double>::iterator inFirst = lseCumQuants.begin() + i * qLinSpaceLength;
+                  vector<double>::iterator inLast = lseCumQuants.begin() + (i + 1) * qLinSpaceLength;
+                  vector<double>::iterator outFirst = lseQuants.begin() + i * qLinSpaceLength;
+                  adjacent_difference(inFirst, inLast, outFirst);
+                }
+                
+                vector<pair<double, double>> zipped;
+                zip(lseQuants, lseMargPrices, zipped);
+                sort(zipped.rbegin(), zipped.rend(), CompareSecond());
+                unzip(zipped, lseQuants, lseMargPrices);
+                partial_sum(lseQuants.begin(), lseQuants.end(), lseCumQuants.begin());
+                for (int i = 0; i < lseMargPrices.size(); i++) {
+                  dsoCosts[i] = lseMargPrices[i] * lseQuants[i];
+                  LDEBUG << "\t marg price: " << lseMargPrices[i] << ", quant: " << lseQuants[i] << ", cum quant: " << lseCumQuants[i] << ", dsoCost: " << dsoCosts[i] << "\n";
+                }
+                partial_sum(dsoCosts.begin(), dsoCosts.end(), dsoCumCosts.begin());
+                demandCurveCoeff = polyfit(lseCumQuants, dsoCumCosts, costFitOrder);
+                LDEBUG << "\n\t demand curve coeff in incremental powers as returned by polyfit:\n\t";
+                for (vector<double>::iterator i = demandCurveCoeff.begin(); i != demandCurveCoeff.end(); i++)
+                  LDEBUG << "\t" << *i;
+                LDEBUG << "\n";
+
+                // publish the maximum available dispatchable load, and the currently dispatched load
+                double dsoCurrDispLoad = accumulate(subscription_currDispLoad_values.begin(), subscription_currDispLoad_values.end(), 0.0);
+                doubleToString << lseCumQuants.back() << "," << dsoCurrDispLoad;
+                fncs::publish("dispLoad", doubleToString.str());
+                LINFO << "control load -> " << doubleToString.str();
+                doubleToString.str(string());
+
+                // publish the demand curve coefficients in decremental powers as needed by MATPOWER
+                for (vector<double>::iterator i = demandCurveCoeff.end() - 1; i != demandCurveCoeff.begin() - 1; i--) {
+                  if (i != demandCurveCoeff.end() - 1)
+                    doubleToString << ",";
+                  doubleToString << *i;
+                }
+                fncs::publish("dispLoadDemandCurve", doubleToString.str());
+                dsoOutputData << iteration << "," << currentTime << "," << lseCumQuants.back() << "," << doubleToString.str() << "," << dsoCurrDispLoad << endl;
+                LINFO << "demand curve coefficients in decremental powers -> " << doubleToString.str();
+                doubleToString.str(string());
+                
+                // request new time from FNCS
+                nextTime = min(currentTime + dtTime, simStopTime);
+                nextFNCSTime = fncs::time_request(nextTime);
+                
+                iteration += 1;
+            }
+            else {
+                nextFNCSTime = fncs::time_request(nextTime);    
+            }
+            LDEBUG << "=== current time is -> " << currentTime << " ===";
+            LDEBUG << "=== next FNCS time is -> " << nextFNCSTime << " ===";
+            //currentTime = nextFNCSTime;
+        }
+        while(currentTime < simStopTime);        
+    }    
+    catch (const exception& e) {
+        LERROR << "Caught a standard exception, see below for details";
+        cerr << e.what() << endl;
+        cerr << "Terminating program..." << endl;
+        fncs::die();
+        return -2;
+      }
+    catch (...) {
+        LERROR << "Unknown and unexpected error thrown";
+        cerr << "Terminating program..." << endl;
+        fncs::die();
+        return -3;
+    }    
+    
+    time_t tStop = time(0);
+    LINFO << "Simulation took " << (float) (tStop-tStart) << " seconds";
+    LINFO << "Terminating FNCS";
+    fncs::finalize();
+    return 0;
+}
