@@ -1,0 +1,331 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Feeder Configuration &mdash; HELICS Use Cases 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Residential Loads" href="residentialLoads.html" />
+    <link rel="prev" title="GLM Helper Functions" href="parseGLM.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> HELICS Use Cases
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">PNNL Real Time Transactive Energy Use Case Scripts</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../experiments/index.html">Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/index.html">Installation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">API Calls</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="createDistributionFeeder.html">Create Distribution Feeders</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parseGLM.html">GLM Helper Functions</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Feeder Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="residentialLoads.html">Residential Loads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commercialLoads.html">Commercial Loads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transmissionSystemConfiguration.html">Transmission System Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="controlConfiguration.html">Transactive Control Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fncsConfiguration.html">FNCS Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="helicsConfiguration.html">HELICS Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="executionScripts.html">Execution Scripts</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../PNNL-TD-Dynamic-Load/index.html">PNNL TD Dynamic Load Use Case Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PNNL-Wide-Area-Control/index.html">PNNL Wide-Area Control Use Case Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ANL-TD-Iterative-Pflow/index.html">ANL TD Iterative Power Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ANL_adaptive_volt_var/index.html">ANL Adaptive Volt Var</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">HELICS Use Cases</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">PNNL Real Time Transactive Energy Use Case Scripts</a> &raquo;</li>
+        
+          <li><a href="index.html">API Calls</a> &raquo;</li>
+        
+      <li>Feeder Configuration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/PNNL-Real-Time-Transactive-Energy/api_calls/feederConfiguration.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-supportFunctions.technologyConfiguration">
+<span id="feeder-configuration"></span><h1>Feeder Configuration<a class="headerlink" href="#module-supportFunctions.technologyConfiguration" title="Permalink to this headline">¶</a></h1>
+<p>This file contains functions to define user specifications for feeder models</p>
+<dl class="function">
+<dt id="supportFunctions.technologyConfiguration.technologyConfiguration">
+<code class="descclassname">supportFunctions.technologyConfiguration.</code><code class="descname">technologyConfiguration</code><span class="sig-paren">(</span><em>use_flags=0</em><span class="sig-paren">)</span><a class="headerlink" href="#supportFunctions.technologyConfiguration.technologyConfiguration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the specific settings for the simulation you are about to run.</p>
+<dl class="docutils">
+<dt>Inputs</dt>
+<dd>feederName - name of the specific feeder we are working on</dd>
+<dt>Outputs</dt>
+<dd>data - dictionary with full configuration specifications</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-supportFunctions.feederConfiguration"></span><p>This file contains functions to define user specifications for feeder models</p>
+<dl class="function">
+<dt id="supportFunctions.feederConfiguration.feederConfiguration">
+<code class="descclassname">supportFunctions.feederConfiguration.</code><code class="descname">feederConfiguration</code><span class="sig-paren">(</span><em>feederName</em>, <em>data=0</em><span class="sig-paren">)</span><a class="headerlink" href="#supportFunctions.feederConfiguration.feederConfiguration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the specific settings for each feeder needed to populate the feeder. If not set by 
+user defaults will be assumed for all variables</p>
+<dl class="docutils">
+<dt>Inputs</dt>
+<dd>feederName - name of the specific feeder we are working on</dd>
+<dt>Outputs</dt>
+<dd>data - dictionary with full configuration specifications</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-supportFunctions.feederGenerator"></span><p>This file takes in the original GLM dictionary and output the modified GLM dictionary</p>
+<dl class="function">
+<dt id="supportFunctions.feederGenerator.modifyFeeder">
+<code class="descclassname">supportFunctions.feederGenerator.</code><code class="descname">modifyFeeder</code><span class="sig-paren">(</span><em>glmDict</em>, <em>selectedFeederDict</em>, <em>randomSeed=2</em><span class="sig-paren">)</span><a class="headerlink" href="#supportFunctions.feederGenerator.modifyFeeder" title="Permalink to this definition">¶</a></dt>
+<dd><p>This fucntion modifies the feeder based on feeder configuration and use flags</p>
+<dl class="docutils">
+<dt>Inputs</dt>
+<dd><p class="first">glmDict - dictionary containing the full feeder unmodified</p>
+<p>configuration_file - dictionary that contains the configurations of the feeder</p>
+<p>use_flags - dictionary that contains flags for what technology case to tack on to the GridLAB-D model</p>
+<p class="last">randomSeed - initialize psuedo-random seed (defaults to 2)</p>
+</dd>
+<dt>Outputs</dt>
+<dd>glmCaseDict -  dictionary containing the full feeder modified</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-supportFunctions.feederRecorders"></span><p>This file contains a fuction to add recorders to a feeder based on the use flags defined</p>
+<dl class="function">
+<dt id="supportFunctions.feederRecorders.add_recorders">
+<code class="descclassname">supportFunctions.feederRecorders.</code><code class="descname">add_recorders</code><span class="sig-paren">(</span><em>recorder_dict</em>, <em>config_file</em>, <em>file_path</em>, <em>selectedFeederDict</em>, <em>last_key=0</em><span class="sig-paren">)</span><a class="headerlink" href="#supportFunctions.feederRecorders.add_recorders" title="Permalink to this definition">¶</a></dt>
+<dd><p>This fuction adds recorders based on the configuration of the feeder</p>
+<dl class="docutils">
+<dt>Inputs</dt>
+<dd><p class="first">recorder_dict - dictionary containing the full feeder</p>
+<p>config_file - dictionary that contains the configurations of the feeder</p>
+<p>file_path - file path to where you created the modified GLM</p>
+<p>feeder_name - name of the feeder we are working with</p>
+<p class="last">last_object_key - Last object key</p>
+</dd>
+<dt>Outputs</dt>
+<dd>recorder_dict -  dictionary containing the full feeder</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-supportFunctions.upgradeEquipment"></span><p>This file contains functions to upgrade transformers</p>
+<dl class="function">
+<dt id="supportFunctions.upgradeEquipment.upgrade_fuses">
+<code class="descclassname">supportFunctions.upgradeEquipment.</code><code class="descname">upgrade_fuses</code><span class="sig-paren">(</span><em>feederDict</em>, <em>upgradeLevel</em>, <em>upgradeCutOff=1000000.0</em><span class="sig-paren">)</span><a class="headerlink" href="#supportFunctions.upgradeEquipment.upgrade_fuses" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function upgrades fuses in the feeder</p>
+<dl class="docutils">
+<dt>Inputs</dt>
+<dd><p class="first">feederDict - The dictionary that hold the feeder information</p>
+<p>upgradeLevel - a number that describes the levels of upgrade you want to make</p>
+<p class="last">upgradeCutOff - a value for when to not upgrade transformers, smaller number means that only small transformers are upgraded</p>
+</dd>
+<dt>Outputs</dt>
+<dd>feederDict</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="supportFunctions.upgradeEquipment.upgrade_transformers">
+<code class="descclassname">supportFunctions.upgradeEquipment.</code><code class="descname">upgrade_transformers</code><span class="sig-paren">(</span><em>feederDict</em>, <em>upgradeLevel</em>, <em>upgradeCutOff=1000000.0</em><span class="sig-paren">)</span><a class="headerlink" href="#supportFunctions.upgradeEquipment.upgrade_transformers" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function upgrades transformers in the feeder</p>
+<dl class="docutils">
+<dt>Inputs</dt>
+<dd><p class="first">feederDict - The dictionary that hold the feeder information</p>
+<p>upgradeLevel - a number that describes the levels of upgrade you want to make</p>
+<p class="last">upgradeCutOff - a value for when to not upgrade transformers, smaller number means that only small transformers are upgraded</p>
+</dd>
+<dt>Outputs</dt>
+<dd>feederDict</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="residentialLoads.html" class="btn btn-neutral float-right" title="Residential Loads" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="parseGLM.html" class="btn btn-neutral" title="GLM Helper Functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018 Battelle Memorial Institute. The Government retains a paid-up nonexclusive, irrevocable worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the Government, including the right to distribute to other Government contractors.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

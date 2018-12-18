@@ -1,0 +1,275 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Create Distribution Feeders &mdash; HELICS Use Cases 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="GLM Helper Functions" href="parseGLM.html" />
+    <link rel="prev" title="API Calls" href="index.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> HELICS Use Cases
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">PNNL Real Time Transactive Energy Use Case Scripts</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../experiments/index.html">Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/index.html">Installation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">API Calls</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Create Distribution Feeders</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parseGLM.html">GLM Helper Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="feederConfiguration.html">Feeder Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="residentialLoads.html">Residential Loads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commercialLoads.html">Commercial Loads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transmissionSystemConfiguration.html">Transmission System Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="controlConfiguration.html">Transactive Control Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fncsConfiguration.html">FNCS Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="helicsConfiguration.html">HELICS Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="executionScripts.html">Execution Scripts</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../PNNL-TD-Dynamic-Load/index.html">PNNL TD Dynamic Load Use Case Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PNNL-Wide-Area-Control/index.html">PNNL Wide-Area Control Use Case Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ANL-TD-Iterative-Pflow/index.html">ANL TD Iterative Power Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ANL_adaptive_volt_var/index.html">ANL Adaptive Volt Var</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">HELICS Use Cases</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">PNNL Real Time Transactive Energy Use Case Scripts</a> &raquo;</li>
+        
+          <li><a href="index.html">API Calls</a> &raquo;</li>
+        
+      <li>Create Distribution Feeders</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/PNNL-Real-Time-Transactive-Energy/api_calls/createDistributionFeeder.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-supportFunctions.createDistributionFeeder">
+<span id="create-distribution-feeders"></span><h1>Create Distribution Feeders<a class="headerlink" href="#module-supportFunctions.createDistributionFeeder" title="Permalink to this headline">¶</a></h1>
+<p>This file contains functions that help build specific distribution feeders</p>
+<dl class="function">
+<dt id="supportFunctions.createDistributionFeeder.createDistributionSystem">
+<code class="descclassname">supportFunctions.createDistributionFeeder.</code><code class="descname">createDistributionSystem</code><span class="sig-paren">(</span><em>feederModel</em>, <em>selectedFeederDict</em>, <em>hpc</em>, <em>parallel</em>, <em>randomSeed=10</em><span class="sig-paren">)</span><a class="headerlink" href="#supportFunctions.createDistributionFeeder.createDistributionSystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is used to create distribution systems according the user specified settings</p>
+<dl class="docutils">
+<dt>Inputs</dt>
+<dd><p class="first">feederModel - the base model file for the feeder</p>
+<p>selectedFeederDict - dictionary with the information of the feeder</p>
+<p>hpc - flag set if run on HPC platforms. Will zip the model files to save space</p>
+<p>parallel - flag that determines if this function is being run in parallel. If so lock are used on shared files</p>
+<p class="last">randomSeed - this is the random seed so we can reproduce the results</p>
+</dd>
+<dt>Outputs</dt>
+<dd>None</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-supportFunctions.realTimeTransactiveEnergy.createDistributionFeeder"></span><p>This file contains functions that help build specific distribution feeders</p>
+<dl class="function">
+<dt id="supportFunctions.realTimeTransactiveEnergy.createDistributionFeeder.createDistributionSystem">
+<code class="descclassname">supportFunctions.realTimeTransactiveEnergy.createDistributionFeeder.</code><code class="descname">createDistributionSystem</code><span class="sig-paren">(</span><em>feederModel</em>, <em>selectedFeederDict</em>, <em>hpc</em>, <em>parallel</em>, <em>randomSeed=10</em><span class="sig-paren">)</span><a class="headerlink" href="#supportFunctions.realTimeTransactiveEnergy.createDistributionFeeder.createDistributionSystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is used to create distribution systems according the user specified settings. This function is specifically
+used for the Real-Time Transactive Use cases.</p>
+<dl class="docutils">
+<dt>Inputs</dt>
+<dd><p class="first">feederModel - the base model file for the feeder</p>
+<p>selectedFeederDict - dictionary with the information of the feeder</p>
+<p>hpc - flag set if run on HPC platforms. Will zip the model files to save space</p>
+<p>parallel - flag that determines if this function is being run in parallel. If so lock are used on shared files</p>
+<p class="last">randomSeed - this is the random seed so we can reproduce the results</p>
+</dd>
+<dt>Outputs</dt>
+<dd>None</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="parseGLM.html" class="btn btn-neutral float-right" title="GLM Helper Functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="API Calls" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018 Battelle Memorial Institute. The Government retains a paid-up nonexclusive, irrevocable worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the Government, including the right to distribute to other Government contractors.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

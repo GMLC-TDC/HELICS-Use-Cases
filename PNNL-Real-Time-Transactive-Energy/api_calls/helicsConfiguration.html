@@ -1,0 +1,346 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>HELICS Configuration &mdash; HELICS Use Cases 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Execution Scripts" href="executionScripts.html" />
+    <link rel="prev" title="FNCS Configuration" href="fncsConfiguration.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> HELICS Use Cases
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">PNNL Real Time Transactive Energy Use Case Scripts</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../experiments/index.html">Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/index.html">Installation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">API Calls</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="createDistributionFeeder.html">Create Distribution Feeders</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parseGLM.html">GLM Helper Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="feederConfiguration.html">Feeder Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="residentialLoads.html">Residential Loads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commercialLoads.html">Commercial Loads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transmissionSystemConfiguration.html">Transmission System Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="controlConfiguration.html">Transactive Control Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fncsConfiguration.html">FNCS Configuration</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">HELICS Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="executionScripts.html">Execution Scripts</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../PNNL-TD-Dynamic-Load/index.html">PNNL TD Dynamic Load Use Case Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PNNL-Wide-Area-Control/index.html">PNNL Wide-Area Control Use Case Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ANL-TD-Iterative-Pflow/index.html">ANL TD Iterative Power Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ANL_adaptive_volt_var/index.html">ANL Adaptive Volt Var</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">HELICS Use Cases</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">PNNL Real Time Transactive Energy Use Case Scripts</a> &raquo;</li>
+        
+          <li><a href="index.html">API Calls</a> &raquo;</li>
+        
+      <li>HELICS Configuration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/PNNL-Real-Time-Transactive-Energy/api_calls/helicsConfiguration.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-supportFunctions.helicsConfiguration">
+<span id="helics-configuration"></span><h1>HELICS Configuration<a class="headerlink" href="#module-supportFunctions.helicsConfiguration" title="Permalink to this headline">¶</a></h1>
+<p>This file contains functions to create HELICS config files for each simulator</p>
+<dl class="function">
+<dt id="supportFunctions.helicsConfiguration.gridlabd_config">
+<code class="descclassname">supportFunctions.helicsConfiguration.</code><code class="descname">gridlabd_config</code><span class="sig-paren">(</span><em>glmDict</em>, <em>selectedFeederDict</em><span class="sig-paren">)</span><a class="headerlink" href="#supportFunctions.helicsConfiguration.gridlabd_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function adds HELICS capabilities to the feeder in question</p>
+<dl class="docutils">
+<dt>Inputs</dt>
+<dd><p class="first">glmDict - dictionary of the feeder</p>
+<p class="last">selectedFeederDict - settings for the specific feeder</p>
+</dd>
+<dt>Outputs</dt>
+<dd>glmDict - the modified feeder dictionary</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="supportFunctions.helicsConfiguration.matpower_config">
+<code class="descclassname">supportFunctions.helicsConfiguration.</code><code class="descname">matpower_config</code><span class="sig-paren">(</span><em>populationDict</em>, <em>transmissionDict</em><span class="sig-paren">)</span><a class="headerlink" href="#supportFunctions.helicsConfiguration.matpower_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function adds HELICS capabilities to matpower</p>
+<dl class="docutils">
+<dt>Inputs</dt>
+<dd><p class="first">populationDict - dictionary containing properties for all the feeders we are using</p>
+<p class="last">transmissionDict - - dictionary containing properties for the transmission system we are using</p>
+</dd>
+<dt>Outputs</dt>
+<dd>None</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="supportFunctions.helicsConfiguration.write_config">
+<code class="descclassname">supportFunctions.helicsConfiguration.</code><code class="descname">write_config</code><span class="sig-paren">(</span><em>configString</em><span class="sig-paren">)</span><a class="headerlink" href="#supportFunctions.helicsConfiguration.write_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function writes the HELICS configuration file to disk</p>
+<dl class="docutils">
+<dt>Inputs</dt>
+<dd>configString - Python dictionary that hold the JSON config information to write to disk</dd>
+<dt>Outputs</dt>
+<dd>None</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-supportFunctions.realTimeTransactiveEnergy.helicsConfiguration"></span><p>This file contains functions to create HELICS config files for each simulator. This time with Transactive Enegy simulators</p>
+<dl class="function">
+<dt id="supportFunctions.realTimeTransactiveEnergy.helicsConfiguration.dso_config">
+<code class="descclassname">supportFunctions.realTimeTransactiveEnergy.helicsConfiguration.</code><code class="descname">dso_config</code><span class="sig-paren">(</span><em>populationDict</em><span class="sig-paren">)</span><a class="headerlink" href="#supportFunctions.realTimeTransactiveEnergy.helicsConfiguration.dso_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function adds HELICS capabilities to the dso in question</p>
+<dl class="docutils">
+<dt>Inputs</dt>
+<dd>populationDict - dictionary containing properties for the feeders we are using</dd>
+<dt>Outputs</dt>
+<dd>None</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="supportFunctions.realTimeTransactiveEnergy.helicsConfiguration.gridlabd_config">
+<code class="descclassname">supportFunctions.realTimeTransactiveEnergy.helicsConfiguration.</code><code class="descname">gridlabd_config</code><span class="sig-paren">(</span><em>glmDict</em>, <em>selectedFeederDict</em>, <em>transactiveActive</em><span class="sig-paren">)</span><a class="headerlink" href="#supportFunctions.realTimeTransactiveEnergy.helicsConfiguration.gridlabd_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function adds HELICS capabilities to the feeder in question</p>
+<dl class="docutils">
+<dt>Inputs</dt>
+<dd><p class="first">glmDict - dictionary of the feeder</p>
+<p>selectedFeederDict - settings for the specific feeder</p>
+<p class="last">transactiveActive - add transactive control to the feeder</p>
+</dd>
+<dt>Outputs</dt>
+<dd>glmDict - the modified feeder dictionary</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="supportFunctions.realTimeTransactiveEnergy.helicsConfiguration.lse_config">
+<code class="descclassname">supportFunctions.realTimeTransactiveEnergy.helicsConfiguration.</code><code class="descname">lse_config</code><span class="sig-paren">(</span><em>feeder_dict</em>, <em>selectedFeederDict</em><span class="sig-paren">)</span><a class="headerlink" href="#supportFunctions.realTimeTransactiveEnergy.helicsConfiguration.lse_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function adds FNCS capabilities to the lse in question</p>
+<dl class="docutils">
+<dt>Inputs</dt>
+<dd><p class="first">feeder_dict - dictionary containing the full feeder</p>
+<p class="last">selectedFeederDict - dictionary containing properties for the feeders we are using</p>
+</dd>
+</dl>
+<p>Outputs</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="supportFunctions.realTimeTransactiveEnergy.helicsConfiguration.matpower_config">
+<code class="descclassname">supportFunctions.realTimeTransactiveEnergy.helicsConfiguration.</code><code class="descname">matpower_config</code><span class="sig-paren">(</span><em>populationDict</em>, <em>transmissionDict</em><span class="sig-paren">)</span><a class="headerlink" href="#supportFunctions.realTimeTransactiveEnergy.helicsConfiguration.matpower_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function adds HELICS capabilities to matpower</p>
+<dl class="docutils">
+<dt>Inputs</dt>
+<dd><p class="first">populationDict - dictionary containing properties for all the feeders we are using</p>
+<p class="last">transmissionDict - - dictionary containing properties for the transmission system we are using</p>
+</dd>
+<dt>Outputs</dt>
+<dd>None</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="supportFunctions.realTimeTransactiveEnergy.helicsConfiguration.write_config">
+<code class="descclassname">supportFunctions.realTimeTransactiveEnergy.helicsConfiguration.</code><code class="descname">write_config</code><span class="sig-paren">(</span><em>configString</em><span class="sig-paren">)</span><a class="headerlink" href="#supportFunctions.realTimeTransactiveEnergy.helicsConfiguration.write_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function writes the HELICS configuration file to disk</p>
+<dl class="docutils">
+<dt>Inputs</dt>
+<dd>configString - Python dictionary that hold the JSON config information to write to disk</dd>
+<dt>Outputs</dt>
+<dd>None</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="executionScripts.html" class="btn btn-neutral float-right" title="Execution Scripts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="fncsConfiguration.html" class="btn btn-neutral" title="FNCS Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018 Battelle Memorial Institute. The Government retains a paid-up nonexclusive, irrevocable worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the Government, including the right to distribute to other Government contractors.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

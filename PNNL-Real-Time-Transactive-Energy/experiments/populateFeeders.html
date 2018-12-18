@@ -1,0 +1,310 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Populate Feeders Example &mdash; HELICS Use Cases 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Tranmission &amp; Distribution Co-Simulation Example" href="tdSimulation.html" />
+    <link rel="prev" title="Experiments" href="index.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> HELICS Use Cases
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">PNNL Real Time Transactive Energy Use Case Scripts</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Experiments</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Populate Feeders Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tdSimulation.html">Tranmission &amp; Distribution Co-Simulation Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rtteSimulation.html">Real Time Transactive Energy Co-Simulation Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/index.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api_calls/index.html">API Calls</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../PNNL-TD-Dynamic-Load/index.html">PNNL TD Dynamic Load Use Case Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PNNL-Wide-Area-Control/index.html">PNNL Wide-Area Control Use Case Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ANL-TD-Iterative-Pflow/index.html">ANL TD Iterative Power Flow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ANL_adaptive_volt_var/index.html">ANL Adaptive Volt Var</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">HELICS Use Cases</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">PNNL Real Time Transactive Energy Use Case Scripts</a> &raquo;</li>
+        
+          <li><a href="index.html">Experiments</a> &raquo;</li>
+        
+      <li>Populate Feeders Example</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/PNNL-Real-Time-Transactive-Energy/experiments/populateFeeders.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="populate-feeders-example">
+<h1>Populate Feeders Example<a class="headerlink" href="#populate-feeders-example" title="Permalink to this headline">¶</a></h1>
+<p>This is an example of populating feeders with technologies. This example will take a simple static power system model and add a detailed secondary side with individual residences with a collection of devices such a HVAC, Water heater, Pool pumps, etc.</p>
+<p>To get started nagivate to the following folder within the main script base and open the <cite>populateFeeders.py</cite> script.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># navigate to the repositories folder</span>
+<span class="nb">cd</span> <span class="nv">$HOME</span>/repositories
+
+<span class="c1"># from here navigate to main landing for experiment runs</span>
+<span class="nb">cd</span> modificationScipts
+nano populateFeeders.py
+</pre></div>
+</div>
+<p>This script will contain all of the setting you have available for the experiment. The following will explain the settings:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># ---------------------------------------------------------------</span>
+<span class="c1"># ----------------------- Settings ------------------------------</span>
+<span class="c1"># ---------------------------------------------------------------</span>
+
+<span class="c1"># name of the experiment</span>
+<span class="nv">experimentName</span> <span class="o">=</span> <span class="s1">&#39;populateExample&#39;</span>
+
+<span class="c1"># number of distribution systems in the experiment</span>
+<span class="nv">distributionSystemNumber</span> <span class="o">=</span> <span class="m">2</span>
+
+<span class="c1"># create simple bash run scipt that will start a GridLAB-D instance per feeder</span>
+<span class="nv">createRunScripts</span> <span class="o">=</span> True
+
+<span class="c1"># this assumes that everything associated with this experiment is in a certain folder structure. This is the path to the root folder</span>
+<span class="nv">rootPath</span> <span class="o">=</span> <span class="s1">&#39;/people/hans464/helicsUseCaseScripts&#39;</span>
+
+<span class="c1"># path to where you want the experiment outputs (if left empty we assume /experiments)</span>
+<span class="nv">experimentFilePath</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+<span class="c1"># file path that contains the GLMs to extract (if left empty we assume /modelDependency/feeders)</span>
+<span class="nv">feederFilePath</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+<span class="c1"># file path that contains include files for the experiment (if left empty we assume /modelDependency)</span>
+<span class="nv">includeFilePath</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+<span class="c1"># list of distribution systems models and their population distribution for the experiment (feeder : [percent [.])</span>
+<span class="nv">inputGLM</span> <span class="o">=</span> dict<span class="o">()</span>
+inputGLM<span class="o">[</span><span class="s1">&#39;small4BusSystem.glm&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="o">[</span><span class="m">1</span>, <span class="m">1</span><span class="o">]</span>
+<span class="c1"># inputGLM[&#39;R1-12.47-1.glm&#39;] = [0.14, 1]</span>
+<span class="c1"># inputGLM[&#39;R1-12.47-2.glm&#39;] = [0.14, 1]</span>
+<span class="c1"># inputGLM[&#39;R1-12.47-3.glm&#39;] = [0.14, 1]</span>
+<span class="c1"># inputGLM[&#39;R2-12.47-1.glm&#39;] = [0.08, 2]</span>
+<span class="c1"># inputGLM[&#39;R2-12.47-2.glm&#39;] = [0.07, 2]</span>
+<span class="c1"># inputGLM[&#39;R2-12.47-3.glm&#39;] = [0.07, 2]</span>
+<span class="c1"># inputGLM[&#39;R3-12.47-1.glm&#39;] = [0.12, 3]</span>
+<span class="c1"># inputGLM[&#39;R3-12.47-2.glm&#39;] = [0.12, 3]</span>
+<span class="c1"># inputGLM[&#39;R3-12.47-3.glm&#39;] = [0.12, 3]</span>
+
+
+<span class="c1"># This specifies what technologies to use. What is specified here will overwrite the defaults in the technologyConfiguration.py</span>
+<span class="nv">useFlags</span> <span class="o">=</span> dict<span class="o">()</span>
+
+<span class="c1"># This specifies what feeder configuration to use. What is specified here will overwrite the defaults in the feederConfiguration.py</span>
+<span class="nv">feederConfig</span> <span class="o">=</span> dict<span class="o">()</span>
+<span class="c1"># this can enable logging to a mysql database instead of csv files</span>
+feederConfig<span class="o">[</span><span class="s1">&#39;sequelLogging&#39;</span><span class="o">]</span> <span class="o">=</span> False
+feederConfig<span class="o">[</span><span class="s2">&quot;sequelSettings&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;localhost&#39;</span>,<span class="s1">&#39;gridlabd&#39;</span>,<span class="s1">&#39;passGLD123&#39;</span>,<span class="s1">&#39;3306&#39;</span>,<span class="s1">&#39;0&#39;</span><span class="o">]</span>
+<span class="c1"># some settings to upgrade the equipment of the feeders</span>
+feederConfig<span class="o">[</span><span class="s1">&#39;fuses_upgrade_level&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">2</span>
+feederConfig<span class="o">[</span><span class="s1">&#39;transformer_upgrade_level&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">1</span>
+feederConfig<span class="o">[</span><span class="s1">&#39;transformer_upgrade_cutoff&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">100</span>
+<span class="c1"># start and stop time for the simulation</span>
+feederConfig<span class="o">[</span><span class="s1">&#39;startdate&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;2013-08-28 00:00:00&#39;</span>
+feederConfig<span class="o">[</span><span class="s1">&#39;stopdate&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;2013-08-29 00:00:00&#39;</span>
+</pre></div>
+</div>
+<p>After modifying the setting for this script you can create and run the experiment by doing the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># navigate to the repositories folder</span>
+<span class="nb">cd</span> <span class="nv">$HOME</span>/repositories/HELICS-Use-Cases/PNNL-Real-Time-Transactive-Energy/modificationScripts
+
+<span class="c1"># run scripts to populate feeders</span>
+python populateFeeders.py
+
+<span class="c1"># execute experiment</span>
+<span class="nb">cd</span> ../experiments/populateExample
+./runAll.sh
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tdSimulation.html" class="btn btn-neutral float-right" title="Tranmission &amp; Distribution Co-Simulation Example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Experiments" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018 Battelle Memorial Institute. The Government retains a paid-up nonexclusive, irrevocable worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the Government, including the right to distribute to other Government contractors.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
