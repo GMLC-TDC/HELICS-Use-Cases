@@ -16,7 +16,7 @@ import os
 import sys
 import sphinx_rtd_theme
 import sphinx
-import recommonmark
+sys.path.insert(0, os.path.abspath('../../PNNL-Real-Time-Transactive-Energy/modificationScripts'))
 
 # -- Project information -----------------------------------------------------
 
