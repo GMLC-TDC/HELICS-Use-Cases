@@ -15,14 +15,14 @@
 import os
 import sys
 import sphinx_rtd_theme
-import sphinx
+from sphinxcontrib.pandoc_markdown import MarkdownParser
 sys.path.insert(0, os.path.abspath('../../PNNL-Real-Time-Transactive-Energy/modificationScripts'))
 
 # -- Project information -----------------------------------------------------
 
 project = 'HELICS Use Cases'
 copyright = '2018 Battelle Memorial Institute. The Government retains a paid-up nonexclusive, irrevocable worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the Government, including the right to distribute to other Government contractors.'
-author = 'Jacob Hansen'
+author = 'Jacob Hansen, Jeff Daily, Trevor Hardy, Andrew Fisher'
 
 # The short X.Y version
 version = '1.0'
@@ -41,6 +41,8 @@ release = '1.0'
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.mathjax',
+    'sphinx.ext.githubpages',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -51,6 +53,8 @@ templates_path = ['_templates']
 #
 source_suffix = ['.rst', '.md']
 # source_suffix = '.rst'
+
+source_parsers = {'.md': MarkdownParser}
 
 # The master toctree document.
 master_doc = 'index'
@@ -132,7 +136,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'HELICSUseCases.tex', 'HELICS Use Cases Documentation',
-     'Jacob Hansen', 'manual'),
+     'Jacob Hansen, Jeff Daily, Trevor Hardy, Andrew Fisher', 'manual'),
 ]
 
 

@@ -1,6 +1,7 @@
 Feeder Configuration
 ====================
 
+``` eval_rst
 .. automodule:: supportFunctions.technologyConfiguration
    :members:
 
@@ -15,5 +16,5 @@ Feeder Configuration
 
 .. automodule:: supportFunctions.upgradeEquipment
    :members:  
-       
+```   
    
