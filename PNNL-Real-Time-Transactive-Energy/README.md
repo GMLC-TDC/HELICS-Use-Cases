@@ -16,6 +16,6 @@ The sctript base supports the following types of federate:
 * [MATPOWER](http://www.pserc.cornell.edu/matpower/) for the transmission system modeling
 * Purpose built LSE and DSO constructs included in the repository for Transactive Energy use case
 
-To get started please take a look at full documentation [here](https://gmlc-tdc.github.io/HELICS-Use-Cases/PNNL-Real-Time-Transactive-Energy)
+To get started please take a look at full documentation [here](https://gmlc-tdc.github.io/HELICS-Use-Cases/PNNL-Real-Time-Transactive-Energy/index.html)
 
 
