@@ -85,7 +85,13 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../PNNL-Real-Time-Transactive-Energy/index.html">PNNL Real Time Transactive Energy Use Case Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../PNNL-TD-Dynamic-Load/index.html">PNNL TD Dynamic Load Use Case Scripts</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">PNNL Wide-Area Control Use Case Scripts</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">PNNL Wide-Area Control Use Case Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-ns-3">Building ns-3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-helics-with-the-matlab-extension">Building HELICS with the Matlab Extension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-the-use-case">Running the Use Case</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../ANL-TD-Iterative-Pflow/index.html">ANL TD Iterative Power Flow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ANL_adaptive_volt_var/index.html">ANL Adaptive Volt Var</a></li>
 </ul>
@@ -154,7 +160,201 @@
             
   <div class="section" id="pnnl-wide-area-control-use-case-scripts">
 <h1>PNNL Wide-Area Control Use Case Scripts<a class="headerlink" href="#pnnl-wide-area-control-use-case-scripts" title="Permalink to this headline">¶</a></h1>
-<p>Todo</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This use case is a transmission and communication co-simulation that
+aims to investigate the impact of the communication network on wide-area
+controls. The transmission simulation is run in MATLAB using the Power
+System Toolbox (PST) and the communication simulation is run in ns-3. In
+this use case, specifically, we would study the impact of time delay on
+the HVDC oscillation damping controller. The HVDC damping controller
+requires two inputs, one is local frequency information, one is remote
+frequency information that comes from hundreds or thousands miles away
+which introduces delay. In this co-simulation, the Matlab PST send the
+remote frequency to ns3 through HELICS platform. The signal goes through
+the ns3 network where communication delay and loss of packages are
+simulated, and finally it is sent back to the Matlab PST as an input to
+the HVDC damping controller. The co-simulation is realized on a modified
+IEEE 39Bus test system for the transmission model and a simple two-node
+link for the communication system model.</p>
+</div>
+<div class="section" id="building-ns-3">
+<h2>Building ns-3<a class="headerlink" href="#building-ns-3" title="Permalink to this headline">¶</a></h2>
+<p>The GMLC-TDC team maintains a branch of ns-3 that contains the HELICS
+integration at <a class="reference external" href="https://github.com/GMLC-TDC/ns-3-dev-git.git">https://github.com/GMLC-TDC/ns-3-dev-git.git</a>.</p>
+<p>ns-3 is built using the “waf” tool. See
+<a class="reference external" href="https://www.nsnam.org/wiki/Installation#Configuration_with_Waf">https://www.nsnam.org/wiki/Installation#Configuration_with_Waf</a> for some
+examples of how to configure and build ns-3.</p>
+<p>To build ns-3 with the HELICS integration, specify the location of the
+Boost, zeromq, and HELICS installations if they aren’t located
+automatically. For example, from the top-level ns-3 source</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">waf</span> <span class="n">configure</span> <span class="o">--</span><span class="n">prefix</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">username</span><span class="o">/</span><span class="n">ns</span><span class="o">-</span><span class="mi">3</span><span class="o">-</span><span class="n">install</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">examples</span> <span class="o">--</span><span class="k">with</span><span class="o">-</span><span class="n">helics</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">username</span><span class="o">/</span><span class="n">HELICS</span><span class="o">-</span><span class="n">install</span> <span class="o">--</span><span class="n">boost</span><span class="o">-</span><span class="n">includes</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">username</span><span class="o">/</span><span class="n">boost_1_62_0</span><span class="o">-</span><span class="n">c</span><span class="o">++</span><span class="mi">11</span><span class="o">-</span><span class="n">install</span><span class="o">/</span><span class="n">include</span> <span class="o">--</span><span class="n">boost</span><span class="o">-</span><span class="n">libs</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">username</span><span class="o">/</span><span class="n">boost_1_62_0</span><span class="o">-</span><span class="n">c</span><span class="o">++</span><span class="mi">11</span><span class="o">-</span><span class="n">install</span><span class="o">/</span><span class="n">lib</span>
+</pre></div>
+</div>
+<p>In the above example, boost was installed manually into a non-default
+location. If you install HELICS using the install instructions at
+<a class="reference external" href="https://gmlc-tdc.github.io/HELICS-src/installation/linux.html">https://gmlc-tdc.github.io/HELICS-src/installation/linux.html</a> the boost
+and zeromq dependencies might be located for you automatically in system
+locations.</p>
+<p>Once waf configures the build for ns-3, you should see output similar to
+the following:</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="o">----</span> <span class="n">Summary</span> <span class="n">of</span> <span class="n">optional</span> <span class="n">NS</span><span class="o">-</span><span class="mi">3</span> <span class="n">features</span><span class="p">:</span>
+<span class="n">Build</span> <span class="n">profile</span>                 <span class="p">:</span> <span class="n">debug</span>
+<span class="n">Build</span> <span class="n">directory</span>               <span class="p">:</span>
+<span class="n">BRITE</span> <span class="n">Integration</span>             <span class="p">:</span> <span class="ow">not</span> <span class="n">enabled</span> <span class="p">(</span><span class="n">BRITE</span> <span class="ow">not</span> <span class="n">enabled</span> <span class="p">(</span><span class="n">see</span> <span class="n">option</span> <span class="o">--</span><span class="k">with</span><span class="o">-</span><span class="n">brite</span><span class="p">))</span>
+<span class="n">DES</span> <span class="n">Metrics</span> <span class="n">event</span> <span class="n">collection</span>  <span class="p">:</span> <span class="ow">not</span> <span class="n">enabled</span> <span class="p">(</span><span class="n">defaults</span> <span class="n">to</span> <span class="n">disabled</span><span class="p">)</span>
+<span class="n">Emulation</span> <span class="n">FdNetDevice</span>         <span class="p">:</span> <span class="n">enabled</span>
+<span class="n">Examples</span>                      <span class="p">:</span> <span class="n">enabled</span>
+<span class="n">File</span> <span class="n">descriptor</span> <span class="n">NetDevice</span>     <span class="p">:</span> <span class="n">enabled</span>
+<span class="n">GNU</span> <span class="n">Scientific</span> <span class="n">Library</span> <span class="p">(</span><span class="n">GSL</span><span class="p">)</span>  <span class="p">:</span> <span class="ow">not</span> <span class="n">enabled</span> <span class="p">(</span><span class="n">GSL</span> <span class="ow">not</span> <span class="n">found</span><span class="p">)</span>
+<span class="n">Gcrypt</span> <span class="n">library</span>                <span class="p">:</span> <span class="ow">not</span> <span class="n">enabled</span> <span class="p">(</span><span class="n">libgcrypt</span> <span class="ow">not</span> <span class="n">found</span><span class="p">:</span> <span class="n">you</span> <span class="n">can</span> <span class="n">use</span> <span class="n">libgcrypt</span><span class="o">-</span><span class="n">config</span> <span class="n">to</span> <span class="n">find</span> <span class="n">its</span> <span class="n">location</span><span class="o">.</span><span class="p">)</span>
+<span class="n">GtkConfigStore</span>                <span class="p">:</span> <span class="ow">not</span> <span class="n">enabled</span> <span class="p">(</span><span class="n">library</span> <span class="s1">&#39;gtk+-2.0 &gt;= 2.12&#39;</span> <span class="ow">not</span> <span class="n">found</span><span class="p">)</span>
+<span class="n">MPI</span> <span class="n">Support</span>                   <span class="p">:</span> <span class="ow">not</span> <span class="n">enabled</span> <span class="p">(</span><span class="n">option</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">mpi</span> <span class="ow">not</span> <span class="n">selected</span><span class="p">)</span>
+<span class="n">NS</span><span class="o">-</span><span class="mi">3</span> <span class="n">Click</span> <span class="n">Integration</span>        <span class="p">:</span> <span class="ow">not</span> <span class="n">enabled</span> <span class="p">(</span><span class="n">nsclick</span> <span class="ow">not</span> <span class="n">enabled</span> <span class="p">(</span><span class="n">see</span> <span class="n">option</span> <span class="o">--</span><span class="k">with</span><span class="o">-</span><span class="n">nsclick</span><span class="p">))</span>
+<span class="n">NS</span><span class="o">-</span><span class="mi">3</span> <span class="n">HELICS</span> <span class="n">Integration</span>       <span class="p">:</span> <span class="n">enabled</span>
+<span class="n">NS</span><span class="o">-</span><span class="mi">3</span> <span class="n">OpenFlow</span> <span class="n">Integration</span>     <span class="p">:</span> <span class="ow">not</span> <span class="n">enabled</span> <span class="p">(</span><span class="n">OpenFlow</span> <span class="ow">not</span> <span class="n">enabled</span> <span class="p">(</span><span class="n">see</span> <span class="n">option</span> <span class="o">--</span><span class="k">with</span><span class="o">-</span><span class="n">openflow</span><span class="p">))</span>
+<span class="n">Network</span> <span class="n">Simulation</span> <span class="n">Cradle</span>     <span class="p">:</span> <span class="ow">not</span> <span class="n">enabled</span> <span class="p">(</span><span class="n">NSC</span> <span class="ow">not</span> <span class="n">found</span> <span class="p">(</span><span class="n">see</span> <span class="n">option</span> <span class="o">--</span><span class="k">with</span><span class="o">-</span><span class="n">nsc</span><span class="p">))</span>
+<span class="n">PlanetLab</span> <span class="n">FdNetDevice</span>         <span class="p">:</span> <span class="ow">not</span> <span class="n">enabled</span> <span class="p">(</span><span class="n">PlanetLab</span> <span class="n">operating</span> <span class="n">system</span> <span class="ow">not</span> <span class="n">detected</span> <span class="p">(</span><span class="n">see</span> <span class="n">option</span> <span class="o">--</span><span class="n">force</span><span class="o">-</span><span class="n">planetlab</span><span class="p">))</span>
+<span class="n">PyViz</span> <span class="n">visualizer</span>              <span class="p">:</span> <span class="ow">not</span> <span class="n">enabled</span> <span class="p">(</span><span class="n">Python</span> <span class="n">Bindings</span> <span class="n">are</span> <span class="n">needed</span> <span class="n">but</span> <span class="ow">not</span> <span class="n">enabled</span><span class="p">)</span>
+<span class="n">Python</span> <span class="n">Bindings</span>               <span class="p">:</span> <span class="ow">not</span> <span class="n">enabled</span> <span class="p">(</span><span class="n">PyBindGen</span> <span class="n">missing</span><span class="p">)</span>
+<span class="n">Real</span> <span class="n">Time</span> <span class="n">Simulator</span>           <span class="p">:</span> <span class="n">enabled</span>
+<span class="n">SQlite</span> <span class="n">stats</span> <span class="n">data</span> <span class="n">output</span>      <span class="p">:</span> <span class="ow">not</span> <span class="n">enabled</span> <span class="p">(</span><span class="n">library</span> <span class="s1">&#39;sqlite3&#39;</span> <span class="ow">not</span> <span class="n">found</span><span class="p">)</span>
+<span class="n">Tap</span> <span class="n">Bridge</span>                    <span class="p">:</span> <span class="n">enabled</span>
+<span class="n">Tap</span> <span class="n">FdNetDevice</span>               <span class="p">:</span> <span class="n">enabled</span>
+<span class="n">Tests</span>                         <span class="p">:</span> <span class="ow">not</span> <span class="n">enabled</span> <span class="p">(</span><span class="n">defaults</span> <span class="n">to</span> <span class="n">disabled</span><span class="p">)</span>
+<span class="n">Threading</span> <span class="n">Primitives</span>          <span class="p">:</span> <span class="n">enabled</span>
+<span class="n">Use</span> <span class="n">sudo</span> <span class="n">to</span> <span class="nb">set</span> <span class="n">suid</span> <span class="n">bit</span>      <span class="p">:</span> <span class="ow">not</span> <span class="n">enabled</span> <span class="p">(</span><span class="n">option</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">sudo</span> <span class="ow">not</span> <span class="n">selected</span><span class="p">)</span>
+<span class="n">XmlIo</span>                         <span class="p">:</span> <span class="ow">not</span> <span class="n">enabled</span> <span class="p">(</span><span class="n">library</span> <span class="s1">&#39;libxml-2.0 &gt;= 2.7&#39;</span> <span class="ow">not</span> <span class="n">found</span><span class="p">)</span>
+<span class="n">ZMQ</span> <span class="n">Integration</span>               <span class="p">:</span> <span class="n">enabled</span>
+<span class="s1">&#39;configure&#39;</span> <span class="n">finished</span> <span class="n">successfully</span> <span class="p">(</span><span class="mf">3.501</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that “NS-3 HELICS Integration” is “enabled”. Do not forget to run
+<code class="docutils literal"><span class="pre">./waf</span> <span class="pre">install</span></code>.</p>
+</div>
+<div class="section" id="building-helics-with-the-matlab-extension">
+<h2>Building HELICS with the Matlab Extension<a class="headerlink" href="#building-helics-with-the-matlab-extension" title="Permalink to this headline">¶</a></h2>
+<p>The tricky part for building HELICS with Matlab extension under Linux is
+that, even using the MATLAB 2017a or MATLAB 2017b, the Matlab MEX tool,
+which is used to build the Matlab extension for HELICS, only supports
+gcc 4.9. However, the HELICS build for ns3 requires gcc 5.4. To work
+around this, a version of HELICS to support the MATLAB extension needs
+to be built separately from the ns-3 installation of HELICS using gcc
+4.9.</p>
+<ol class="arabic">
+<li><p class="first">Install gcc 4.9</p>
+</li>
+<li><p class="first">switch the system default gcc and g++ from 5.x to 4.9 by:
+<code class="docutils literal"><span class="pre">sudo</span> <span class="pre">update-alternatives</span> <span class="pre">--config</span> <span class="pre">gcc</span></code> and selecting gcc 4.9.x.
+Check that the appropriate version was installed and has been
+properly linked by running <code class="docutils literal"><span class="pre">gcc</span> <span class="pre">–version</span></code> and verifying it returns
+verison 4.9.x The same thing needs to be done for g++ by:
+<code class="docutils literal"><span class="pre">sudo</span> <span class="pre">update-alternatives</span> <span class="pre">--config</span> <span class="pre">g++</span></code></p>
+</li>
+<li><p class="first">Build boost with gcc 4.9, as cmake will throw errors if you build
+HELICS with gcc 4.9 while the Boost libraries is compiled with gcc
+5.x. It is recommended building and installing this version of boost
+with gcc 4.9 into unique location outside the system path. In this
+way, two version of boost compiled with different versions of gcc can
+be used by the two installations of HELICS.</p>
+</li>
+<li><p class="first">start to build the HELICS with Matlab extension, assuming you already
+have Matlab installed in your Linux machine.</p>
+<ul class="simple">
+<li>cd to HELICS-src</li>
+<li><code class="docutils literal"><span class="pre">mkdir</span> <span class="pre">build</span></code></li>
+<li><code class="docutils literal"><span class="pre">cd</span> <span class="pre">build</span></code></li>
+<li></li>
+</ul>
+<p><code class="docutils literal"><span class="pre">bash</span>&#160;&#160; <span class="pre">cmake</span> <span class="pre">-DBUILD_MATLAB_INTERFACE=ON</span>&#160; <span class="pre">-DCMAKE_INSTALL_PREFIX=/path/to/your/helics/install/</span>&#160; <span class="pre">..</span></code></p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">ccmake</span> <span class="pre">..</span></code></li>
+<li>make sure the following boost options in the ccamke point to the
+correct boost directory with gcc 4.9:
+<code class="docutils literal"><span class="pre">Boost_CHRONO_LIBRARY_DEBUG</span></code>
+<code class="docutils literal"><span class="pre">Boost_CHRONO_LIBRARY_RELEASE</span></code>
+<code class="docutils literal"><span class="pre">Boost_DATE_TIME_LIBRARY_DEBUG</span></code>
+<code class="docutils literal"><span class="pre">Boost_DATE_TIME_LIBRARY_RELEASE</span></code>
+<code class="docutils literal"><span class="pre">Boost_FILESYSTEM_LIBRARY_DEBUG</span></code>
+<code class="docutils literal"><span class="pre">Boost_FILESYSTEM_LIBRARY_RELEASE</span></code>
+<code class="docutils literal"><span class="pre">Boost_LIBRARY_DIR_DEBUG</span></code>
+<code class="docutils literal"><span class="pre">Boost_LIBRARY_DIR_RELEASE</span></code>
+<code class="docutils literal"><span class="pre">Boost_PROGRAM_OPTIONS_LIBRARY_DEBUG</span></code>
+<code class="docutils literal"><span class="pre">Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE</span></code>
+<code class="docutils literal"><span class="pre">Boost_SYSTEM_LIBRARY_DEBUG</span></code>
+<code class="docutils literal"><span class="pre">Boost_SYSTEM_LIBRARY_RELEASE</span></code>
+<code class="docutils literal"><span class="pre">Boost_TIMER_LIBRARY_DEBUG</span></code>
+<code class="docutils literal"><span class="pre">Boost_TIMER_LIBRARY_RELEASE</span></code>
+<code class="docutils literal"><span class="pre">Boost_UNIT_TEST_FRAMEWORK_LIBRARY_DEBUG</span></code>
+<code class="docutils literal"><span class="pre">Boost_UNIT_TEST_FRAMEWORK_LIBRARY_RELEASE</span></code></li>
+</ul>
+</li>
+</ol>
+<p>then run <code class="docutils literal"><span class="pre">make</span> <span class="pre">-j8</span></code> followed by <code class="docutils literal"><span class="pre">make</span> <span class="pre">install</span></code> 5. Build the MATLAB
+extension * <code class="docutils literal"><span class="pre">cd</span> <span class="pre">..\swig</span></code> *</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>```bash
+mex -I/home/huan495/helics-test/helics-install/include/helics/shared_api_library/ ./matlab/helicsMEX.cpp -lhelicsSharedLib -L/home/huan495/helics-test/helics-install/lib
+```
+* `mv helicsMEX.mexa64 matlab`
+</pre></div>
+</div>
+<ol class="arabic" start="6">
+<li><p class="first">Start MATLAB and test HELICS MATLAB extension:</p>
+<ul class="simple">
+<li></li>
+</ul>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span>`LD_PRELOAD=/path/to/your/zeromq-install-directory/lib/libzmq.so matlab
+</pre></div>
+</div>
+<ul class="simple">
+<li>From within MATLAB test the HELICS installation by running
+<code class="docutils literal"><span class="pre">helics.helicsGetVersion()</span></code></li>
+</ul>
+</li>
+</ol>
+<p>Further information on building HELICS with the MATLAB extension can be
+found at
+<a class="reference external" href="https://gmlc-tdc.github.io/HELICS-src/installation/language.html">https://gmlc-tdc.github.io/HELICS-src/installation/language.html</a></p>
+</div>
+<div class="section" id="running-the-use-case">
+<h2>Running the Use Case<a class="headerlink" href="#running-the-use-case" title="Permalink to this headline">¶</a></h2>
+<p>By this point there should be two versions of HELICS installed, one for
+ns-3 and one for MATLAB.</p>
+<p>To run ns-3 with HELICS two environmental variables need to be set:</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&quot;$path/to/helics/install/withgcc5.x/lib:$LD_LIBRARY_PATH&quot;</span>
+</pre></div>
+</div>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&quot;$ path/to/Boost/install/withgcc5.x /lib:$LD_LIBRARY_PATH&quot;</span>
+</pre></div>
+</div>
+<p>Similarly, to run MATLAB with HELICS the same environment variables need
+to be set (in a different terminal session so they don’t overwrite the
+setting for ns-3):</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&quot;$path/to/helics/install/withgcc4.9/lib:$LD_LIBRARY_PATH&quot;</span>
+</pre></div>
+</div>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&quot;$ path/to/Boost/install/withgcc4.9/lib:$LD_LIBRARY_PATH&quot;</span>
+</pre></div>
+</div>
+<p>To run the MATLAB model the Power System Toolbox (PST) needs to be
+installed from
+<a class="reference external" href="http://www.eps.ee.kth.se/personal/vanfretti/pst/Power_System_Toolbox_Webpage/PST.html">http://www.eps.ee.kth.se/personal/vanfretti/pst/Power_System_Toolbox_Webpage/PST.html</a>
+After installing PST, move the files from the “examples-matlab” in this
+repository to the root folder of the PST installation.</p>
+<p>For the ns-3 model, move “ns3-sndrcv.cc” from the “examples-ns3” folder
+in this repository to the “example” folder in the ns-3 source tree and
+build ns-3 and this model (from the session where the ns-3 environment
+variables have been set): <code class="docutils literal"><span class="pre">./waf</span> <span class="pre">build</span></code></p>
+<p>To run the co-simulation, using the session where the MATLAB environment
+variables have been set, open MATLAB and run
+“s_simu_fedmessage_ns3_hvdc.m”. When selecting the system model
+choose “d_revised_newengland39bus.m”. The MATLAB code will begin
+running and then halt while it waits for ns-3 to begin.</p>
+<p>To run the ns-3 model, from the session where the ns-3 variables have
+been defined, execute “ns3-sndrcv.cc” from the “build” folder. This will
+connect the ns-3 model to the co-simulation, allowing both the MATLAB
+model and ns-3 model to run to the completion of the co-simulation.</p>
+</div>
 </div>
 
 
@@ -198,10 +398,21 @@
 
     
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'1.0',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
         <script type="text/javascript" src="../_static/jquery.js"></script>
         <script type="text/javascript" src="../_static/underscore.js"></script>
         <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   

@@ -84,7 +84,15 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../PNNL-Real-Time-Transactive-Energy/index.html">PNNL Real Time Transactive Energy Use Case Scripts</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">PNNL TD Dynamic Load Use Case Scripts</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">PNNL TD Dynamic Load Use Case Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-gridlab-d-with-helics-interface">Install GridLAB-D with HELICS interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#checkout-required-interpss-libraries">Checkout required InterPSS libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setup-interpss-running-environment-in-eclipse">Setup InterPSS running environment in Eclipse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#case-files">Case files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-the-use-case">Run the use case</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../PNNL-Wide-Area-Control/index.html">PNNL Wide-Area Control Use Case Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ANL-TD-Iterative-Pflow/index.html">ANL TD Iterative Power Flow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ANL_adaptive_volt_var/index.html">ANL Adaptive Volt Var</a></li>
@@ -154,7 +162,144 @@
             
   <div class="section" id="pnnl-td-dynamic-load-use-case-scripts">
 <h1>PNNL TD Dynamic Load Use Case Scripts<a class="headerlink" href="#pnnl-td-dynamic-load-use-case-scripts" title="Permalink to this headline">¶</a></h1>
-<p>Todo</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This use case is to provide data and insights of detailed individual
+load responses (including the protection actions) to faults in the
+transmission system for deriving the aggregate protection models and
+evaluating the performance of WECC composite load model, i.e., CMPLDW.</p>
+<p>Thus, it requires the T&amp;D&nbsp; dynamic co-simulation capability. For
+initialization of the dynamic co-simulation, T&amp;D power flow
+co-simulation is also required.</p>
+<p>In this use case, the transmission part simulation is performed by
+<a class="reference external" href="www.interpss.og">InterPSS</a>, whereas
+<a class="reference external" href="https://www.gridlabd.org/">GridLAB-D</a> is used for distribution power
+flow and dynamic simulation. GridLAB-D <a class="reference external" href="http://gridlab-d.sourceforge.net/wiki/index.php/Subsecond">subsecond
+(deltaMode)</a>
+simulation capability will be leveraged for dynamic simulation. HELICS
+is utilized to handle time synchronization and data message exchange
+between InterPSS and GridLAB-D. As InterPSS is a Java-based simulation
+tool, so HELICS <strong>with Java binding</strong> is needed for InterPSS, while
+GridLAB-D will use the default HELICS C++ APIs.</p>
+<p>In the current release, the test cases comprise IEEE 39-bus system (for
+the transmission system part), a test feeder and a generic commercial
+<a class="reference external" href="http://gridlab-d.sourceforge.net/wiki/index.php/Feeder_Taxonomy">PNNL taxonomy
+feeder</a>
+(for the distribution system part).</p>
+<p>While HECLIS supports iteration at both initialization and execution
+stages, in this use case, iteration between T&amp;D at both power flow and
+each time step of dynamic simulation has not been implemented yet, due
+to the fact that current GridLAB-D HELICS implementation do not support
+iteration. This will be one of the focuses of next phase development.</p>
+</div>
+<div class="section" id="install-gridlab-d-with-helics-interface">
+<h2>Install GridLAB-D with HELICS interface<a class="headerlink" href="#install-gridlab-d-with-helics-interface" title="Permalink to this headline">¶</a></h2>
+<p><em>The use case is currently developed in Linux environment, so the
+following instructions are only tested on Linux. Information for other
+development environment will be provided in the future.</em></p>
+<ol class="arabic">
+<li><p class="first">Follow the <a class="reference external" href="https://github.com/GMLC-TDC/HELICS-src">instructions provided by HELICS
+developers</a> and install
+HELICS <strong>with Java binding</strong>, which will be enabled by default
+installation configuration setting. You can use <code class="docutils literal"><span class="pre">ccmake</span> <span class="pre">.</span></code> during
+the build process to check or change the configuration.</p>
+</li>
+<li><p class="first">Install GridLAB-D. HELICS support currently (7/14/2018) is provided
+in
+the&nbsp;<code class="docutils literal"><span class="pre">`feature/1024</span></code>&nbsp;branch &lt;<a class="reference external" href="https://github.com/gridlab-d/gridlab-d/tree/feature/1024">https://github.com/gridlab-d/gridlab-d/tree/feature/1024</a>&gt;`__,
+So you need to check it out first:
+<code class="docutils literal"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-b</span> <span class="pre">feature/1024</span> <span class="pre">origin/feature/1024</span></code></p>
+<p>Then you have to build GridLAB-D yourself as
+described&nbsp;<a class="reference external" href="https://github.com/GMLC-TDC/HELICS-Tutorial/tree/master/setup">here</a>.</p>
+<p><strong>NOTE:</strong> The motor protection models in GridLAB-D are currently
+(7/14/2018) developed in
+<code class="docutils literal"><span class="pre">`feature/1105</span></code> &lt;<a class="reference external" href="https://github.com/gridlab-d/gridlab-d/tree/feature/1105">https://github.com/gridlab-d/gridlab-d/tree/feature/1105</a>&gt;`__
+branch, so it requires some extra work to check out and merge this
+part into the GridLAB-D to run on the one of the study cases with
+motor protection.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="checkout-required-interpss-libraries">
+<h2>Checkout required InterPSS libraries<a class="headerlink" href="#checkout-required-interpss-libraries" title="Permalink to this headline">¶</a></h2>
+<p>The modeling and simulation capabilities that will be used in this use
+case are accessed through InterPSS Java libraries (*jar), which in turn
+depend on some third-party libraries. All these libraries are access in
+the <a class="reference external" href="https://github.com/InterPSS-Project/ipss-common">InterPSS-Project/**ipss-common** on
+github.</a></p>
+<p>To checkout all the required libraries, simply run
+<code class="docutils literal"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/InterPSS-Project/ipss-common.git</span></code></p>
+</div>
+<div class="section" id="setup-interpss-running-environment-in-eclipse">
+<h2>Setup InterPSS running environment in Eclipse<a class="headerlink" href="#setup-interpss-running-environment-in-eclipse" title="Permalink to this headline">¶</a></h2>
+<p>Given that compiling the simulation java file for this use case using
+InterPSS and HELICS Jar files is very complex, Eclipse IDE is
+recommended to use to build and run the InterPSS-based simulation code.</p>
+<ol class="arabic simple">
+<li>Install Java-8, if it is not available or other Java version is used.</li>
+<li>Install Eclipse. Follow Instructions provided
+<a class="reference external" href="https://www.eclipse.org/downloads/">here</a></li>
+<li>Open Eclipse:<ol class="arabic">
+<li><code class="docutils literal"><span class="pre">cd</span> <span class="pre">&lt;path</span> <span class="pre">to</span> <span class="pre">Eclipse&gt;</span></code></li>
+<li><code class="docutils literal"><span class="pre">./eclipse</span></code></li>
+</ol>
+</li>
+<li>Import the InterPSS
+<a class="reference external" href="https://github.com/InterPSS-Project/ipss-common">ipss-common</a>
+project into Eclipse</li>
+<li>Check out this <a class="reference external" href="https://github.com/GMLC-TDC/HELICS-Use-Cases">TDC-Use-Case
+project</a></li>
+<li>Import <strong>ipss.plugin.external.cosim</strong> project under the
+PNNL-TD-Dynamic-Load into Eclipse</li>
+<li>Configure <strong>ipss.plugin.external.cosim</strong> project<ul>
+<li>Select Project-&gt;Right Click-&gt;Build Path-&gt;Link Source…,</li>
+<li>Select the <code class="docutils literal"><span class="pre">&lt;Path</span> <span class="pre">to</span> <span class="pre">HELICS</span> <span class="pre">Build</span> <span class="pre">folder&gt;/swig/java</span></code> folder as
+the Linked folder location.</li>
+<li>Configure Build Path: * For the libraries, select and add all
+those under the <code class="docutils literal"><span class="pre">ipss.lib</span></code> folder of the
+<a class="reference external" href="https://github.com/InterPSS-Project/ipss-common">ipss-common</a>
+, select and add the following jar files under the
+<code class="docutils literal"><span class="pre">ipss.lib.3rdPty</span></code> folder: * apache: commons-logging,
+commons-math3 * cache: hazelcast-3.8.jar * eclipse: all emf jar
+files</li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="case-files">
+<h2>Case files<a class="headerlink" href="#case-files" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Transmissions:<ul>
+<li>A dataset for IEEE 39-Bus system, including power flow, dynamic
+and sequence data</li>
+<li>A json configuration file for co-simulation</li>
+</ul>
+</li>
+<li>Distribution feeders:<ul>
+<li>A simple feeder with diesel generators–
+IEEE-13_Dynamic_2gen_swingsub_helics.glm, and associated
+player files and a json configuration file for co-simulation</li>
+<li>A general commercial taxonomy feeder, i.e.,
+<a class="reference external" href="https://github.com/gridlab-d/Taxonomy_Feeders/blob/master/GC-12.47-1.glm">GC-12.47-1.glm</a>,
+with <code class="docutils literal"><span class="pre">motor</span></code> and <code class="docutils literal"><span class="pre">helics_msg</span></code> modules added to it, and
+associated player files and a json configuration file for
+co-simulation</li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="run-the-use-case">
+<h2>Run the use case<a class="headerlink" href="#run-the-use-case" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Open <em>terminal 1</em>, start helics_brokers with cmd lines, for one
+transmission and one distribution feeder co-simulation, we will need
+2 brokers, and the cmd line should be, <code class="docutils literal"><span class="pre">helics_broker</span> <span class="pre">2</span></code></li>
+<li>Open <em>terminal 2</em>, start Eclipse, run <code class="docutils literal"><span class="pre">TestTransCoSim.java</span></code></li>
+<li>Open <em>terminal 3</em>, first get the case folder:
+<code class="docutils literal"><span class="pre">cd</span> <span class="pre">/home/huan289/eclipse-workspace/ipss.plugin.external.cosim/testData/GLD/</span></code>,
+then run <code class="docutils literal"><span class="pre">gridlab-d</span> <span class="pre">IEEE-13_Dynamic_2gen_swingsub_helics.glm</span></code></li>
+</ol>
+</div>
 </div>
 
 
@@ -198,10 +343,21 @@
 
     
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'1.0',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
         <script type="text/javascript" src="../_static/jquery.js"></script>
         <script type="text/javascript" src="../_static/underscore.js"></script>
         <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   

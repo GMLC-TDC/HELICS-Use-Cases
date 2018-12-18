@@ -172,60 +172,62 @@
             
   <div class="section" id="helics">
 <h1>HELICS<a class="headerlink" href="#helics" title="Permalink to this headline">¶</a></h1>
-<p>These are the steps neccesary to install the proper version of HELICS that works with this script base. Currently that is the 2.0 beta 1 release (This will be updated to 2.0 when released).</p>
+<p>These are the steps neccesary to install the proper version of HELICS
+that works with this script base. Currently that is the 2.0 beta 1
+release (This will be updated to 2.0 when released).</p>
 <p>Install ZMQ</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># create the folders needed</span>
-mkdir -p <span class="nv">$HOME</span>/software
-mkdir -p <span class="nv">$HOME</span>/repositories
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span># create the folders needed
+mkdir -p $HOME/software
+mkdir -p $HOME/repositories
 
-<span class="c1"># navigate to the repositories folder</span>
-<span class="nb">cd</span> <span class="nv">$HOME</span>/repositories
+# navigate to the repositories folder
+cd $HOME/repositories
 
-<span class="c1"># get the latest ZMQ version</span>
+# get the latest ZMQ version
 wget https://github.com/zeromq/libzmq/releases/download/v4.2.5/zeromq-4.2.5.tar.gz
 tar -zxf zeromq-4.2.5.tar.gz
 rm zeromq-4.2.5.tar.gz
-<span class="nb">cd</span> zeromq-4.2.5
+cd zeromq-4.2.5
 
-<span class="c1"># build ZMQ</span>
-./configure --prefix<span class="o">=</span><span class="nv">$HOME</span>/software/zeromq/4.2.5
+# build ZMQ
+./configure --prefix=$HOME/software/zeromq/4.2.5
 make
 make install
 </pre></div>
 </div>
 <p>Install Boost</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># navigate to the repositories folder</span>
-<span class="nb">cd</span> <span class="nv">$HOME</span>/repositories
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span># navigate to the repositories folder
+cd $HOME/repositories
 
-<span class="c1"># get Boost version 1.6.1</span>
-<span class="c1"># download from here: https://sourceforge.net/projects/boost/files/boost/1.61.0/</span>
+# get Boost version 1.6.1
+# download from here: https://sourceforge.net/projects/boost/files/boost/1.61.0/
 tar -zxf boost_1_61.tar.gz
 rm boost_1_61.tar.gz
-<span class="nb">cd</span> boost_1_61
+cd boost_1_61
 
-<span class="c1"># build boost</span>
-./bootstrap.sh --prefix<span class="o">=</span><span class="nv">$HOME</span>/software/boost/1.6.1
-./bjam <span class="nv">cxxflags</span><span class="o">=</span><span class="s1">&#39;-fPIC&#39;</span> <span class="nv">cflags</span><span class="o">=</span><span class="s1">&#39;-fPIC&#39;</span> -a <span class="nv">link</span><span class="o">=</span>dynamic,static install
+# build boost
+./bootstrap.sh --prefix=$HOME/software/boost/1.6.1
+./bjam cxxflags=&#39;-fPIC&#39; cflags=&#39;-fPIC&#39; -a link=dynamic,static install
 </pre></div>
 </div>
 <p>Install HELICS</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># navigate to the repositories folder</span>
-<span class="nb">cd</span> <span class="nv">$HOME</span>/repositories
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span># navigate to the repositories folder
+cd $HOME/repositories
 
-<span class="c1"># clone the HELICS repository</span>
+# clone the HELICS repository
 git clone https://github.com/GMLC-TDC/HELICS-src.git -b HELICS_2_0
 git checkout tags/v2.0.0-beta.1
 
-<span class="c1"># build helics</span>
+# build helics
 mkdir build
-<span class="nb">cd</span> build
-cmake ../ -DCMAKE_INSTALL_PREFIX<span class="o">=</span><span class="nv">$HOME</span>/software/helics/2.0.0-beta.1 -DZeroMQ_ROOT_DIR<span class="o">=</span><span class="nv">$HOME</span>/software/zeromq/4.2.5 -DBOOST_ROOT<span class="o">=</span><span class="nv">$HOME</span>/software/boost/1.6.1
+cd build
+cmake ../ -DCMAKE_INSTALL_PREFIX=$HOME/software/helics/2.0.0-beta.1 -DZeroMQ_ROOT_DIR=$HOME/software/zeromq/4.2.5 -DBOOST_ROOT=$HOME/software/boost/1.6.1
 make
 make install
 
-<span class="c1"># add helics to the path environment (you can replace this with your favorite way to do this)</span>
-<span class="nb">echo</span> <span class="s2">&quot;export PATH=PATH:</span><span class="nv">$HOME</span><span class="s2">/software/helics/2.0.0-beta.1/bin&quot;</span> &gt;&gt; /etc/profile.d/userAddedPaths.sh
-<span class="nb">source</span> /etc/profile.d/userAddedPaths.sh
+# add helics to the path environment (you can replace this with your favorite way to do this)
+echo &quot;export PATH=PATH:$HOME/software/helics/2.0.0-beta.1/bin&quot; &gt;&gt; /etc/profile.d/userAddedPaths.sh
+source /etc/profile.d/userAddedPaths.sh
 </pre></div>
 </div>
 </div>
@@ -271,10 +273,21 @@ make install
 
     
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'1.0',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
         <script type="text/javascript" src="../../_static/jquery.js"></script>
         <script type="text/javascript" src="../../_static/underscore.js"></script>
         <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   

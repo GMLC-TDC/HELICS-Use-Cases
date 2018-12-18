@@ -1,0 +1,365 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>HELICS download and installation &mdash; HELICS Use Cases 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="PETSc download and installation" href="InstallPETSc.html" />
+    <link rel="prev" title="ANL TD Iterative Power Flow" href="index.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> HELICS Use Cases
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../PNNL-Real-Time-Transactive-Energy/index.html">PNNL Real Time Transactive Energy Use Case Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PNNL-TD-Dynamic-Load/index.html">PNNL TD Dynamic Load Use Case Scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PNNL-Wide-Area-Control/index.html">PNNL Wide-Area Control Use Case Scripts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">ANL TD Iterative Power Flow</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#transmission-distribution-power-flow">Transmission-Distribution Power Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#download">Download</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#installation">Installation</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">HELICS download and installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gcc-and-cmake-compilers">GCC and CMake compilers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installing-helics-dependencies">Installing HELICS dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="InstallPETSc.html">PETSc download and installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#compiling">Compiling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#running-the-code">Running the code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ANL_adaptive_volt_var/index.html">ANL Adaptive Volt Var</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">HELICS Use Cases</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">ANL TD Iterative Power Flow</a> &raquo;</li>
+        
+      <li>HELICS download and installation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/ANL-TD-Iterative-Pflow/InstallHELICS.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="helics-download-and-installation">
+<h1>HELICS download and installation<a class="headerlink" href="#helics-download-and-installation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="gcc-and-cmake-compilers">
+<h2>GCC and CMake compilers<a class="headerlink" href="#gcc-and-cmake-compilers" title="Permalink to this headline">¶</a></h2>
+<p>HELICS requires relatively newer versions of GCC and CMake compilers.
+The ones tested for this use-case example were gcc-6.2.0 and
+cmake-3.11.1.</p>
+</div>
+<div class="section" id="installing-helics-dependencies">
+<h2>Installing HELICS dependencies<a class="headerlink" href="#installing-helics-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>Before installing HELICS, let us install the dependendencies, Boost and
+ZeroMQ, for HELICS</p>
+<div class="section" id="boost">
+<h3>Boost<a class="headerlink" href="#boost" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Download</li>
+</ol>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">wget</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">dl</span><span class="o">.</span><span class="n">bintray</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">boostorg</span><span class="o">/</span><span class="n">release</span><span class="o">/</span><span class="mf">1.65</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">source</span><span class="o">/</span><span class="n">boost_1_65_0</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+<span class="n">tar</span> <span class="o">-</span><span class="n">xvf</span> <span class="n">boost_1_65_0</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+</pre></div>
+</div>
+<ol class="arabic" start="2">
+<li><p class="first">Install Assume BOOST_DIR is the location of the downloaded and
+extracted Boost library and is the location of the directory under
+which Boost was downloaded.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>mkdir build_boost_1_65_0
+cd $BOOST_DIR
+./bootstrap.sh --with-toolset=gcc --prefix=&lt;localdir&gt;/build_boost_1_65_0 --with-libraries=system,test,program_options,filesystem,date_time
+/b2 install -j4 --prefix=&lt;local_dir&gt;/build_boost_1_65_0 --build-dir=&lt;localdir&gt;/buildboost toolset=gcc variant=release link=static link=shared cxxflags=&quot;-std=c++14 -fPIC&quot; threading=multi address-model=64
+</pre></div>
+</div>
+</li>
+</ol>
+<p>Boost is a big library so it may take some time to install. Once the
+installation is complete, the installation files will be in
+/build_boost_1_65_0 3. Set up environment variables</p>
+<p>To access the boost include and libs, we need to set up a few
+environmental variables so that these files get picked up correctly.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>emacs ~/.bashrc
+export PATH=&lt;local_dir&gt;/build_boost_1_65_0/include:$PATH
+export LD_LIBRARY_PATH=&lt;local_dir/build_boost_1_65_0/lib:$LD_LIBRARY_PATH
+</pre></div>
+</div>
+</div>
+<div class="section" id="zeromq">
+<h3>ZeroMQ<a class="headerlink" href="#zeromq" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Download</li>
+</ol>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">zeromq</span><span class="o">/</span><span class="n">libzmq</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Install</li>
+</ol>
+<p>Assume is the location of the libzmq directory.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">&lt;</span><span class="n">ZEROMQ_DIR</span><span class="o">&gt;</span>
+<span class="o">./</span><span class="n">autogen</span><span class="o">.</span><span class="n">sh</span>
+<span class="n">mkdir</span> <span class="n">build</span>
+<span class="n">cd</span> <span class="n">build</span>
+<span class="n">cmake</span> <span class="o">..</span> <span class="o">-</span><span class="n">DENABLE_CURVE</span><span class="o">=</span><span class="n">OFF</span> <span class="o">-</span><span class="n">DWITH_PERF_TOOL</span><span class="o">=</span><span class="n">OFF</span> <span class="o">-</span><span class="n">DZMQ_BUILD_TESTS</span><span class="o">=</span><span class="n">OFF</span> <span class="o">-</span><span class="n">DENABLE_CPACK</span><span class="o">=</span><span class="n">OFF</span> <span class="o">-</span><span class="n">DCMAKE_BUILD_TYPE</span><span class="o">=</span><span class="n">Release</span> <span class="o">-</span><span class="n">DCMAKE_INSTALL_PREFIX</span><span class="o">=</span><span class="s2">&quot;&lt;ZEROMQ_DIR&gt;/build&quot;</span>
+<span class="n">make</span>
+<span class="n">make</span> <span class="n">install</span>
+</pre></div>
+</div>
+<ol class="arabic" start="3">
+<li><p class="first">Set up environment variables</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>emacs ~/.bashrc
+export LD_LIBRARY_PATH=&lt;ZEROMQ_DIR&gt;/build/lib:$LD_LIBRARY_PATH
+export PATH=&lt;ZEROMQ_DIR&gt;/build/lib:$PATH
+export PATH=&lt;ZEROMQ_DIR&gt;/include:$PATH
+</pre></div>
+</div>
+</li>
+</ol>
+<p>With these two dependencies installed, we are ready to install the
+co-simulation tool HELICS.</p>
+</div>
+<div class="section" id="helics">
+<h3>HELICS<a class="headerlink" href="#helics" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Download</li>
+</ol>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">GMLC</span><span class="o">-</span><span class="n">TDC</span><span class="o">/</span><span class="n">HELICS</span><span class="o">-</span><span class="n">src</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Install</li>
+</ol>
+<p>Assume is the location of the HELICS-src directory.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">&lt;</span><span class="n">HELICS</span><span class="o">-</span><span class="n">src</span><span class="o">&gt;</span>
+<span class="n">emacs</span> <span class="n">ThirdParty</span><span class="o">/</span><span class="n">helics_includes</span><span class="o">/</span><span class="n">optional</span><span class="o">.</span><span class="n">hpp</span>
+</pre></div>
+</div>
+<p>Before the line <code class="docutils literal"><span class="pre">#define</span> <span class="pre">STX_NO_LIBRARY_OPTIONAL</span> <span class="pre">1</span></code> add line
+<code class="docutils literal"><span class="pre">#define</span> <span class="pre">STX_NO_STD_OPTIONAL</span> <span class="pre">1</span></code>. Save, close the file and return to
+HELICS-src</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">build</span>
+<span class="n">cd</span> <span class="n">build</span>
+<span class="n">cmake</span> <span class="o">..</span> <span class="o">-</span><span class="n">DCMAKE_C_COMPILER</span><span class="o">=</span><span class="n">gcc</span> <span class="o">-</span><span class="n">DCMAKE_CXX_COMPILER</span><span class="o">=</span><span class="n">g</span><span class="o">++</span> <span class="o">-</span><span class="n">DCMAKE_INSTALL_PREFIX</span><span class="o">=&lt;</span><span class="n">HELICS</span><span class="o">-</span><span class="n">src</span><span class="o">&gt;/</span><span class="n">build</span>
+<span class="n">make</span>
+<span class="n">make</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>This finishes the installation of the HELICS library. Once completed, it
+should show the compilation was 100% successful.</p>
+<ol class="arabic" start="3">
+<li><p class="first">Set environmental variables We’ll now set up some environmental that
+will be necessary for running the T-D dynamics co-simulation code</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>emacs ~/.bashrc
+export HELICS_DIR=&lt;HELICS-src&gt;
+export HELICS_BUILD=&lt;HELICS-src&gt;/build
+export LD_LIBRARY_PATH=$HELICS_BUILD/lib:$LD_LIBRARY_PATH
+export PATH=$HELICS_BUILD/bin:$PATH
+export LD_LIBRARY_PATH=$HELICS_BUILD/src/helics/shared_api_library:$LD_LIBRARY_PATH
+</pre></div>
+</div>
+</li>
+</ol>
+<p>This completes installation of the HELICS library.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="InstallPETSc.html" class="btn btn-neutral float-right" title="PETSc download and installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="ANL TD Iterative Power Flow" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018 Battelle Memorial Institute. The Government retains a paid-up nonexclusive, irrevocable worldwide license to reproduce, prepare derivative works, perform publicly and display publicly by or for the Government, including the right to distribute to other Government contractors.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'1.0',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

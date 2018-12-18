@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ANL Adaptive Volt Var &mdash; HELICS Use Cases 1.0 documentation</title>
+  <title>PETSc download and installation &mdash; HELICS Use Cases 1.0 documentation</title>
   
 
   
@@ -28,7 +28,8 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="PETSc download and installation" href="../ANL-TD-Iterative-Pflow/InstallPETSc.html" /> 
+    <link rel="next" title="ANL Adaptive Volt Var" href="../ANL_adaptive_volt_var/index.html" />
+    <link rel="prev" title="HELICS download and installation" href="InstallHELICS.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -85,15 +86,22 @@
 <li class="toctree-l1"><a class="reference internal" href="../PNNL-Real-Time-Transactive-Energy/index.html">PNNL Real Time Transactive Energy Use Case Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../PNNL-TD-Dynamic-Load/index.html">PNNL TD Dynamic Load Use Case Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../PNNL-Wide-Area-Control/index.html">PNNL Wide-Area Control Use Case Scripts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../ANL-TD-Iterative-Pflow/index.html">ANL TD Iterative Power Flow</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">ANL Adaptive Volt Var</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#installing-gridlabd">Installing Gridlabd</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pflow">PFLOW</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#zeromq">ZeroMQ</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#running-simulation">Running Simulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#petsc-download-and-installation">PETSc download and installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">ANL TD Iterative Power Flow</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#transmission-distribution-power-flow">Transmission-Distribution Power Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#download">Download</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#installation">Installation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="InstallHELICS.html">HELICS download and installation</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">PETSc download and installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#petsc">PETSc</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#compiling">Compiling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#running-the-code">Running the code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ANL_adaptive_volt_var/index.html">ANL Adaptive Volt Var</a></li>
 </ul>
 
             
@@ -139,13 +147,15 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>ANL Adaptive Volt Var</li>
+          <li><a href="index.html">ANL TD Iterative Power Flow</a> &raquo;</li>
+        
+      <li>PETSc download and installation</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/ANL_adaptive_volt_var/index.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/ANL-TD-Iterative-Pflow/InstallPETSc.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -158,79 +168,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="anl-adaptive-volt-var">
-<h1>ANL Adaptive Volt Var<a class="headerlink" href="#anl-adaptive-volt-var" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="installing-gridlabd">
-<h2>Installing Gridlabd<a class="headerlink" href="#installing-gridlabd" title="Permalink to this headline">¶</a></h2>
-<p>svn co <a class="reference external" href="http://svn.code.sf.net/p/gridlab-d/code/branch/3.1">http://svn.code.sf.net/p/gridlab-d/code/branch/3.1</a> gridlabd</p>
-<p>copy files in <code class="docutils literal"><span class="pre">mods/</span></code> directory to <code class="docutils literal"><span class="pre">gridlabd/core/</span></code></p>
-<p>cd to gridlabd</p>
-<p><code class="docutils literal"><span class="pre">autoreconf</span> <span class="pre">-isf</span></code> <code class="docutils literal"><span class="pre">./configure</span></code> <code class="docutils literal"><span class="pre">make</span></code> <code class="docutils literal"><span class="pre">sudo</span> <span class="pre">make</span> <span class="pre">install</span></code></p>
-</div>
-<div class="section" id="pflow">
-<h2>PFLOW<a class="headerlink" href="#pflow" title="Permalink to this headline">¶</a></h2>
-<p>PFLOW uses PETSc. The provided code works with the latest version of
-PETSc 3.8.4. See installation instructions for PETSc here.</p>
-<p>The source code for PFLOW library is not provided. The source code for
-the application/driver is provided to give an idea of algorithmic flow
-along with shared library of pflow library (libpflow.so). This shared
-object has pflow library archived while PETSc and other other relevant
-dependencies are linked as shared objects.</p>
-<p>After installing PETSc add
-<code class="docutils literal"><span class="pre">export</span> <span class="pre">LD_LIBRARY_PATH=$LD_LIBRARY_PATH:path/to/helicsvvo/lib</span></code> to
-your <code class="docutils literal"><span class="pre">~/.bashrc</span></code> file and then do <code class="docutils literal"><span class="pre">make</span> <span class="pre">pflowDriver</span></code> from helicsvvo
-directory.</p>
-</div>
-<div class="section" id="zeromq">
-<h2>ZeroMQ<a class="headerlink" href="#zeromq" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic simple">
-<li>Download</li>
-</ol>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">zeromq</span><span class="o">/</span><span class="n">libzmq</span><span class="o">.</span><span class="n">git</span>
-</pre></div>
-</div>
-<ol class="arabic simple" start="2">
-<li>Install</li>
-</ol>
-<p>Assume is the location of the libzmq directory.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">&lt;</span><span class="n">ZEROMQ_DIR</span><span class="o">&gt;</span>
-<span class="o">./</span><span class="n">autogen</span><span class="o">.</span><span class="n">sh</span>
-<span class="n">mkdir</span> <span class="n">build</span>
-<span class="n">cd</span> <span class="n">build</span>
-<span class="n">cmake</span> <span class="o">..</span> <span class="o">-</span><span class="n">DENABLE_CURVE</span><span class="o">=</span><span class="n">OFF</span> <span class="o">-</span><span class="n">DWITH_PERF_TOOL</span><span class="o">=</span><span class="n">OFF</span> <span class="o">-</span><span class="n">DZMQ_BUILD_TESTS</span><span class="o">=</span><span class="n">OFF</span> <span class="o">-</span><span class="n">DENABLE_CPACK</span><span class="o">=</span><span class="n">OFF</span> <span class="o">-</span><span class="n">DCMAKE_BUILD_TYPE</span><span class="o">=</span><span class="n">Release</span> <span class="o">-</span><span class="n">DCMAKE_INSTALL_PREFIX</span><span class="o">=</span><span class="s2">&quot;&lt;ZEROMQ_DIR&gt;/build&quot;</span>
-<span class="n">make</span>
-<span class="n">make</span> <span class="n">install</span>
-</pre></div>
-</div>
-<ol class="arabic simple" start="3">
-<li>pyzmq</li>
-</ol>
-<p>You also need to install pyzmq using pip</p>
-</div>
-<div class="section" id="running-simulation">
-<h2>Running Simulation<a class="headerlink" href="#running-simulation" title="Permalink to this headline">¶</a></h2>
-<p><em>P.S. The code works only on Linux.</em></p>
-<p>Open six terminals, cd to helicsvvo directory</p>
-<ol class="arabic simple">
-<li>On the first terminal run <code class="docutils literal"><span class="pre">path/to/helics_broker</span> <span class="pre">4</span></code></li>
-<li>cd to helicsVVO/ and run pflow on the second window <code class="docutils literal"><span class="pre">./pflowDriver</span></code></li>
-<li>cd to helicsVVO/src and run
-<code class="docutils literal"><span class="pre">python3</span> <span class="pre">adaptive_volt_var.py</span> <span class="pre">nDis=288</span> <span class="pre">adaptive=1</span> <span class="pre">ID=5,7,9</span></code></li>
-<li>cd to helicsVVO/src and run
-<code class="docutils literal"><span class="pre">python3</span> <span class="pre">pygld.py</span> <span class="pre">ID=5</span> <span class="pre">client_portNum=10500</span> <span class="pre">server_portNum=12000</span></code></li>
-<li>cd to helicsVVO/src and run
-<code class="docutils literal"><span class="pre">python3</span> <span class="pre">pygld.py</span> <span class="pre">ID=7</span> <span class="pre">client_portNum=10510</span> <span class="pre">server_portNum=12010</span></code></li>
-<li>cd to helicsVVO/src and run
-<code class="docutils literal"><span class="pre">python3</span> <span class="pre">pygld.py</span> <span class="pre">ID=9</span> <span class="pre">client_portNum=10520</span> <span class="pre">server_portNum=12020</span></code></li>
-</ol>
-<p>This will run a 288 dispatch tight coupling simulation. You can provide
-number of dispatches as command line argument. For instance, to run a 1
-hour (00:00-01:00 hrs) quasi static time series spaced at 5 min
-intervals with adaptive volt/var settings, use,</p>
-<p><code class="docutils literal"><span class="pre">python3</span> <span class="pre">adaptive_volt_var.py</span> <span class="pre">nDis=12</span> <span class="pre">adaptive=1</span> <span class="pre">ID=5,7,9</span></code></p>
-</div>
-<div class="section" id="petsc-download-and-installation">
-<h2>PETSc download and installation<a class="headerlink" href="#petsc-download-and-installation" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="petsc-download-and-installation">
+<h1>PETSc download and installation<a class="headerlink" href="#petsc-download-and-installation" title="Permalink to this headline">¶</a></h1>
+<p>This document shows steps to download and install PETSc</p>
+<div class="section" id="petsc">
+<h2>PETSc<a class="headerlink" href="#petsc" title="Permalink to this headline">¶</a></h2>
 <p>PETSc is an open-source numerical library providing high-performance
 time-stepping, nonlinear, and linearsolvers. The following are steps to
 install PETSc</p>
@@ -290,8 +232,10 @@ instructions refer to PETSc Installation.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="../ANL_adaptive_volt_var/index.html" class="btn btn-neutral float-right" title="ANL Adaptive Volt Var" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-        <a href="../ANL-TD-Iterative-Pflow/InstallPETSc.html" class="btn btn-neutral" title="PETSc download and installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+        <a href="InstallHELICS.html" class="btn btn-neutral" title="HELICS download and installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

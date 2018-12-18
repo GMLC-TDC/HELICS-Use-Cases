@@ -172,27 +172,28 @@
             
   <div class="section" id="lse">
 <h1>LSE<a class="headerlink" href="#lse" title="Permalink to this headline">¶</a></h1>
-<p>These are the steps neccesary to install the proper version of the LSE that works with this script base.</p>
+<p>These are the steps neccesary to install the proper version of the LSE
+that works with this script base.</p>
 <p>Install LSE</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># navigate to the repositories folder</span>
-<span class="nb">cd</span> <span class="nv">$HOME</span>/repositories
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span># navigate to the repositories folder
+cd $HOME/repositories
 
-<span class="c1"># If you have not already downloadded the main repository do the following</span>
+# If you have not already downloadded the main repository do the following
 git clone https://github.com/GMLC-TDC/HELICS-Use-Cases.git -b PNNL-Real-Time-Transactive-Energy
-<span class="nb">cd</span> HELICS-Use-Cases/PNNL-Real-Time-Transactive-Energy
-<span class="c1"># otherwise just navigate to the right folder</span>
-<span class="nb">cd</span> HELICS-Use-Cases/PNNL-Real-Time-Transactive-Energy
+cd HELICS-Use-Cases/PNNL-Real-Time-Transactive-Energy
+# otherwise just navigate to the right folder
+cd HELICS-Use-Cases/PNNL-Real-Time-Transactive-Energy
 
-<span class="c1"># build LSE</span>
-<span class="nb">cd</span> modelDependency/realTimeTransactiveEnergy/helics/lse
+# build LSE
+cd modelDependency/realTimeTransactiveEnergy/helics/lse
 mkdir build
-<span class="nb">cd</span> build
-cmake ../ -DCMAKE_INSTALL_PREFIX<span class="o">=</span><span class="nv">$HOME</span>/software/dso/helics/1.0 -DZeroMQ_ROOT_DIR<span class="o">=</span><span class="nv">$HOME</span>/software/zeromq/4.1.6 -DBOOST_ROOT<span class="o">=</span><span class="nv">$HOME</span>/software/boost/1.6.1
+cd build
+cmake ../ -DCMAKE_INSTALL_PREFIX=$HOME/software/dso/helics/1.0 -DZeroMQ_ROOT_DIR=$HOME/software/zeromq/4.1.6 -DBOOST_ROOT=$HOME/software/boost/1.6.1
 make
 make install
 
-<span class="c1"># add helics to the path environment (you can replace this with your favorite way to do this)</span>
-<span class="nb">echo</span> <span class="s2">&quot;export PATH=PATH:</span><span class="nv">$HOME</span><span class="s2">/software/lse/helics/1.0/bin&quot;</span> &gt;&gt; /etc/profile.d/userAddedPaths.sh
+# add helics to the path environment (you can replace this with your favorite way to do this)
+echo &quot;export PATH=PATH:$HOME/software/lse/helics/1.0/bin&quot; &gt;&gt; /etc/profile.d/userAddedPaths.sh
 </pre></div>
 </div>
 </div>
@@ -238,10 +239,21 @@ make install
 
     
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'1.0',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
         <script type="text/javascript" src="../../_static/jquery.js"></script>
         <script type="text/javascript" src="../../_static/underscore.js"></script>
         <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   

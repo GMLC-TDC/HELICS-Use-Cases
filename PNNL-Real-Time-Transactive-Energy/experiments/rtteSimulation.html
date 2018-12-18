@@ -168,58 +168,65 @@
             
   <div class="section" id="real-time-transactive-energy-co-simulation-example">
 <h1>Real Time Transactive Energy Co-Simulation Example<a class="headerlink" href="#real-time-transactive-energy-co-simulation-example" title="Permalink to this headline">¶</a></h1>
-<p>This is an example of a Transactive Energy Use case. This example will take a simple static power system model and add a detailed secondary side with individual residences with a collection of devices such a HVAC, Water heater, Pool pumps, etc. Then also add a Transmission system using MATPOWER while also adding a Hierachical control structure with LSE and DSO constructs.</p>
-<p>To get started nagivate to the following folder within the main script base and open the <cite>coSimulationRTTE.py</cite> script.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># navigate to the repositories folder</span>
-<span class="nb">cd</span> <span class="nv">$HOME</span>/repositories
+<p>This is an example of a Transactive Energy Use case. This example will
+take a simple static power system model and add a detailed secondary
+side with individual residences with a collection of devices such a
+HVAC, Water heater, Pool pumps, etc. Then also add a Transmission system
+using MATPOWER while also adding a Hierachical control structure with
+LSE and DSO constructs.</p>
+<p>To get started nagivate to the following folder within the main script
+base and open the <code class="docutils literal"><span class="pre">coSimulationRTTE.py</span></code> script.</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span># navigate to the repositories folder
+cd $HOME/repositories
 
-<span class="c1"># from here navigate to main landing for experiment runs</span>
-<span class="nb">cd</span> modificationScipts
+# from here navigate to main landing for experiment runs
+cd modificationScipts
 nano coSimulationTD.py
 </pre></div>
 </div>
-<p>This script will contain all of the setting you have available for the experiment. The following will explain the settings:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># ---------------------------------------------------------------</span>
+<p>This script will contain all of the setting you have available for the
+experiment. The following will explain the settings:</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="c1"># ---------------------------------------------------------------</span>
 <span class="c1"># ----------------------- Settings ------------------------------</span>
 <span class="c1"># ---------------------------------------------------------------</span>
 
 <span class="c1"># name of the experiment</span>
-<span class="nv">experimentName</span> <span class="o">=</span> <span class="s1">&#39;rtteSimTest&#39;</span>
+<span class="n">experimentName</span> <span class="o">=</span> <span class="s1">&#39;rtteSimTest&#39;</span>
 
 <span class="c1"># number of distribution systems in the experiment</span>
-<span class="nv">distributionSystemNumber</span> <span class="o">=</span> <span class="m">2</span>
+<span class="n">distributionSystemNumber</span> <span class="o">=</span> <span class="mi">2</span>
 
 <span class="c1"># create simple bash run scipt that will start a GridLAB-D instance per feeder</span>
-<span class="nv">createRunScripts</span> <span class="o">=</span> True
+<span class="n">createRunScripts</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="c1"># create HPC run scipt that will work with the Co-Simulation launcher capability</span>
-<span class="nv">createHPCScripts</span> <span class="o">=</span> False
+<span class="n">createHPCScripts</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="c1"># this assumes that everything associated with this experiment is in a certain folder structure. This is the path to the root folder</span>
-<span class="nv">rootPath</span> <span class="o">=</span> <span class="s1">&#39;/people/hans464/helicsUseCaseScripts&#39;</span>
+<span class="n">rootPath</span> <span class="o">=</span> <span class="s1">&#39;/people/hans464/helicsUseCaseScripts&#39;</span>
 
 <span class="c1"># path to where you want the experiment outputs (if left empty we assume /experiments)</span>
-<span class="nv">experimentFilePath</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">experimentFilePath</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 
 <span class="c1"># file path that contains the GLMs to extract (if left empty we assume /modelDependency/feeders)</span>
-<span class="nv">feederFilePath</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">feederFilePath</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 
 <span class="c1"># file path that contains include files for the experiment (if left empty we assume /modelDependency)</span>
-<span class="nv">includeFilePath</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">includeFilePath</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 
 <span class="c1"># dictionary that holds all the log level information for each type of federate</span>
-<span class="nv">simulatorLogLevels</span> <span class="o">=</span> dict<span class="o">()</span>
-simulatorLogLevels<span class="o">[</span><span class="s1">&#39;fncs&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;WARNING&#39;</span>
-simulatorLogLevels<span class="o">[</span><span class="s1">&#39;matpower&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;LMACTIME&#39;</span>
-simulatorLogLevels<span class="o">[</span><span class="s1">&#39;dso&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;INFO&#39;</span>
-simulatorLogLevels<span class="o">[</span><span class="s1">&#39;lse&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;INFO&#39;</span>
+<span class="n">simulatorLogLevels</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">simulatorLogLevels</span><span class="p">[</span><span class="s1">&#39;fncs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;WARNING&#39;</span>
+<span class="n">simulatorLogLevels</span><span class="p">[</span><span class="s1">&#39;matpower&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;LMACTIME&#39;</span>
+<span class="n">simulatorLogLevels</span><span class="p">[</span><span class="s1">&#39;dso&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;INFO&#39;</span>
+<span class="n">simulatorLogLevels</span><span class="p">[</span><span class="s1">&#39;lse&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;INFO&#39;</span>
 
 <span class="c1"># specify the port fncs will use to communicate on</span>
-<span class="nv">fncsPort</span> <span class="o">=</span> <span class="s1">&#39;7777&#39;</span>
+<span class="n">fncsPort</span> <span class="o">=</span> <span class="s1">&#39;7777&#39;</span>
 
 <span class="c1"># list of distribution systems models and their population distribution for the experiment (feeder : [percent [.], region [#])</span>
-<span class="nv">inputGLM</span> <span class="o">=</span> dict<span class="o">()</span>
-inputGLM<span class="o">[</span><span class="s1">&#39;small4BusSystem.glm&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="o">[</span><span class="m">1</span>, <span class="m">1</span><span class="o">]</span>
+<span class="n">inputGLM</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">inputGLM</span><span class="p">[</span><span class="s1">&#39;small4BusSystem.glm&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 <span class="c1"># inputGLM[&#39;R1-12.47-1.glm&#39;] = [0.14, 1]</span>
 <span class="c1"># inputGLM[&#39;R1-12.47-2.glm&#39;] = [0.14, 1]</span>
 <span class="c1"># inputGLM[&#39;R1-12.47-3.glm&#39;] = [0.14, 1]</span>
@@ -232,77 +239,78 @@ inputGLM<span class="o">[</span><span class="s1">&#39;small4BusSystem.glm&#39;</
 
 
 <span class="c1"># This specifies what technologies to use. What is specified here will overwrite the defaults in the technologyConfiguration.py</span>
-<span class="nv">useFlags</span> <span class="o">=</span> dict<span class="o">()</span>
-useFlags<span class="o">[</span><span class="s1">&#39;use_FNCS&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">0</span>
-useFlags<span class="o">[</span><span class="s1">&#39;use_HELICS&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">1</span>
-useFlags<span class="o">[</span><span class="s1">&#39;core_type_HELICS&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;zmq&#39;</span>
-useFlags<span class="o">[</span><span class="s1">&#39;add_real_time_transactive_control&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">1</span>
-useFlags<span class="o">[</span><span class="s1">&#39;house_thermostat_mode&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;COOL&#39;</span>
+<span class="n">useFlags</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">useFlags</span><span class="p">[</span><span class="s1">&#39;use_FNCS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">useFlags</span><span class="p">[</span><span class="s1">&#39;use_HELICS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">useFlags</span><span class="p">[</span><span class="s1">&#39;core_type_HELICS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;zmq&#39;</span>
+<span class="n">useFlags</span><span class="p">[</span><span class="s1">&#39;add_real_time_transactive_control&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">useFlags</span><span class="p">[</span><span class="s1">&#39;house_thermostat_mode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;COOL&#39;</span>
 
 <span class="c1"># This specifies what feeder configuration to use. What is specified here will overwrite the defaults in the feederConfiguration.py</span>
-<span class="nv">feederConfig</span> <span class="o">=</span> dict<span class="o">()</span>
+<span class="n">feederConfig</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
 <span class="c1"># this can enable logging to a mysql database instead of csv files</span>
-feederConfig<span class="o">[</span><span class="s1">&#39;sequelLogging&#39;</span><span class="o">]</span> <span class="o">=</span> False
-feederConfig<span class="o">[</span><span class="s2">&quot;sequelSettings&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="o">[</span><span class="s1">&#39;localhost&#39;</span>,<span class="s1">&#39;gridlabd&#39;</span>,<span class="s1">&#39;passGLD123&#39;</span>,<span class="s1">&#39;3306&#39;</span>,<span class="s1">&#39;0&#39;</span><span class="o">]</span>
+<span class="n">feederConfig</span><span class="p">[</span><span class="s1">&#39;sequelLogging&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">feederConfig</span><span class="p">[</span><span class="s2">&quot;sequelSettings&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span><span class="s1">&#39;gridlabd&#39;</span><span class="p">,</span><span class="s1">&#39;passGLD123&#39;</span><span class="p">,</span><span class="s1">&#39;3306&#39;</span><span class="p">,</span><span class="s1">&#39;0&#39;</span><span class="p">]</span>
 <span class="c1"># some settings to upgrade the equipment of the feeders</span>
-feederConfig<span class="o">[</span><span class="s1">&#39;fuses_upgrade_level&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">2</span>
-feederConfig<span class="o">[</span><span class="s1">&#39;transformer_upgrade_level&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">1</span>
-feederConfig<span class="o">[</span><span class="s1">&#39;transformer_upgrade_cutoff&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">100</span>
+<span class="n">feederConfig</span><span class="p">[</span><span class="s1">&#39;fuses_upgrade_level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">feederConfig</span><span class="p">[</span><span class="s1">&#39;transformer_upgrade_level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">feederConfig</span><span class="p">[</span><span class="s1">&#39;transformer_upgrade_cutoff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="c1"># start and stop time for the simulation</span>
-feederConfig<span class="o">[</span><span class="s1">&#39;startdate&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;2013-08-28 00:00:00&#39;</span>
-feederConfig<span class="o">[</span><span class="s1">&#39;stopdate&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;2013-08-29 00:00:00&#39;</span>
+<span class="n">feederConfig</span><span class="p">[</span><span class="s1">&#39;startdate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;2013-08-28 00:00:00&#39;</span>
+<span class="n">feederConfig</span><span class="p">[</span><span class="s1">&#39;stopdate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;2013-08-29 00:00:00&#39;</span>
 <span class="c1"># edit the files being recorder and the interval</span>
-feederConfig<span class="o">[</span><span class="s1">&#39;measure_interval&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">30</span>
-feederConfig<span class="o">[</span><span class="s1">&#39;recorders&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="o">{</span><span class="s1">&#39;TSEControllers&#39;</span>: True, <span class="s1">&#39;HVAC&#39;</span>: True, <span class="s1">&#39;market&#39;</span>: True<span class="o">}</span>
-feederConfig<span class="o">[</span><span class="s1">&#39;short_names&#39;</span><span class="o">]</span> <span class="o">=</span> True
-feederConfig<span class="o">[</span><span class="s1">&#39;suppress_repeat_messages&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;True&#39;</span>
-feederConfig<span class="o">[</span><span class="s1">&#39;tmy_higher_fidelity&#39;</span><span class="o">]</span> <span class="o">=</span> False
-feederConfig<span class="o">[</span><span class="s1">&#39;tmy_higher_fidelity_path&#39;</span><span class="o">]</span> <span class="o">=</span> Path<span class="o">(</span>rootPath<span class="o">)</span> / <span class="s1">&#39;modelDependency&#39;</span> / <span class="s1">&#39;transmission&#39;</span> / <span class="s1">&#39;tmy_higher_fidelity.csv&#39;</span>
+<span class="n">feederConfig</span><span class="p">[</span><span class="s1">&#39;measure_interval&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">feederConfig</span><span class="p">[</span><span class="s1">&#39;recorders&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;TSEControllers&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;HVAC&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;market&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+<span class="n">feederConfig</span><span class="p">[</span><span class="s1">&#39;short_names&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">feederConfig</span><span class="p">[</span><span class="s1">&#39;suppress_repeat_messages&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;True&#39;</span>
+<span class="n">feederConfig</span><span class="p">[</span><span class="s1">&#39;tmy_higher_fidelity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">feederConfig</span><span class="p">[</span><span class="s1">&#39;tmy_higher_fidelity_path&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">rootPath</span><span class="p">)</span> <span class="o">/</span> <span class="s1">&#39;modelDependency&#39;</span> <span class="o">/</span> <span class="s1">&#39;transmission&#39;</span> <span class="o">/</span> <span class="s1">&#39;tmy_higher_fidelity.csv&#39;</span>
 
 <span class="c1"># createing a dict for the transmission system</span>
-<span class="nv">transmissionConfig</span> <span class="o">=</span> <span class="o">{}</span>
-transmissionConfig<span class="o">[</span><span class="s1">&#39;sequelLogging&#39;</span><span class="o">]</span> <span class="o">=</span> False
-transmissionConfig<span class="o">[</span><span class="s1">&#39;matpowerFilePath&#39;</span><span class="o">]</span> <span class="o">=</span> Path<span class="o">(</span>rootPath<span class="o">)</span> / <span class="s1">&#39;modelDependency&#39;</span> / <span class="s1">&#39;transmission&#39;</span>
-transmissionConfig<span class="o">[</span><span class="s1">&#39;matpowerSystem&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;case9&#39;</span>  <span class="c1"># transmission system to use</span>
-transmissionConfig<span class="o">[</span><span class="s1">&#39;matpowerPFTime&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">15</span>               <span class="c1"># time between power flow solutions in MATPOWER in seconds. OPF need to be a multiple of PF</span>
-transmissionConfig<span class="o">[</span><span class="s1">&#39;matpowerOPFTime&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">300</span>             <span class="c1"># time between optimal power flow solutions in MATPOWER in seconds. OPF need to be a multiple of PF</span>
-transmissionConfig<span class="o">[</span><span class="s1">&#39;matpowerAmpFactor&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">1</span>             <span class="c1"># MATPOWER distribution load amplification factor</span>
-transmissionConfig<span class="o">[</span><span class="s1">&#39;wholesaleTimeShift&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">15</span>   <span class="c1"># lead time at which the OPF is solved</span>
+<span class="n">transmissionConfig</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">transmissionConfig</span><span class="p">[</span><span class="s1">&#39;sequelLogging&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">transmissionConfig</span><span class="p">[</span><span class="s1">&#39;matpowerFilePath&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">rootPath</span><span class="p">)</span> <span class="o">/</span> <span class="s1">&#39;modelDependency&#39;</span> <span class="o">/</span> <span class="s1">&#39;transmission&#39;</span>
+<span class="n">transmissionConfig</span><span class="p">[</span><span class="s1">&#39;matpowerSystem&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;case9&#39;</span>  <span class="c1"># transmission system to use</span>
+<span class="n">transmissionConfig</span><span class="p">[</span><span class="s1">&#39;matpowerPFTime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">15</span>     <span class="c1"># time between power flow solutions in MATPOWER in seconds. OPF need to be a multiple of PF</span>
+<span class="n">transmissionConfig</span><span class="p">[</span><span class="s1">&#39;matpowerOPFTime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">300</span>   <span class="c1"># time between optimal power flow solutions in MATPOWER in seconds. OPF need to be a multiple of PF</span>
+<span class="n">transmissionConfig</span><span class="p">[</span><span class="s1">&#39;matpowerAmpFactor&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>   <span class="c1"># MATPOWER distribution load amplification factor</span>
+<span class="n">transmissionConfig</span><span class="p">[</span><span class="s1">&#39;wholesaleTimeShift&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">15</span>   <span class="c1"># lead time at which the OPF is solved</span>
 
 <span class="c1"># These are the specific settings for the NODES control</span>
-<span class="nv">controlConfig</span> <span class="o">=</span> dict<span class="o">()</span>
-controlConfig<span class="o">[</span><span class="s2">&quot;controlDependencyFilePath&quot;</span><span class="o">]</span> <span class="o">=</span> Path<span class="o">(</span>rootPath<span class="o">)</span> / <span class="s1">&#39;modelDependency&#39;</span> / <span class="s1">&#39;realTimeTransactiveEnergy&#39;</span>
-controlConfig<span class="o">[</span><span class="s1">&#39;quantityPrioritization&#39;</span><span class="o">]</span> <span class="o">=</span> True <span class="c1"># If true quantity is used though the control levels. If false price is used</span>
-controlConfig<span class="o">[</span><span class="s1">&#39;transactivepenetration&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">1</span> <span class="c1"># Penetration of transactive control (percent of distribution system that will have control active)</span>
+<span class="n">controlConfig</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">controlConfig</span><span class="p">[</span><span class="s2">&quot;controlDependencyFilePath&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">rootPath</span><span class="p">)</span> <span class="o">/</span> <span class="s1">&#39;modelDependency&#39;</span> <span class="o">/</span> <span class="s1">&#39;realTimeTransactiveEnergy&#39;</span>
+<span class="n">controlConfig</span><span class="p">[</span><span class="s1">&#39;quantityPrioritization&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># If true quantity is used though the control levels. If false price is used</span>
+<span class="n">controlConfig</span><span class="p">[</span><span class="s1">&#39;transactivepenetration&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># Penetration of transactive control (percent of distribution system that will have control active)</span>
 <span class="c1"># settings for Transactive Energy Controllers</span>
-controlConfig<span class="o">[</span><span class="s1">&#39;TSEmarketName&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;retailMarket&#39;</span>
-controlConfig<span class="o">[</span><span class="s1">&#39;TSEmarketUnit&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;W&#39;</span>
-controlConfig<span class="o">[</span><span class="s1">&#39;TSEmarketPeriod&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">300</span>
-controlConfig<span class="o">[</span><span class="s1">&#39;TSEcontrolTechnology&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;DOUBLE_PRICE&#39;</span>  <span class="c1"># at the moment we only support modes that does either cooling or heating</span>
-controlConfig<span class="o">[</span><span class="s1">&#39;TSEresolveMode&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;DEADBAND&#39;</span>
-controlConfig<span class="o">[</span><span class="s1">&#39;TSEbidMode&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;ON&#39;</span>
-controlConfig<span class="o">[</span><span class="s1">&#39;TSEbidDelay&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">30</span>
-controlConfig<span class="o">[</span><span class="s1">&#39;TSEsliderSetting&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">1</span>
-controlConfig<span class="o">[</span><span class="s1">&#39;TSEauctionStatistics&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">24</span>
-controlConfig<span class="o">[</span><span class="s1">&#39;TSEinitPrice&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">18</span>
-controlConfig<span class="o">[</span><span class="s1">&#39;TSEinitStdev&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">4</span>
-controlConfig<span class="o">[</span><span class="s1">&#39;TSEpriceCap&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">1000</span>
-controlConfig<span class="o">[</span><span class="s1">&#39;TSEuseFutureMeanPrice&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;FALSE&#39;</span>
-controlConfig<span class="o">[</span><span class="s1">&#39;TSEwarmUp&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">0</span>
+<span class="n">controlConfig</span><span class="p">[</span><span class="s1">&#39;TSEmarketName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;retailMarket&#39;</span>
+<span class="n">controlConfig</span><span class="p">[</span><span class="s1">&#39;TSEmarketUnit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;W&#39;</span>
+<span class="n">controlConfig</span><span class="p">[</span><span class="s1">&#39;TSEmarketPeriod&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">controlConfig</span><span class="p">[</span><span class="s1">&#39;TSEcontrolTechnology&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;DOUBLE_PRICE&#39;</span>  <span class="c1"># at the moment we only support modes that does either cooling or heating</span>
+<span class="n">controlConfig</span><span class="p">[</span><span class="s1">&#39;TSEresolveMode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;DEADBAND&#39;</span>
+<span class="n">controlConfig</span><span class="p">[</span><span class="s1">&#39;TSEbidMode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;ON&#39;</span>
+<span class="n">controlConfig</span><span class="p">[</span><span class="s1">&#39;TSEbidDelay&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">controlConfig</span><span class="p">[</span><span class="s1">&#39;TSEsliderSetting&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">controlConfig</span><span class="p">[</span><span class="s1">&#39;TSEauctionStatistics&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">24</span>
+<span class="n">controlConfig</span><span class="p">[</span><span class="s1">&#39;TSEinitPrice&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="n">controlConfig</span><span class="p">[</span><span class="s1">&#39;TSEinitStdev&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">controlConfig</span><span class="p">[</span><span class="s1">&#39;TSEpriceCap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">controlConfig</span><span class="p">[</span><span class="s1">&#39;TSEuseFutureMeanPrice&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;FALSE&#39;</span>
+<span class="n">controlConfig</span><span class="p">[</span><span class="s1">&#39;TSEwarmUp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 
-controlConfig<span class="o">[</span><span class="s1">&#39;dsoISORelativeTimeShift&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">5</span>
-controlConfig<span class="o">[</span><span class="s1">&#39;lseISORelativeTimeShift&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">10</span>
+<span class="n">controlConfig</span><span class="p">[</span><span class="s1">&#39;dsoISORelativeTimeShift&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">controlConfig</span><span class="p">[</span><span class="s1">&#39;lseISORelativeTimeShift&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
 </pre></div>
 </div>
-<p>After modifying the setting for this script you can create and run the experiment by doing the following:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># navigate to the repositories folder</span>
-<span class="nb">cd</span> <span class="nv">$HOME</span>/repositories/HELICS-Use-Cases/PNNL-Real-Time-Transactive-Energy/modificationScripts
+<p>After modifying the setting for this script you can create and run the
+experiment by doing the following:</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span># navigate to the repositories folder
+cd $HOME/repositories/HELICS-Use-Cases/PNNL-Real-Time-Transactive-Energy/modificationScripts
 
-<span class="c1"># run scripts to populate feeders</span>
+# run scripts to populate feeders
 python coSimulationRTTE.py
 
-<span class="c1"># execute experiment</span>
-<span class="nb">cd</span> ../experiments/rtteExample
+# execute experiment
+cd ../experiments/rtteExample
 ./runAll.sh
 </pre></div>
 </div>
@@ -349,10 +357,21 @@ python coSimulationRTTE.py
 
     
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'1.0',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
         <script type="text/javascript" src="../../_static/jquery.js"></script>
         <script type="text/javascript" src="../../_static/underscore.js"></script>
         <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   

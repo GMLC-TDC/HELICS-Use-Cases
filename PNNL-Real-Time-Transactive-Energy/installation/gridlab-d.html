@@ -172,40 +172,42 @@
             
   <div class="section" id="gridlab-d">
 <h1>GridLAB-D<a class="headerlink" href="#gridlab-d" title="Permalink to this headline">¶</a></h1>
-<p>These are the steps neccesary to install the proper version of GridLAB-D that works with this script base. Currently that is feature branch #1153 (This will be updated when this feature is merged in).</p>
+<p>These are the steps neccesary to install the proper version of GridLAB-D
+that works with this script base. Currently that is feature branch #1153
+(This will be updated when this feature is merged in).</p>
 <p>Install Xerces</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># navigate to the repositories folder</span>
-<span class="nb">cd</span> <span class="nv">$HOME</span>/repositories
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span># navigate to the repositories folder
+cd $HOME/repositories
 
-<span class="c1"># get the correct version of Xerces by cloning the  GridLAB-D repository</span>
+# get the correct version of Xerces by cloning the  GridLAB-D repository
 git clone https://github.com/gridlab-d/gridlab-d.git
-<span class="nb">cd</span> gridlab-d/third_party
+cd gridlab-d/third_party
 tar -zxf xerces-c-3.2.0.tar.gz
-<span class="nb">cd</span> xerces-c-3.2.0
+cd xerces-c-3.2.0
 
-<span class="c1"># build Xerces</span>
-./configure --prefix<span class="o">=</span><span class="nv">$HOME</span>/software/xerces/3.2.0
+# build Xerces
+./configure --prefix=$HOME/software/xerces/3.2.0
 make
 make install
 </pre></div>
 </div>
 <p>Install GridLAB-D</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># navigate to the repositories folder</span>
-<span class="nb">cd</span> <span class="nv">$HOME</span>/repositories
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span># navigate to the repositories folder
+cd $HOME/repositories
 
-<span class="c1"># GridLAB-D is already cloned so move to that folder</span>
-<span class="nb">cd</span> gridlab-d
+# GridLAB-D is already cloned so move to that folder
+cd gridlab-d
 
-<span class="c1"># build GridLAB-D</span>
+# build GridLAB-D
 autoreconf -ifs
-./configure --prefix<span class="o">=</span><span class="nv">$HOME</span>/software/gridlabd/develop --with-xerces<span class="o">=</span><span class="nv">$HOME</span>/software/xerces/3.2.0 --with-helics<span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/software/zeromq/4.2.5 </span><span class="nv">$HOME</span><span class="s2">/software/boost/1.6.1 </span><span class="nv">$HOME</span><span class="s2">/software/helics/2.0.0-beta.1&quot;</span> --enable-silent-rules <span class="s1">&#39;CFLAGS=-w -O3 -fno-inline-functions&#39;</span> <span class="s1">&#39;CXXFLAGS=-w -O3 -fno-inline-functions -std=c++14&#39;</span> <span class="s1">&#39;LDFLAGS=-w -O3&#39;</span>
+./configure --prefix=$HOME/software/gridlabd/develop --with-xerces=$HOME/software/xerces/3.2.0 --with-helics=&quot;$HOME/software/zeromq/4.2.5 $HOME/software/boost/1.6.1 $HOME/software/helics/2.0.0-beta.1&quot; --enable-silent-rules &#39;CFLAGS=-w -O3 -fno-inline-functions&#39; &#39;CXXFLAGS=-w -O3 -fno-inline-functions -std=c++14&#39; &#39;LDFLAGS=-w -O3&#39;
 make
 make install
 
-<span class="c1"># add helics to the path environment (you can replace this with your favorite way to do this)</span>
-<span class="nb">echo</span> <span class="s2">&quot;export PATH=PATH:</span><span class="nv">$HOME</span><span class="s2">/software/gridlabd/develop/bin&quot;</span> &gt;&gt; /etc/profile.d/userAddedPaths.sh
-<span class="nb">echo</span> <span class="s2">&quot;export GLPATH=</span><span class="nv">$HOME</span><span class="s2">/software/gridlabd/develop/lib/gridlabd:</span><span class="nv">$HOME</span><span class="s2">/software/gridlabd/develop/share/gridlabd&quot;</span> &gt;&gt; /etc/profile.d/userAddedPaths.sh
-<span class="nb">echo</span> <span class="s2">&quot;export LD_LIBRARY_PATH=</span><span class="nv">$LD_LIBRARY_PATH</span><span class="s2">:</span><span class="nv">$HOME</span><span class="s2">/software/zeromq/4.2.5/lib:</span><span class="nv">$HOME</span><span class="s2">/software/boost/1.6.1/lib&quot;</span> &gt;&gt; /etc/profile.d/userAddedPaths.sh
+# add helics to the path environment (you can replace this with your favorite way to do this)
+echo &quot;export PATH=PATH:$HOME/software/gridlabd/develop/bin&quot; &gt;&gt; /etc/profile.d/userAddedPaths.sh
+echo &quot;export GLPATH=$HOME/software/gridlabd/develop/lib/gridlabd:$HOME/software/gridlabd/develop/share/gridlabd&quot; &gt;&gt; /etc/profile.d/userAddedPaths.sh
+echo &quot;export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/software/zeromq/4.2.5/lib:$HOME/software/boost/1.6.1/lib&quot; &gt;&gt; /etc/profile.d/userAddedPaths.sh
 </pre></div>
 </div>
 </div>
@@ -251,10 +253,21 @@ make install
 
     
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'1.0',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
         <script type="text/javascript" src="../../_static/jquery.js"></script>
         <script type="text/javascript" src="../../_static/underscore.js"></script>
         <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
 
   
