@@ -91,6 +91,7 @@ def gridlabd_config(glmDict, selectedFeederDict):
 	configData['timeDelta'] = 1.0
 	configData['outputDelay'] = 0
 	configData['inputDelay'] = 0
+	configData['strict_type_matching'] = True
 
 	configData['publications'] = []
 	configData['subscriptions'] = []
@@ -162,6 +163,7 @@ def matpower_config(populationDict, transmissionDict):
 	configData['timeDelta'] = 15.0
 	configData['outputDelay'] = 0
 	configData['inputDelay'] = 0
+	configData['strict_type_matching'] = True
 
 	configData['publications'] = []
 	configData['subscriptions'] = []

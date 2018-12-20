@@ -79,6 +79,7 @@ def matpower_config(populationDict, transmissionDict):
 	configData['timeDelta'] = 15.0
 	configData['outputDelay'] = 0
 	configData['inputDelay'] = 0
+	configData['strict_type_matching'] = True
 
 	configData['publications'] = []
 	configData['subscriptions'] = []
@@ -198,6 +199,7 @@ def dso_config(populationDict):
 		configData['timeDelta'] = 10.0
 		configData['outputDelay'] = 0
 		configData['inputDelay'] = 0
+		configData['strict_type_matching'] = True
 
 		configData['publications'] = []
 		configData['subscriptions'] = []
@@ -264,14 +266,14 @@ def dso_config(populationDict):
 
 		# publish the LSE max quantity
 		temp = {'key': 'maxQ',
-				'type': 'string',
+				'type': 'double',
 				'unit': 'MW',
 				'global': False}
 		configData['publications'].append(temp)	
 
 		# publish the DSO marginal demand curve
 		temp = {'key': 'demandCurve',
-				'type': 'string ',
+				'type': 'string',
 				'unit': '',
 				'global': False}
 		configData['publications'].append(temp)	
@@ -331,6 +333,7 @@ def lse_config(feeder_dict, selectedFeederDict):
 		configData['timeDelta'] = 5.0
 		configData['outputDelay'] = 0
 		configData['inputDelay'] = 0
+		configData['strict_type_matching'] = True
 
 		configData['publications'] = []
 		configData['subscriptions'] = []
@@ -481,6 +484,7 @@ def gridlabd_config(glmDict, selectedFeederDict, transactiveActive):
 	configData['timeDelta'] = 1.0
 	configData['outputDelay'] = 0
 	configData['inputDelay'] = 0
+	configData['strict_type_matching'] = True
 
 	configData['publications'] = []
 	configData['subscriptions'] = []

@@ -720,17 +720,9 @@ pid_t run_command(std::string command)
     new_argv.push_back(NULL);
 
     // Here I need to add modifications to the HELICS config file
-    std::string sedcommand;
-    if (strcmp(new_argv[0],"helics_broker") == 0) {
-        // do nothing
-    } else if (strcmp(new_argv[2],"gridlabd") == 0) { 
-        sedcommand = "sed -i '/core_init_string/c\\    \"core_init_string\": \"--federates=1 --broker_address=" + broker_ip + ":" + helics_port + " --interface=" + federate_ip + " --tick=" + core_tick + " --timeout=" + core_timeout + "\",' helics_configure.json";
-    } else {     
+    if (strcmp(new_argv[0],"helics_broker") != 0) {  
+        std::string sedcommand;
         sedcommand = "sed -i '/coreInit/c\\    \"coreInit\": \"--federates=1 --broker_address=" + broker_ip + ":" + helics_port + " --interface=" + federate_ip + " --tick=" + core_tick + " --timeout=" + core_timeout + "\",' helics.json";
-    }
-
-    LDEBUG << "sed command -> " << sedcommand << " (" << working_directory << ")";
-    if (strcmp(new_argv[1],"helics_broker") != 0) {
         int retval;
         retval = system(sedcommand.c_str());
         if (-1 == retval) {
