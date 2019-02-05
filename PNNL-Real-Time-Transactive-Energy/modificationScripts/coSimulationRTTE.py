@@ -37,7 +37,7 @@ createRunScripts = True
 createHPCScripts = False
 
 # this assumes that everything associated with this experiment is in a certain folder structure. This is the path to the root folder
-rootPath = '/people/hans464/helicsUseCaseScripts'
+rootPath = '<path to your repository>/HELICS-Use-Cases/PNNL-Real-Time-Transactive-Energy'
 
 # path to where you want the experiment outputs (if left empty we assume /experiments)
 experimentFilePath = ''

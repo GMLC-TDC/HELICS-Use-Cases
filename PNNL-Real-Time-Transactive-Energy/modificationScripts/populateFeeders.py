@@ -30,7 +30,7 @@ distributionSystemNumber = 2
 createRunScripts = True
 
 # this assumes that everything associated with this experiment is in a certain folder structure. This is the path to the root folder
-rootPath = '/people/hans464/helicsUseCaseScripts'
+rootPath = '<path to your repository>/HELICS-Use-Cases/PNNL-Real-Time-Transactive-Energy'
 
 # path to where you want the experiment outputs (if left empty we assume /experiments)
 experimentFilePath = ''
@@ -166,7 +166,7 @@ success = True
 if os.name == 'nt': # if running on windows
 	for randomSeed, feeder in enumerate(populationDict):
 		# print populationDict[feeder]
-		result = createDistributionFeeder.createDistributionSystem(parsedDict[populationDict[feeder]['originalName']]['model'], populationDict[feeder], createHPCScripts, False)
+		result = createDistributionFeeder.createDistributionSystem(parsedDict[populationDict[feeder]['originalName']]['model'], populationDict[feeder], False, False)
 		if not result == True:
 			print ('The script failed with the following trace:')
 			print (result)
@@ -179,7 +179,7 @@ else:
 	poolResults = []
 	for randomSeed, feeder in enumerate(populationDict):
 		# print populationDict[feeder]
-		pool.apply_async(createDistributionFeeder.createDistributionSystem, args=(parsedDict[populationDict[feeder]['originalName']]['model'], populationDict[feeder], createHPCScripts, True, ), callback=poolResults.append)
+		pool.apply_async(createDistributionFeeder.createDistributionSystem, args=(parsedDict[populationDict[feeder]['originalName']]['model'], populationDict[feeder], False, True, ), callback=poolResults.append)
 
 	time.sleep(1) # seems to be needed
 	pbar = tqdm.tqdm(desc='processing: ',total=len(list(populationDict.keys())), bar_format='{desc}|{bar}| {percentage:3.0f}%', ncols=50)

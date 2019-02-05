@@ -35,7 +35,6 @@ def modifyFeeder(glmDict, selectedFeederDict, randomSeed=2):
 
 	config_data = selectedFeederDict['feederConfig']
 	use_flags = selectedFeederDict['useFlags']
-	node=selectedFeederDict['substationBus']
 
 	# Initialize psuedo-random seed
 	random.seed(randomSeed)
@@ -144,6 +143,7 @@ def modifyFeeder(glmDict, selectedFeederDict, randomSeed=2):
     # Higher fidelity climate  (model specific)
 	if config_data["tmy_higher_fidelity"]:
 		try:
+			node=selectedFeederDict['substationBus']
 			with open(config_data['tmy_higher_fidelity_path'], newline='') as csvfile:
 				reader = csv.DictReader(csvfile)
 				spamreader  = csv.reader(csvfile, lineterminator='\n')
