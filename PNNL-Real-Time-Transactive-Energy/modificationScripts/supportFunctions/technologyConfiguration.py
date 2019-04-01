@@ -61,6 +61,12 @@ def technologyConfiguration(use_flags=0):
 	if 'add_real_time_transactive_control' not in use_flags:
 		use_flags['add_real_time_transactive_control'] = 0  	# by default we will not use the nodes control
 
+	if 'use_NR_solver' not in use_flags:
+		use_flags['use_NR_solver'] = 0  	# by default we will use FBS solver
+		
+	if 'use_substation' not in use_flags:
+		use_flags['use_substation'] = 1  	# by default we will use a substation		
+
 	return use_flags
 
 

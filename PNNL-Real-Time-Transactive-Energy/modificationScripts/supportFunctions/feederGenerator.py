@@ -109,12 +109,17 @@ def modifyFeeder(glmDict, selectedFeederDict, randomSeed=2):
 							 'implicit_enduses': 'NONE'}
 	last_key += 1
 
-	glmCaseDict[last_key] = {'module': 'powerflow',
-							 'solver_method': 'FBS',
-							 'default_maximum_voltage_error': '1e-4',
-							 #'solver_method': 'NR',
-							 # 'NR_iteration_limit': '100'
-							 'line_limits' : '{:s}'.format(config_data['line_limits']),}
+	
+	if use_flags['use_NR_solver']:
+		glmCaseDict[last_key] = {'module': 'powerflow',
+								 'solver_method': 'FBS',
+								 'default_maximum_voltage_error': '1e-4',
+								 'line_limits' : '{:s}'.format(config_data['line_limits']),}
+	else:
+		glmCaseDict[last_key] = {'module': 'powerflow',
+								 'solver_method': 'NR',
+								 'NR_iteration_limit': '50'
+								 'line_limits' : '{:s}'.format(config_data['line_limits']),}
 	last_key += 1
 
 	if use_flags["use_residential_storage"] == 1 or use_flags["use_utility_storage"] == 1:
@@ -193,8 +198,8 @@ def modifyFeeder(glmDict, selectedFeederDict, randomSeed=2):
 	swing_bus_name = ''
 	nom_volt = 0
 	for x in glmDict:
-		if hit < 1 and 'bustype' in glmDict[x] and glmDict[x]['bustype'] == 'SWING':
-			hit = 1
+		if 'bustype' in glmDict[x] and glmDict[x]['bustype'] == 'SWING':
+			hit += 1
 			swing_bus_name = glmDict[x]['name']
 			nom_volt = glmDict[x]['nominal_voltage'] # Nominal voltage in V
 			if 'substationkV' in config_data:
@@ -205,36 +210,39 @@ def modifyFeeder(glmDict, selectedFeederDict, randomSeed=2):
 	
 	if hit is 0:
 		raise Exception('Original feeder model did not contain a swing bus!')
+	elif hit > 1:
+		print('WARNING: found multiple substations')
 
-	# Add substation swing bus and substation transformer dictionaries
-	glmCaseDict[last_key] = {'object': 'substation',
-							 'name': 'network_node',
-							 'bustype': 'SWING',
-							 'positive_sequence_voltage': '{:s}'.format(sub_volt),
-						 	 'base_power': '100',
-							 'power_convergence_value': '100',
-							 'nominal_voltage': '{:s}'.format(sub_volt),
-							 'phases': 'ABCN'}
-	last_key += 1
+	if use_flags['use_substation']:
+		# Add substation swing bus and substation transformer dictionaries
+		glmCaseDict[last_key] = {'object': 'substation',
+								 'name': 'network_node',
+								 'bustype': 'SWING',
+								 'positive_sequence_voltage': '{:s}'.format(sub_volt),
+							 	 'base_power': '100',
+								 'power_convergence_value': '100',
+								 'nominal_voltage': '{:s}'.format(sub_volt),
+								 'phases': 'ABCN'}
+		last_key += 1
 
-	# Add substation transformer transformer_configuration
-	glmCaseDict[last_key] = {'object': 'transformer_configuration',
-							 'name': 'trans_config_to_feeder',
-							 'connect_type': 'WYE_WYE',
-							 'install_type': 'PADMOUNT',
-							 'primary_voltage': '{:s}'.format(sub_volt),
-							 'secondary_voltage': '{:s}'.format(nom_volt),
-							 'power_rating': '{:.1f} MVA'.format(config_data['feeder_rating']*1.5),
-							 'impedance': '0.00033+0.0022j'}
-	last_key += 1
+		# Add substation transformer transformer_configuration
+		glmCaseDict[last_key] = {'object': 'transformer_configuration',
+								 'name': 'trans_config_to_feeder',
+								 'connect_type': 'WYE_WYE',
+								 'install_type': 'PADMOUNT',
+								 'primary_voltage': '{:s}'.format(sub_volt),
+								 'secondary_voltage': '{:s}'.format(nom_volt),
+								 'power_rating': '{:.1f} MVA'.format(config_data['feeder_rating']*1.5),
+								 'impedance': '0.00033+0.0022j'}
+		last_key += 1
 
-	glmCaseDict[last_key] = {'object': 'transformer',
-							 'name': 'substation_transformer',
-							 'from': 'network_node',
-							 'to': '{:s}'.format(swing_bus_name),
-							 'phases': 'ABCN',
-							 'configuration': 'trans_config_to_feeder'}
-	last_key += 1
+		glmCaseDict[last_key] = {'object': 'transformer',
+								 'name': 'substation_transformer',
+								 'from': 'network_node',
+								 'to': '{:s}'.format(swing_bus_name),
+								 'phases': 'ABCN',
+								 'configuration': 'trans_config_to_feeder'}
+		last_key += 1
 
 	# Copy static powerflow model glm dictionary into case dictionary
 	for x in glmDict:
