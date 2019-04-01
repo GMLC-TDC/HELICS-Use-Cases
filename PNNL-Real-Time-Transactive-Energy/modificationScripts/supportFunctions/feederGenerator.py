@@ -112,14 +112,15 @@ def modifyFeeder(glmDict, selectedFeederDict, randomSeed=2):
 	
 	if use_flags['use_NR_solver']:
 		glmCaseDict[last_key] = {'module': 'powerflow',
-								 'solver_method': 'FBS',
-								 'default_maximum_voltage_error': '1e-4',
-								 'line_limits' : '{:s}'.format(config_data['line_limits']),}
+								 'solver_method': 'NR',
+								 'NR_iteration_limit': '50',
+								 'line_limits' : '{:s}'.format(config_data['line_limits'])}
 	else:
 		glmCaseDict[last_key] = {'module': 'powerflow',
-								 'solver_method': 'NR',
-								 'NR_iteration_limit': '50'
-								 'line_limits' : '{:s}'.format(config_data['line_limits']),}
+								 'solver_method': 'FBS',
+								 'default_maximum_voltage_error': '1e-4',
+								 'line_limits' : '{:s}'.format(config_data['line_limits'])}
+			
 	last_key += 1
 
 	if use_flags["use_residential_storage"] == 1 or use_flags["use_utility_storage"] == 1:
@@ -213,7 +214,7 @@ def modifyFeeder(glmDict, selectedFeederDict, randomSeed=2):
 	elif hit > 1:
 		print('WARNING: found multiple substations')
 
-	if use_flags['use_substation']:
+	if use_flags['use_substation'] == 1:
 		# Add substation swing bus and substation transformer dictionaries
 		glmCaseDict[last_key] = {'object': 'substation',
 								 'name': 'network_node',
@@ -248,7 +249,7 @@ def modifyFeeder(glmDict, selectedFeederDict, randomSeed=2):
 	for x in glmDict:
 		if 'clock' not in list(glmDict[x].keys()) and '#set' not in list(glmDict[x].keys()) and '#define' not in list(glmDict[x].keys()) and 'module' not in list(glmDict[x].keys()) and 'omftype' not in list(glmDict[x].keys()):
 			glmCaseDict[last_key] = copy.deepcopy(glmDict[x])
-			if 'bustype' in glmCaseDict[last_key]:
+			if 'bustype' in glmCaseDict[last_key] and use_flags['use_substation'] == 1:
 				del glmCaseDict[last_key]['bustype']
 			last_key += 1
 
