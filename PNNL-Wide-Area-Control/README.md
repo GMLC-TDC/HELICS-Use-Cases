@@ -1,6 +1,6 @@
 # PNNL Wide Area Control
 
-##Introduction
+## Introduction
 
 This use case is a transmission and communication co-simulation that aims to investigate the impact of the communication network on wide-area controls. The transmission simulation is run in MATLAB using the Power System Toolbox (PST) and the communication simulation is run in ns-3. In this use case, specifically, we would study the impact of time delay on the HVDC oscillation damping controller. The HVDC damping controller requires two inputs, one is local frequency information, one is remote frequency information that comes from hundreds or thousands miles away which introduces delay. In this co-simulation, the Matlab PST send the remote frequency to ns3 through HELICS platform. The signal goes through the ns3 network where communication delay and loss of packages are simulated, and finally it is sent back to the Matlab PST as an input to the HVDC damping controller. The co-simulation is realized on a modified IEEE 39Bus test system for the transmission model and a simple two-node link for the communication system model.
 
