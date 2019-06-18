@@ -73,7 +73,7 @@ The same thing needs to be done for g++ by:
 `sudo update-alternatives --config g++`
 3. Build boost with gcc 4.9, as cmake will throw errors if you build HELICS with gcc 4.9 while the Boost libraries is compiled with gcc 5.x. It is recommended building and installing this version of boost with gcc 4.9 into unique location outside the system path. In this way, two version of boost compiled with different versions of gcc can be used by the two installations of HELICS. 
 4. start to build the HELICS with Matlab extension, assuming you already have Matlab installed in your Linux machine.
-  * cd to HELICS-src
+  * cd to HELICS
   * `mkdir build`
   * `cd build`
   * 
