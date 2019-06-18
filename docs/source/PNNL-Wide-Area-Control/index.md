@@ -22,7 +22,7 @@ To build ns-3 with the HELICS integration, specify the location of the Boost, ze
 ```
 
 In the above example, boost was installed manually into a non-default
-location. If you install HELICS using the install instructions at [https://gmlc-tdc.github.io/HELICS-src/installation/linux.html](https://gmlc-tdc.github.io/HELICS-src/installation/linux.html) the
+location. If you install HELICS using the install instructions at [https://helics.readthedocs.io/en/latest/installation/linux.html](https://helics.readthedocs.io/en/latest/installation/linux.html) the
 boost and zeromq dependencies might be located for you automatically in system locations.
 
 Once waf configures the build for ns-3, you should see output similar to the following:
@@ -119,7 +119,7 @@ The same thing needs to be done for g++ by:
   ```
   * From within MATLAB test the HELICS installation by running `helics.helicsGetVersion()`
 
-Further information on building HELICS with the MATLAB extension can be found at [https://gmlc-tdc.github.io/HELICS-src/installation/language.html](https://gmlc-tdc.github.io/HELICS-src/installation/language.html)
+Further information on building HELICS with the MATLAB extension can be found at [https://helics.readthedocs.io/en/latest/installation/language.html#helics-with-matlab](https://helics.readthedocs.io/en/latest/installation/language.html#helics-with-matlab)
 
 
 ## Running the Use Case
