@@ -17,7 +17,7 @@ While HECLIS supports iteration at both initialization and execution stages,  in
 
 *The use case is currently developed in Linux environment, so the following instructions are only tested on Linux. Information for other development environment will be provided in the future.*
 
-1. Follow the [instructions provided by HELICS developers](https://github.com/GMLC-TDC/HELICS-src) and install HELICS **with Java binding**, which will be enabled by default installation configuration setting. You can use `ccmake .`  during the build process to check or change the configuration. 
+1. Follow the [instructions provided by HELICS developers](https://github.com/GMLC-TDC/HELICS) and install HELICS **with Java binding**, which will be enabled by default installation configuration setting. You can use `ccmake .`  during the build process to check or change the configuration. 
 
 2. Install GridLAB-D. HELICS support currently (7/14/2018) is provided in the [`feature/1024` branch](https://github.com/gridlab-d/gridlab-d/tree/feature/1024), So you need to check it out first: `git checkout -b feature/1024 origin/feature/1024`
 

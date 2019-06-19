@@ -49,7 +49,7 @@ Install HELICS
 cd $HOME/repositories
 	
 # clone the HELICS repository
-git clone https://github.com/GMLC-TDC/HELICS-src.git -b HELICS_2_0
+git clone https://github.com/GMLC-TDC/HELICS.git -b HELICS_2_0
 git checkout tags/v2.0.0-beta.1
 	
 # build helics

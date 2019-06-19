@@ -69,21 +69,21 @@ With these two dependencies installed, we are ready to install the co-simulation
 1. Download
 
 ```
-git clone https://github.com/GMLC-TDC/HELICS-src.git
+git clone https://github.com/GMLC-TDC/HELICS.git
 ```
 
 2. Install
 
-Assume <HELICS-src> is the location of the HELICS-src directory.
+Assume <HELICS> is the location of the HELICS directory.
 ```
-cd <HELICS-src>
+cd <HELICS>
 emacs ThirdParty/helics_includes/optional.hpp
 ```
-Before the line ```#define STX_NO_LIBRARY_OPTIONAL 1``` add line ```#define STX_NO_STD_OPTIONAL 1```. Save, close the file and return to HELICS-src
+Before the line ```#define STX_NO_LIBRARY_OPTIONAL 1``` add line ```#define STX_NO_STD_OPTIONAL 1```. Save, close the file and return to HELICS
 ```
 mkdir build
 cd build
-cmake .. -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DCMAKE_INSTALL_PREFIX=<HELICS-src>/build
+cmake .. -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DCMAKE_INSTALL_PREFIX=<HELICS>/build
 make
 make install
 ```
@@ -93,8 +93,8 @@ This finishes the installation of the HELICS library. Once completed, it should 
 We'll now set up some environmental that will be necessary for running the T-D dynamics co-simulation code
 ```
 emacs ~/.bashrc
-export HELICS_DIR=<HELICS-src>
-export HELICS_BUILD=<HELICS-src>/build
+export HELICS_DIR=<HELICS>
+export HELICS_BUILD=<HELICS>/build
 export LD_LIBRARY_PATH=$HELICS_BUILD/lib:$LD_LIBRARY_PATH
 export PATH=$HELICS_BUILD/bin:$PATH
 export LD_LIBRARY_PATH=$HELICS_BUILD/src/helics/shared_api_library:$LD_LIBRARY_PATH
